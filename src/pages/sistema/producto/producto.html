@@ -1,0 +1,173 @@
+<ion-header>
+        <ion-navbar color="cafe-claro">
+            <ion-title>Productos</ion-title>
+            <ion-buttons end>
+                <button ion-button outline
+                        [disabled]="articuloRequest.objetoArticulo.codigo==undefined || articuloRequest.objetoArticulo.codigo == null || articuloRequest.objetoArticulo.codigo.trim().length == 0" 
+                        (click)="onAlertGrabar(codigo)" >
+                    <i class="pi pi-save"></i>
+                </button>
+                <button ion-button outline
+                        (click)="onAlertEliminar(codigo)"
+                        [disabled]="!esActualizar">
+                    <i class="pi pi-trash"></i> 
+                </button>
+                <button ion-button outline 
+                        [disabled]="!esActualizar">
+                    <i class="pi pi-print"></i>
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+</ion-header>
+
+<ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>{{ 'Codigo Producto' }}</ion-label>
+              <ion-input #codigo type="text"
+                         [(ngModel)]="articuloRequest.objetoArticulo.codigo"
+                         tabindex="1" autofocus
+                         (ngModelChange)="articuloRequest.objetoArticulo.codigo = $event.toLocaleUpperCase()"
+                         placeholder="Ejm.: SAO"
+                         (keyup.enter)="onQuest(nombre)"
+                         [class.inputExistente]="esActualizar"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>{{ 'Codigo Barra' }}</ion-label>
+              <ion-input type="number"
+                         disabled="true"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Descripcion' }}</ion-label>
+                  <ion-input #nombre
+                             type="text"
+                             tabindex="2"
+                             [(ngModel)]="articuloRequest.objetoArticulo.nombre"
+                             (keydown.enter)="precioKilo.setFocus()"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Precio por Kilo' }}</ion-label>
+                  <ion-input #precioKilo
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.precioKilo"
+                             tabindex="3"
+                             (keydown.enter)="peso.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( precioKilo,2 )"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Gastos' }}</ion-label>
+                  <ion-input type="number"
+                             [ngModel]="onOperaciones()"
+                             disabled="true"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Peso Stock' }}</ion-label>
+                  <ion-input #peso 
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.peso"
+                             tabindex="4"
+                             (keydown.enter)="precioZonaLibre.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( peso,2 )"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Precio Compra' }}</ion-label>
+                  <ion-input #precioCompra
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.precioCompra"
+                             disabled="true"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Precio Zona Libre' }}</ion-label>
+                  <ion-input #precioZonaLibre
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.precioZonaLibre"
+                             tabindex="5"
+                             (keydown.enter)="porcentajeGasto.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( precioZonaLibre,2 )"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Precio Venta' }}</ion-label>
+                  <ion-input #precioVenta
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.precioVenta"
+                             tabindex="7"
+                             (keydown.enter)="precioMercado.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( precioVenta,2 )"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ '% Gasto %' }}</ion-label>
+                  <ion-input #porcentajeGasto
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.porcentajeGasto"
+                             tabindex="6"
+                             (keydown.enter)="precioVenta.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( porcentajeGasto,3 )"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Precio Mercado' }}</ion-label>
+                  <ion-input #precioMercado
+                             type="number"
+                             [(ngModel)]="articuloRequest.objetoArticulo.precioMercado"
+                             tabindex="8"
+                             (keydown.enter)="descripcion.setFocus()"
+                             (keypress)="utilitarioUtils.onFormatMoneda( precioMercado,2 )"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label stacked>{{ 'Mensaje' }}</ion-label>
+                  <ion-input #descripcion
+                             type="text"
+                             [(ngModel)]="articuloRequest.objetoArticulo.descripcion"
+                             tabindex="9"
+                             (keydown.enter)="onAlertGrabar(codigo)"></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ng-container *ngIf="esRenderAmbiente">
+                <inventario  [codigo]="articuloRequest.objetoArticulo.codigo"></inventario>
+            </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-content>

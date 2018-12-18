@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label stacked>{{ 'Codigo ' }}{{ tipo | titlecase }}</ion-label>
+  <ion-input #cod
+             type="text" 
+             tabindex="1"
+             [disabled]="disabled"
+             [(ngModel)]="codigo"
+             (ngModelChange)="codigo=$event.toLocaleUpperCase()"
+             [class.incorrecto]="ctrlIncorrecto"
+             (keyup.enter)="onQuest()"></ion-input>
+</ion-item>

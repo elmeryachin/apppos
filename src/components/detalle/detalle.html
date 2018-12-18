@@ -1,0 +1,43 @@
+<p-table [columns]="cols" [value]="lista" 
+         [scrollable]="true" scrollHeight="120px">
+                <ng-template pTemplate="colgroup" let-columns>
+                    <colgroup>
+                        <col *ngFor="let col of columns" [style.width]="col.width">
+                    </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td>
+                            {{rowData['codigoArticulo']}}
+                        </td>
+                        <td style="text-align: center;">
+                            {{rowData['cantidad']}}
+                        </td>
+                        <td style="text-align: right">
+                            {{rowData['precio'] | number:'1.2-2' }}
+                        </td>
+                        <td style="text-align: right">
+                            {{ (rowData['cantidad'] * rowData['precio']) | number:'1.2-2' }}
+                        </td>
+                        <td style="text-align: center;" (click)="onAlertElminar(rowData)">
+                            <i class="pi pi-trash"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                        <tr>
+                            <td>Totales</td>
+                            <td style="text-align: center">{{ tsubcant }}</td>
+                            <td style="text-align: right">{{ tsubprec | number:'1.2-2' }}</td>
+                            <td style="text-align: right">{{ tsubtotl | number:'1.2-2' }}</td>
+                            <td></td>
+                        </tr>
+                </ng-template>
+    </p-table>    

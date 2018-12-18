@@ -1,0 +1,47 @@
+<ion-row>
+        <ion-col>
+                <ion-item>
+                        <ion-label stacked>{{ 'Codigo Articulo' }}</ion-label>
+                        <ion-input #codigo
+                                   type="text" 
+                                   [(ngModel)]="articuloResponseMin.codigo"
+                                   (ngModelChange)="articuloResponseMin.codigo = $event.toLocaleUpperCase()"
+                                   (keyup.enter)="onQuest(cantidad)"
+                                   [class.incorrecto]="ctrlIncorrecto"
+                                   tabindex="2"></ion-input>
+                </ion-item>
+        </ion-col>
+        <ion-col>
+                <ion-item>
+                        <ion-label stacked>{{ 'Cantidad - Compra' }}</ion-label>
+                        <ion-input #cantidad
+                                   type="number"
+                                   [(ngModel)]="articuloResponseMin.cantidad"
+                                   (keydown.enter)="onCantidad( precio )"
+                                   (keypress)="utilitarioUtils.formatInt( $event )"
+                                   tabindex="3"></ion-input>
+                </ion-item>
+        </ion-col>
+        <ion-col>
+                <ion-item>
+                        <ion-label stacked>{{ 'Precio U.' }}</ion-label>
+                        <ion-input #precio
+                                   type="number" 
+                                   [(ngModel)]="articuloResponseMin.precio"
+                                   (keydown.enter)="onAgregar()"
+                                   (keypress)="utilitarioUtils.onFormatMoneda( precio, 2 )"
+                                   tabindex="4"></ion-input>
+                </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+                <ion-item>
+                        <ion-label stacked>{{ 'Nombre Articulo' }}</ion-label>
+                        <ion-input type="text" 
+                                   disabled="true"
+                                   [(ngModel)]="articuloResponseMin.nombre"></ion-input>
+                </ion-item>
+        </ion-col>
+    </ion-row>
