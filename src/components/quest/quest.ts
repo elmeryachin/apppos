@@ -5,6 +5,7 @@ import { ArticuloService } from '../../providers/articulo.service';
 import { UtilitarioUtils } from '../../utils/utilitario.utils';
 import { MensajeUtils } from '../../utils/mensaje.utils';
 import { TransaccionService } from '../../providers/transaccion.service';
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
   selector: 'quest',
@@ -28,7 +29,8 @@ export class QuestComponent {
               public utilitarioUtils:UtilitarioUtils,
               public mensajeUtils:MensajeUtils,
               public alertCtrl:AlertController,
-              public transaccionService:TransaccionService) {
+              public transaccionService:TransaccionService,
+              public storageService: StorageService ) {
     this.articuloResponseMin = new ArticuloResponseMin() 
     this.auxiliarCtrl = new ArticuloResponseMin()
     this.auxiliarCtrl.codigo = '-1'
@@ -115,7 +117,7 @@ export class QuestComponent {
       this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.precioNext, 'Alerta', 'Verifique el precio, avance con enter')
     } else {
 
-      if( this.cantidadExistente >= this.articuloResponseMin.cantidad ) {
+      if( !this.storageService.getDtoTransaccion().vMonto || this.cantidadExistente >= this.articuloResponseMin.cantidad ) {
         if( this.existeEnLista ) {
           this.utilitarioUtils.onAlertGuardar(this.alertCtrl, this, this.codigoNext, 'Alerta', 'Existe otro registro en la lista desea reemplazar?')
         } else {

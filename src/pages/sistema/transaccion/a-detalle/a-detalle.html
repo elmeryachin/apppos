@@ -14,6 +14,12 @@
                 <i class="pi pi-arrow-left"></i> 
             </button>
             <button ion-button outline
+                    (click)="onVerDiferencia()"
+                    *ngIf="dtoDetalle.questDif!=null" 
+                    [disabled]="selected==null || (selected.observacion!=null && !selected.observacion.includes('editado'))">
+                <i class="pi pi-question-circle"></i> 
+            </button>
+            <button ion-button outline
                     *ngIf="dtoDetalle.ver"
                     (click)="onReturnModal(selected)" 
                     [disabled]="selected==null">

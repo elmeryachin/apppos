@@ -14,9 +14,13 @@ export const PATH_PEDIDO:DtoTransaccion = {
     tipoE   :   'PROVEEDOR',
     listE   :   '/pedido/proveedor/list',
     questE  :   '/pedido/proveedor/quest/',                 //{codigo}
+
+    vMonto  :   false,
+
     B       :   { 
                     titulo      :   'Lista Pedidos',
                     list        :   '/pedido/list', 
+                    mProcesar   :   2,
                     nProcesar   :   'Hacer Llegada',
                     procesar    :   '/pedido/llegada/confirmar/',   //{id}
                     questDif    :   null,
@@ -26,6 +30,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     list        :   '/pedido/llegada/list',
                     titulo      :   'Lista Llegadas', 
                     nProcesar   :   'Cancelar Llegada',
+                    mProcesar   :   2,
                     procesar    :   '/pedido/llegada/cancelar/',    //{id}
                     questDif    :   null,
                     ver         :   false
@@ -33,6 +38,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
     D       :   { 
                     list        :   null, 
                     titulo      :   null,
+                    mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
@@ -51,9 +57,13 @@ export const PATH_ENVIAR:DtoTransaccion = {
     tipoE   :   'AMBIENTE',
     listE   :   '/transferencia/envio/ambiente/list',
     questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+    
+    vMonto  :   true,
+
     B       :   { 
                     list        :   '/transferencia/envio/list',
                     titulo      :   'Lista Envios',
+                    mProcesar   :   null,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
@@ -62,6 +72,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
     C       :   { 
                     list        :   '/transferencia/envio/confirmados/list', 
                     titulo      :   'Lista de Confirmados',
+                    mProcesar   :   2,
                     nProcesar   :   'Reconfirmar Envio',
                     procesar    :   '/transferencia/envio/reconfirmar/',        //{id}
                     questDif    :   '/transferencia/envio/diferencia/quest/',    //{id}
@@ -70,6 +81,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
     D       :   { 
                     list        :   '/transferencia/envio/reconfirmar/list',
                     titulo      :   'Lista de Reconfirmados',
+                    mProcesar   :   2,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
@@ -79,18 +91,22 @@ export const PATH_ENVIAR:DtoTransaccion = {
 
 export const PATH_RECIBIR:DtoTransaccion = {
     enabled :   false,
-    titulo  :   'Recibidos',
+    titulo  :   'Por Recibir',
     init    :   null,
     add     :   null,
     update  :   null,
     delete  :   null,
     quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',      // {nro}  ******** DESARROLLAR ******
-    tipoE   :   'AMBIENTE',
+    tipoE   :   'ORIGEN',
     listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+
+    vMonto  :   true,
+
     B       :   { 
                     list        :   '/transferencia/recibir/porrecibir/list',
                     titulo      :   'Lista Por Recibir',
+                    mProcesar   :   0,
                     nProcesar   :   'Confirmar Recepcion',
                     procesar    :   '/transferencia/recibir/confirmar/recepcion/',  //{id}
                     questDif    :   null,
@@ -99,14 +115,16 @@ export const PATH_RECIBIR:DtoTransaccion = {
     C       :   { 
                     list        :   '/transferencia/recibir/recibidos/list', 
                     titulo      :   'Lista Recibidos',
+                    mProcesar   :   0,
                     nProcesar   :   'Cancelar Recepcion',
                     procesar    :   '/transferencia/recibir/cancelar/recepcion/',   //{id}
-                    questDif    :   null,
+                    questDif    :   '/transferencia/envio/diferencia/quest/',       //{id}
                     ver         :   false
                 },
     D       :   { 
                     list        :   null,
                     titulo      :   null, 
+                    mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
@@ -125,9 +143,13 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     tipoE   :   'AMBIENTE',
     listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+
+    vMonto  :   true,
+
     B       :   { 
                     list        :   '/transferencia/recibir/solicitud/list', 
                     titulo      :   'Lista Solicitudes',
+                    mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
@@ -136,6 +158,7 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     C       :   { 
                     list        :   null,
                     titulo      :   null,
+                    mProcesar   :   null,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
@@ -144,6 +167,7 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     D       :   { 
                     list        :   null,
                     titulo      :   null,
+                    mProcesar   :   null,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
@@ -162,10 +186,14 @@ export const PATH_VENTA:DtoTransaccion = {
     tipoE   :   'CLIENTE',
     listE   :   '/ventas/cliente/list',
     questE  :   '/ventas/cliente/quest/',
+    
+    vMonto  :   true,
+
     B       :   { 
                     list        :   '/ventas/list', 
                     titulo      :   'Lista de Ventas',
                     nProcesar   :   'Confirmar Control Venta',
+                    mProcesar   :   2,
                     procesar    :   '/ventas/confirmar/',   
                     questDif    :   null,
                     ver         :   true
@@ -173,6 +201,7 @@ export const PATH_VENTA:DtoTransaccion = {
     C       :   { 
                     list        :   '/ventas/confirmar/list', 
                     titulo      :   'Lista de Ventas Confirmadas',
+                    mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
@@ -181,6 +210,7 @@ export const PATH_VENTA:DtoTransaccion = {
     D       :   { 
                     list        :   null,
                     titulo      :   null,
+                    mProcesar   :   null,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,

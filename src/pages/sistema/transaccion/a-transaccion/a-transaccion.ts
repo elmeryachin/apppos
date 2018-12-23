@@ -7,7 +7,7 @@ import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { Observable } from 'rxjs/Observable';
 import { SERVIDOR } from '../../../../utils/ctte.utils';
 import { ADetallePage } from '../a-detalle/a-detalle';
-import { DtoTransaccion } from '../../../../modelo/dto';
+import { DtoTransaccion, DtoDetalle } from '../../../../modelo/dto';
 import { StorageService } from '../../../../providers/storage.service';
 
 var Mousetrap = require('mousetrap')  // Para que funcione require "npm install --save @types/node"
@@ -20,9 +20,7 @@ var PHE = require("print-html-element")
   templateUrl: 'a-transaccion.html',
 })
 export class ATransaccionPage {
-  
-  @Input() tipo:string
-  
+    
   transaccionRequest:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
   
@@ -30,6 +28,7 @@ export class ATransaccionPage {
   @ViewChild('producto') productoNext     //Uso de producto para limpiar campos
   
   dtoTransaccion:DtoTransaccion
+  dtoDetalle:DtoDetalle   // Solo para ejecutar procesar
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -39,14 +38,14 @@ export class ATransaccionPage {
               public transaccionService:TransaccionService,
               public modalCtrl:ModalController,
               public storageService: StorageService) {
-
+                
     this.transaccionRequest = new TransaccionRequest()
-
   }
 
   ngOnInit() {
     console.log(Mousetrap_global)
     this.dtoTransaccion = this.storageService.getDtoTransaccion()
+    this.dtoDetalle = this.storageService.getDtoDetalle()
     this.getInit()
   }
   
@@ -102,7 +101,7 @@ export class ATransaccionPage {
    * Busca generar la pantalla de lista de pedidos|...|...
    */
   onModalList( opcion:string) {
-
+    console.log( opcion )
     if( opcion == 'B' ) {
       this.storageService.setDtoDetalle( this.dtoTransaccion.B )
     } else if( opcion == 'C' ) {
@@ -111,10 +110,13 @@ export class ATransaccionPage {
       this.storageService.setDtoDetalle( this.dtoTransaccion.D )
     }
     
+    this.dtoDetalle = this.storageService.getDtoDetalle()
+
     let modal = this.modalCtrl.create( ADetallePage )
     modal.present()
     modal.onDidDismiss( paramTransaccionObjeto => {
       if( paramTransaccionObjeto == null) {
+        this.transaccionRequest.getReset()
         this.getInit()
         this.transaccionRequest.transaccionObjeto.nombreUsuario = null
         this.entradaNext.codigo = null
@@ -338,6 +340,41 @@ export class ATransaccionPage {
         }
       )
     }
+  }
+
+  /**
+   * Muestra un mensaje antes de ejectar 
+   */
+  onAlertProcesar() {
+    this.utilitarioUtils.onAlertProcesar( this.alertCtrl, this, null, 'Confirmacion',
+     'Esta seguro de procesar ' + this.dtoDetalle.nProcesar + ' del  Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
+  }
+  
+  /**
+   * Procesa segun el path lo que se ejecuta, guarda un nuevo cambio de estado para el registro seleccionado
+   */
+  onProcesar( next:any ) {
+    let servicio: Observable<ServResponse>
+    let ctrlEdicion:boolean = false
+    for(let i=0; i<this.transaccionRequest.transaccionObjeto.lista.length; i++) {
+      if( this.transaccionRequest.transaccionObjeto.lista[i].id == null ) {
+        ctrlEdicion = true
+      }
+    }
+    
+    servicio = this.transaccionService.onProcesar( this.transaccionRequest.transaccionObjeto.id, ctrlEdicion?this.transaccionRequest:{} )
+      
+    servicio.subscribe(
+      data => {
+        if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
+          this.transaccionRequest.getReset()
+          this.entradaNext.codigo = null
+          this.getInit()
+          this.productoNext.getReset()
+          this.codigo = null
+        } 
+      }
+    )
   }
 
 }

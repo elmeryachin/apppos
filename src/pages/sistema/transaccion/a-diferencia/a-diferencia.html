@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="cafe-claro">
+        <ion-title>{{ 'Diferencia' }}</ion-title>
+        <ion-buttons end>
+            <button ion-button outline 
+                    (click)="viewCtrl.dismiss()">
+                <i class="pi pi-arrow-left"></i> 
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+      
+<ion-content>
+    <div class="content">
+        <p-table #dt1 [columns]="cols" [value]="list"
+                    [scrollable]="true" scrollHeight="105px" >
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" pResizableColumn>
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td *ngFor="let col of columns" class="ui-resizable-column">
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+        </p-table>    
+    </div>
+</ion-content>

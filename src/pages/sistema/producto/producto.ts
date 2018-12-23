@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { ArticuloRequest, ServResponse } from '../../../modelo/objeto.model';
 import { UtilitarioUtils } from '../../../utils/utilitario.utils';
 import { ArticuloService } from '../../../providers/articulo.service';
@@ -22,9 +22,7 @@ export class ProductoPage {
   @ViewChild('codigo') codigoNext   //Requerido para dar focus al componente ccodigo
   
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public alertCtrl:AlertController,
+  constructor(public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
               public utilitarioUtils:UtilitarioUtils,
               public articuloService:ArticuloService) {

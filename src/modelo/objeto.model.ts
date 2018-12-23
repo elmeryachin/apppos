@@ -108,6 +108,8 @@ export class TransaccionRequest {
         this.transaccionObjeto.codigo = null
         this.transaccionObjeto.observacion = null
         this.transaccionObjeto.lista = new Array()
+        this.transaccionObjeto.precio = null
+        this.transaccionObjeto.cantidad = null
     }
 }
 

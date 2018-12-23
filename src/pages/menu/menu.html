@@ -1,8 +1,12 @@
-<ion-tabs tabsPlacement="bottom" color="cafe-claro" preloadTabs="false">
+<ion-tabs *ngIf="getTipo()=='ALMACEN'" tabsPlacement="bottom" color="cafe-claro" preloadTabs="false">
   <ion-tab tabIcon="water" tabTitle="Productos" [root]="productoPage"></ion-tab>
-
-  <ion-tab tabIcon="water" tabTitle="Pedidos" [root]="bPedidoPage"></ion-tab>
+  <ion-tab tabIcon="water" tabTitle="Pedidos" [root]="bPedidoPage" ></ion-tab>
   <ion-tab tabIcon="water" tabTitle="Envios" [root]="cEnvioPage"></ion-tab>
+  <ion-tab tabIcon="water" tabTitle="Solicitud" [root]="dSolicitudPage"></ion-tab>
+</ion-tabs>
+
+
+<ion-tabs *ngIf="getTipo()!='ALMACEN'" tabsPlacement="bottom" color="cafe-claro" preloadTabs="false">
   <ion-tab tabIcon="water" tabTitle="Solicitud" [root]="dSolicitudPage"></ion-tab>
   <ion-tab tabIcon="water" tabTitle="Recibido" [root]="eRecibidoPage"></ion-tab>
   <ion-tab tabIcon="water" tabTitle="Venta" [root]="fVentaPage"></ion-tab>

@@ -57,8 +57,8 @@ export class TransaccionService {
     return this.http.get<TransaccionResponseList>( SERVIDOR + this.storageService.getDtoDetalle().list, {headers: this.getHeaders()} )
   }
 
-  onProcesar( id:string ): Observable<ServResponse> {
-    return this.http.put<ServResponse>( SERVIDOR + this.storageService.getDtoDetalle().procesar + id, {}, {headers: this.getHeaders()} )
+  onProcesar( id:string, request:any ): Observable<ServResponse> {
+    return this.http.put<ServResponse>( SERVIDOR + this.storageService.getDtoDetalle().procesar + id, request, {headers: this.getHeaders()} )
   }
 
   onObtenerDiff( id:string ): Observable<TransaccionResponse> {

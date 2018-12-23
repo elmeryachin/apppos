@@ -5,6 +5,7 @@ import { ProductoPage,
          DSolicitudPage,
          ERecibidoPage,
          FVentaPage } from '../paginas.page'
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
   selector: 'page-menu',
@@ -19,7 +20,7 @@ export class MenuPage {
   fVentaPage:any
   
   productoPage:any
-  constructor() {
+  constructor( public storageService: StorageService ) {
     this.productoPage = ProductoPage
 
     this.bPedidoPage = BPedidoPage
@@ -29,5 +30,8 @@ export class MenuPage {
     this.eRecibidoPage = ERecibidoPage
     this.fVentaPage = FVentaPage
   }
-
+  
+  getTipo():string {
+    return this.storageService.getAccesoResponse().tipo
+  }
 }

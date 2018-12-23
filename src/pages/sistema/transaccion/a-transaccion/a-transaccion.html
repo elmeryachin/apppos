@@ -45,6 +45,13 @@
                         [disabled]="transaccionRequest.transaccionObjeto.id==null">
                     <i class="pi pi-print"></i>
                 </button>
+                <button ion-button outline 
+                        *ngIf="dtoDetalle!= null && dtoDetalle.mProcesar==0"
+                        [disabled]="transaccionRequest.transaccionObjeto.id==null"
+                        (click)="onAlertProcesar()">
+                    <i *ngIf="transaccionRequest.transaccionObjeto.id==null" class="pi pi-cog"></i>
+                    <label style="font-size: 10px">{{ transaccionRequest.transaccionObjeto.id==null?'': dtoDetalle.nProcesar }}</label>
+                </button>
             </ion-buttons>
         </ion-navbar>
 </ion-header>
@@ -85,7 +92,7 @@
         <ion-row>
             <ion-col>
                     <ion-item>
-                            <ion-label stacked>{{ 'Nombre ' }} {{ tipo | titlecase }}</ion-label>
+                            <ion-label stacked>{{ 'Nombre ' }} {{ dtoTransaccion.tipoE | titlecase }}</ion-label>
                             <ion-input type="text"
                                        [(ngModel)]="transaccionRequest.transaccionObjeto.nombreUsuario" 
                                        disabled="true"></ion-input>

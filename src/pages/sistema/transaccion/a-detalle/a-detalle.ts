@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { TransaccionResponseList, TransaccionObjeto, ServResponse } from '../../../../modelo/objeto.model';
 import { TransaccionService } from '../../../../providers/transaccion.service';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
-import { ViewController, AlertController } from 'ionic-angular';
+import { ViewController, AlertController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { StorageService } from '../../../../providers/storage.service';
 import { DtoDetalle } from '../../../../modelo/dto';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
+import { ADiferenciaPage } from '../a-diferencia/a-diferencia';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class ADetallePage {
   dtoDetalle: DtoDetalle
 
   constructor(public transaccionService:TransaccionService,
+              public modalCtrl: ModalController,
               public utilitarioUtils:UtilitarioUtils,
               public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
@@ -56,33 +58,68 @@ export class ADetallePage {
 
   }
 
+  /**
+   * Popup para ver la diferencia entre registros.
+   */
+  onVerDiferencia() {
+    console.log('ver difrencias..')
+    let diff = new Array()
+    let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
+    servicio.subscribe(
+      data => {
+        if( this.mensajeUtils.getValidarRespuestaSinMsgOk( data, null, null ) ) {
+          //console.log(data)
+          for( let i=0; i<this.selected.lista.length; i++ ) {
+            //console.log(this.selected.lista[i])
+            let seCod = this.selected.lista[i].codigoArticulo
+            let reg = {
+              codigo    : seCod,
+              cant_1  : this.selected.lista[i].cantidad,
+              cant_2  : this.selected.lista[i].cantidad,
+              cant_3  : 0
+            }
+            for( let j=0; j<data.transaccionObjeto.lista.length; j++ ) {
+              let daCod = data.transaccionObjeto.lista[j].codigoArticulo
+
+              if( seCod == daCod ) {
+                reg.cant_2 = reg.cant_2 - data.transaccionObjeto.lista[j].cantidad
+                reg.cant_3 = data.transaccionObjeto.lista[j].cantidad
+              } 
+            }
+
+            diff[i] = reg
+          }
+          console.log(diff)
+          let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
+          modal.present()
+        }
+      }
+    )
+  }
 
   /**
    * Muestra un mensaje antes de ejectar 
    */
   onAlertProcesar() {
-    this.utilitarioUtils.onAlertGuardar( this.alertCtrl, this, null, 'Confirmacion',
+    this.utilitarioUtils.onAlertProcesar( this.alertCtrl, this, null, 'Confirmacion',
      'Esta seguro de procesar ' + this.dtoDetalle.nProcesar + ' del  Nro ' + this.selected.nroMovimiento)
   }
   /**
    * Procesa segun el path lo que se ejecuta, guarda un nuevo cambio de estado para el registro seleccionado
    */
-  onGuardar( next:any ) {
-    if( this.dtoDetalle.procesar != null ) {
-
-      let servicio: Observable<ServResponse>
+  onProcesar( next:any ) {
+    let servicio: Observable<ServResponse>
   
-      servicio = this.transaccionService.onProcesar( this.selected.id )
+    servicio = this.transaccionService.onProcesar( this.selected.id, this.selected )
       
-      servicio.subscribe(
-        data => {
-          if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
+    servicio.subscribe(
+      data => {
+        if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
             this.getLista()
             this.selected = null
-          } 
-        }
-      )
-    }
+        } 
+      }
+    )
   }
 
   /**
