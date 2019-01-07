@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { TransaccionResponseList, TransaccionObjeto, ServResponse, TransaccionDetalle } from '../../../../modelo/objeto.model';
-import { TransaccionService } from '../../../../providers/transaccion.service';
-import { MensajeUtils } from '../../../../utils/mensaje.utils';
-import { ViewController, AlertController, NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs';
+import { ViewController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../../../providers/storage.service';
-import { DtoDetalle } from '../../../../modelo/dto';
-import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 
 
 @Component({

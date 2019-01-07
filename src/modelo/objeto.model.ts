@@ -106,7 +106,7 @@ export class TransaccionRequest {
         this.transaccionObjeto.fechaMovimiento = null
         this.transaccionObjeto.nroMovimiento = null
         this.transaccionObjeto.codigo = null
-        this.transaccionObjeto.observacion = null
+        this.transaccionObjeto.observacion = ""
         this.transaccionObjeto.lista = new Array()
         this.transaccionObjeto.precio = null
         this.transaccionObjeto.cantidad = null
@@ -120,7 +120,7 @@ export class TransaccionObjeto {
     public fechaMovimiento:string = null
     public nroMovimiento:number = null
     public codigo:string = null
-    public observacion:string = null
+    public observacion:string = ""
     public precio:number = null     //nuevo a configurar
     public cantidad:number = null   //nuevo a configurar
     public lista:TransaccionDetalle[] = new Array()

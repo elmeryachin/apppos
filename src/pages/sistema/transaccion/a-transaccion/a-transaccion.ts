@@ -21,6 +21,7 @@ var PHE = require("print-html-element")
 })
 export class ATransaccionPage {
     
+  @Input() tipoTransaccion:string         // Se manda el tipo ejm.: 'PEDIDO, RECIBIDO, SOLICITUD ...'
   transaccionRequest:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
   
@@ -38,12 +39,15 @@ export class ATransaccionPage {
               public transaccionService:TransaccionService,
               public modalCtrl:ModalController,
               public storageService: StorageService) {
-                
+    //Quitar el storage para adicionarlo en transaccionService para org. el codigo
     this.transaccionRequest = new TransaccionRequest()
   }
 
   ngOnInit() {
     console.log(Mousetrap_global)
+    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
+    this.storageService.setAsignacionDtoTransaccion(this.tipoTransaccion)
+
     this.dtoTransaccion = this.storageService.getDtoTransaccion()
     this.dtoDetalle = this.storageService.getDtoDetalle()
     this.getInit()

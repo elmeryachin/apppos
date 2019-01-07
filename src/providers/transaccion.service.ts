@@ -11,7 +11,10 @@ export class TransaccionService {
 
   constructor( private http: HttpClient,
                public storageService: StorageService ) {
-    console.log('CONSTRUCTOR : TransaccionService ... ')
+  }
+
+  onTipoTransaccion(tipo:string) {
+    this.storageService.setAsignacionDtoTransaccion(tipo)
   }
 
   getHeaders():HttpHeaders {

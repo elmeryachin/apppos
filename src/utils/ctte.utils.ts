@@ -2,7 +2,7 @@ import { DtoTransaccion } from "../modelo/dto";
 
 export const SERVIDOR = "http://localhost:8080"
 
-
+export const PEDIDO:string = "PATH_PEDIDO"
 export const PATH_PEDIDO:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Pedidos',
@@ -45,7 +45,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     ver         :   false
                 }
 }
-
+export const ENVIAR:string = "PATH_ENVIAR"
 export const PATH_ENVIAR:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Envios',
@@ -88,7 +88,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     ver         :   false
                 }
 }
-
+export const RECIBIR:string = "PATH_RECIBIR"
 export const PATH_RECIBIR:DtoTransaccion = {
     enabled :   false,
     titulo  :   'Por Recibir',
@@ -131,7 +131,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     ver         :   false
                 }
 }
-
+export const SOLICITUD:string = "PATH_SOLICITUD"
 export const PATH_SOLICITUD:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Solicitud Manual',
@@ -175,6 +175,7 @@ export const PATH_SOLICITUD:DtoTransaccion = {
                 }
 }
 
+export const VENTA:string = "PATH_VENTA"
 export const PATH_VENTA:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Ventas',
