@@ -206,6 +206,49 @@ $colors: (
     padding:5px 1px 1px 5px;
   }
 
+  
+.label-md[stacked]{
+  font-size: 1.1rem !important;//todo: tamanio de fuente
+}
+.item-md{
+  font-size: 1.1rem !important;//todo: tamanio de fuente
+}
+.grid .item-md{
+  font-size: 1.1rem !important;//todo: tamanio de fuente
+}
+.md{
+  font-size: 1.1rem !important;
+}
+@media (min-width: 700px) {
+  .label-md[stacked]{
+    font-size: 1.3rem !important;//todo: tamanio de fuente
+  }
+  .item-md{
+    font-size: 1.3rem !important;//todo: tamanio de fuente
+  }
+  .grid .item-md{
+    font-size: 1.3rem !important;//todo: tamanio de fuente
+  }
+  .md{
+    font-size: 1.3rem !important;
+  }
+}
+@media (min-width: 1000px) {
+  .label-md[stacked]{
+    font-size: 1.4rem !important;//todo: tamanio de fuente
+  }
+  .item-md{
+    font-size: 1.4rem !important;//todo: tamanio de fuente
+  }
+  .grid .item-md{
+    font-size: 1.4rem !important;//todo: tamanio de fuente
+  }
+  .md{
+    font-size: 1.4rem !important;
+  }
+}
+
+
 @import url('assets/css/primeicons/primeicons.css');
 @import url('assets/css/primeng/resources/themes/omega/theme.css');
 @import url('assets/css/primeng/resources/primeng.min.css');
