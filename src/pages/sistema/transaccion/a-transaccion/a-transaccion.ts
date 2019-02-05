@@ -9,8 +9,8 @@ import { SERVIDOR } from '../../../../utils/ctte.utils';
 import { ADetallePage } from '../a-detalle/a-detalle';
 import { DtoTransaccion, DtoDetalle } from '../../../../modelo/dto';
 import { StorageService } from '../../../../providers/storage.service';
-
-var Mousetrap = require('mousetrap')  // Para que funcione require "npm install --save @types/node"
+declare var require: any;
+var Mousetrap = require('mousetrap')  // Para que funcione require "npm install --save @types/node" -- declare var require: any;
 var Mousetrap_global = require('mousetrap-global-bind')
 
 var PHE = require("print-html-element")

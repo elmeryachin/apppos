@@ -5,6 +5,7 @@ import { UtilitarioUtils } from '../../../utils/utilitario.utils';
 import { ArticuloService } from '../../../providers/articulo.service';
 import { MensajeUtils } from '../../../utils/mensaje.utils';
 import { Observable } from 'rxjs/Observable';
+declare var require: any;
 var Mousetrap = require('mousetrap');// Para que funcione require "npm install --save @types/node"
 var Mousetrap_global = require('mousetrap-global-bind');
 @Component({
