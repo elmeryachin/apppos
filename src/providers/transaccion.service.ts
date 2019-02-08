@@ -47,6 +47,8 @@ export class TransaccionService {
 
   // 01
   onListEntrada( json:any ): Observable<UsuarioResponseList> {
+    console.log("json::: " + json)
+    console.log("this.storageService.getDtoTransaccion().listE " + this.storageService.getDtoTransaccion())
     return this.http.post<UsuarioResponseList>( SERVIDOR + this.storageService.getDtoTransaccion().listE, json, {headers: this.getHeaders()}  )
   }
   // 02

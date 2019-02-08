@@ -10,3 +10,5 @@ export { CEnvioPage } from './sistema/transaccion/c-envio/c-envio'
 export { DSolicitudPage } from './sistema/transaccion/d-solicitud/d-solicitud'
 export { ERecibidoPage } from './sistema/transaccion/e-recibido/e-recibido'
 export { FVentaPage } from './sistema/transaccion/f-venta/f-venta'
+
+export { DiscoPage } from './sistema/disco/disco'

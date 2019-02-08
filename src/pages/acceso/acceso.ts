@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AccesoRequest } from '../../modelo/objeto.model';
 import { AccesoService } from '../../providers/acceso.service';
 import { MenuPage } from '../menu/menu';
 import { MensajeUtils } from '../../utils/mensaje.utils';
 import { StorageService } from '../../providers/storage.service';
+import { UtilitarioUtils } from '../../utils/utilitario.utils';
 
 @Component({
   selector: 'page-acceso',
@@ -18,7 +19,9 @@ export class AccesoPage {
               public navParams: NavParams,
               public accesoService:AccesoService,
               public mensajeUtils:MensajeUtils,
-              public storageService:StorageService) {
+              public storageService:StorageService,
+              private utilitarioUtils:UtilitarioUtils,
+              private alertCtrl:AlertController) {
     this.accesoRequest = new AccesoRequest( null, null, null, null, null )
   }
   
@@ -32,6 +35,8 @@ export class AccesoPage {
           this.storageService.setAccesoResponse(data)
           this.navCtrl.setRoot(MenuPage)
         }
+      }, error =>{
+        this.utilitarioUtils.onAlertMensaje(this.alertCtrl, null, "Error Acceso", "No se puede conectar, vuelva a intentar")
       }
     )
   }

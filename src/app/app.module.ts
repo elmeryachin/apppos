@@ -37,7 +37,8 @@ import {  AccesoPage,
           CEnvioPage,
           DSolicitudPage,
           ERecibidoPage,
-          FVentaPage } from '../pages/paginas.page';
+          FVentaPage,
+          DiscoPage } from '../pages/paginas.page';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import {  AccesoPage,
     DSolicitudPage,
     ERecibidoPage,
     FVentaPage,
+    DiscoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,
@@ -84,6 +86,7 @@ import {  AccesoPage,
     DSolicitudPage,
     ERecibidoPage,
     FVentaPage,
+    DiscoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,

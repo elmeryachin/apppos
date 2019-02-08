@@ -4,7 +4,8 @@ import { ProductoPage,
          CEnvioPage,
          DSolicitudPage,
          ERecibidoPage,
-         FVentaPage } from '../paginas.page'
+         FVentaPage,
+         DiscoPage } from '../paginas.page'
 import { StorageService } from '../../providers/storage.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class MenuPage {
   fVentaPage:any
   
   productoPage:any
+  discoPage:any
   constructor( public storageService: StorageService ) {
     this.productoPage = ProductoPage
 
@@ -29,6 +31,7 @@ export class MenuPage {
     this.dSolicitudPage = DSolicitudPage
     this.eRecibidoPage = ERecibidoPage
     this.fVentaPage = FVentaPage
+    this.discoPage = DiscoPage
   }
   
   getTipo():string {

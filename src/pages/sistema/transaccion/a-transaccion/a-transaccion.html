@@ -78,6 +78,7 @@
                 <entrada #entrada 
                          [disabled]="!dtoTransaccion.enabled"
                          [tipo]="dtoTransaccion.tipoE"
+                         [tipoTransaccion]="tipoTransaccion"
                          (enter)="onEnterEntrada( $event, producto.codigoNext )"></entrada>
             </ion-col>
             <ion-col class="colTextArea">

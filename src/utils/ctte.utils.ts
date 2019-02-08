@@ -101,7 +101,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
     listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
 
-    vMonto  :   true,
+    vMonto  :   false,
 
     B       :   { 
                     list        :   '/transferencia/recibir/porrecibir/list',
