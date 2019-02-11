@@ -1,16 +1,40 @@
 <ion-header>
     <ion-navbar color="cafe-claro">
         <ion-title>Discos</ion-title>
-        <ion-buttons end>
-            <button ion-button outline (click)="onAlertProcesar()">
-                <label style="font-size: 10px">Descargar</label>
-            </button>
-            <button ion-button outline (click)="onAlertProcesar()">
-                <label style="font-size: 10px">Actualizarse</label>
-            </button>
-            <button ion-button outline (click)="onAlertProcesar()">
-                <label style="font-size: 10px">Ver Desc/Actu</label>
-            </button>
-        </ion-buttons>
     </ion-navbar>
 </ion-header>
+
+<ion-content>
+        <ion-card>
+            <ion-card-header>
+                Actualizarse 
+            </ion-card-header>
+            <ion-item>    
+                <input type="file"  id="file" multiple (change)="files($event.target.files)">
+            </ion-item>
+            <ion-item>
+                <button ion-button outline (click)="upload()">
+                    <i class="pi pi-save"></i>
+                    Cargar Actualizacion
+                </button>
+            </ion-item>
+            <ion-item>
+                <p> Actualizacion exitosa</p> 
+            </ion-item>
+        </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Descargar lo procesado
+        </ion-card-header>
+        <ion-item>
+            <button ion-button outline (click)="upload()">
+                <i class="pi pi-save"></i>
+                Cargar Actualizacion
+            </button>
+        </ion-item>
+        <ion-item>
+            <p> Archivo descargado</p> 
+        </ion-item>
+    </ion-card>
+
+</ion-content>

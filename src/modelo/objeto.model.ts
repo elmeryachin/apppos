@@ -1,4 +1,4 @@
-import { ResumenArticulo } from "./tabla.model";
+import { ResumenArticulo, AbcOperaciones } from "./tabla.model";
 
 export class AccesoRequest {
     constructor(public usuario:string,
@@ -182,4 +182,13 @@ export class ArticuloResponseMin {
         this.nombre = null
         this.precio = null
     }
+}
+
+export class DiscoResponse {
+    constructor(public ruta:string = null,
+                public nombre:string = null,
+                public list:AbcOperaciones[],
+                public array:any,
+                public respuesta:boolean,
+                public mensaje:string) {}
 }

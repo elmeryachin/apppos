@@ -33,9 +33,9 @@ export class EntradaComponent {
   onQuest( ):any {
     if( this.codigo == undefined || this.codigo.trim() == '' ) return; 
     
+    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
     if ( this.codigo.indexOf('%') > -1 ) {
       let service:Observable<any> 
-      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
       service = this.transaccionService.onListEntrada ( { patron: this.codigo } )
 
       service.subscribe (

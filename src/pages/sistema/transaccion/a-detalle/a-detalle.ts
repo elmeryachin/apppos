@@ -89,7 +89,7 @@ export class ADetallePage {
 
             diff[i] = reg
           }
-          console.log(diff)
+          
           let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
           modal.present()
         }
@@ -176,7 +176,7 @@ export class ADetallePage {
     this.tsubprec = 0.00
     this.tsubcant = 0
     if( this.selected != null ) {
-      console.log('this.selected.lista.length ' + this.selected.lista.length)
+      
       for(let i=0; i<this.selected.lista.length; i++) {
         this.tsubcant = this.tsubcant * 1 + this.selected.lista[i].cantidad * 1
         this.tsubprec = this.tsubprec * 1 + this.selected.lista[i].precio * 1
