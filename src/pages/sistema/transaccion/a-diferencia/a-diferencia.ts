@@ -22,7 +22,7 @@ export class ADiferenciaPage {
               public params: NavParams,
               public storageService: StorageService) {
       this.list = params.get('diff')
-      console.log(this.list)
+
   }
 
   onVolver() {

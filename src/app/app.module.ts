@@ -15,6 +15,7 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
 import {DialogModule} from 'primeng/dialog';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AccesoService, 
          ArticuloService, 
@@ -70,7 +71,8 @@ import {  AccesoPage,
     TableModule,
     ButtonModule,
     ToolbarModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

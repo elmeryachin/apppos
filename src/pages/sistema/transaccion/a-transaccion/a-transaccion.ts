@@ -44,8 +44,7 @@ export class ATransaccionPage {
   }
 
   ngOnInit() {
-    console.log(Mousetrap_global)
-    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
+    //console.log(Mousetrap_global)
     this.storageService.setAsignacionDtoTransaccion(this.tipoTransaccion)
 
     this.dtoTransaccion = this.storageService.getDtoTransaccion()
@@ -157,6 +156,7 @@ export class ATransaccionPage {
    */
   getInit() {
     if( this.dtoTransaccion.init != null && this.dtoTransaccion.enabled ) {
+      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
       this.transaccionService.onInit().subscribe(
         data => {
           this.transaccionRequest.getReset()
@@ -181,10 +181,10 @@ export class ATransaccionPage {
       this.transaccionRequest.transaccionObjeto.nombreUsuario = null
       this.entradaNext.codigo = null
       let service: Observable<TransaccionResponse>
-      console.log(this.transaccionRequest.transaccionObjeto.nroMovimiento )
+      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
       service = this.transaccionService.onObtener(this.transaccionRequest.transaccionObjeto.nroMovimiento )
       service.subscribe(
-        data => { console.log(data)
+        data => {
           if( this.mensajeUtils.getValidarRespuestaQuest( data, present, this.entradaNext.codigoNext ) ) {
             this.transaccionRequest.transaccionObjeto = data.transaccionObjeto
             
@@ -287,6 +287,7 @@ export class ATransaccionPage {
   onGuardar( next:any ) {
     
     let servicio: Observable<TransaccionResponse>
+    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
     if( this.transaccionRequest.transaccionObjeto.id == null && this.dtoTransaccion.add != null ) {
       servicio = this.transaccionService.onAdicionar( this.transaccionRequest )
     } else if( this.transaccionRequest.transaccionObjeto.id != null && this.dtoTransaccion.update != null ){
@@ -331,6 +332,7 @@ export class ATransaccionPage {
   onEliminar( next:any ) {
     if( this.storageService.getDtoTransaccion().delete != null ) {
       let service: Observable<ServResponse>
+      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
       service = this.transaccionService.onEliminar( this.transaccionRequest.transaccionObjeto.id )
   
       service.subscribe(
@@ -365,7 +367,7 @@ export class ATransaccionPage {
         ctrlEdicion = true
       }
     }
-    
+    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
     servicio = this.transaccionService.onProcesar( this.transaccionRequest.transaccionObjeto.id, ctrlEdicion?this.transaccionRequest:{} )
       
     servicio.subscribe(
