@@ -5,10 +5,13 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "start": "ionic-app-scripts serve",
+    
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
   },
   "dependencies": {
     "@angular/animations": "^5.2.11",

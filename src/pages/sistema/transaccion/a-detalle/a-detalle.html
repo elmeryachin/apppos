@@ -32,7 +32,7 @@
 <ion-content>
 <div class="content">
     <p-table #dt1 [columns]="cols" [value]="transaccionResponseList.list"
-                 [scrollable]="true" scrollHeight="105px" 
+                 [scrollable]="true" scrollHeight="120px" 
                  [resizableColumns]="true"
                  selectionMode="single" [(selection)]="selected" dataKey="nroMovimiento">
                  <ng-template pTemplate="caption">
@@ -75,7 +75,7 @@
 </div>
 <div class="content" *ngIf="selected!=null">
     <p-table #dt [columns]="colsD" [value]="selected.lista" 
-                 [scrollable]="true" scrollHeight="140px">
+                 [scrollable]="true" scrollHeight="160px">
                  <ng-template pTemplate="caption">
                     <div class="captionGlobal">        
                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>

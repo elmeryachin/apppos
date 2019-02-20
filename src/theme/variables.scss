@@ -45,12 +45,12 @@ $colors: (
   ),
   amarillo-grid:#FEF6AD,
   style-sucursales-0: (
-            base:#D8D8D8,
-            contrast: #FFFFFF
+            base: rgb(255, 255, 255),
+            contrast: rgb(114, 100, 100)
   ),
   style-sucursales-1: (
-          base:#93d6f5,
-          contrast: #FFFFFF
+          base:#CC5F39,
+          contrast: #ffffff
   )
 );
 
@@ -111,7 +111,7 @@ $colors: (
     .label-md[stacked] {
       font-size: 1.1rem !important;
     }
-    .item-input .label-md, {
+    .item-input .label-md {
       color: #3c3c3c;
       font-weight: normal;
     }

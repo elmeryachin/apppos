@@ -9,8 +9,8 @@ function createWindow () {
   // Crear la ventana del navegador.
 
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 392,
+    height: 540,
     webPreferences: {
       nodeIntegration: true
     }
@@ -19,15 +19,8 @@ function createWindow () {
   // y cargar el index.html de la aplicación.
   //mainWindow.loadFile('index.html')
 
-  console.log('ejecutando ...')
   var url = 'file://' + __dirname + '/../www/index.html';
-  console.log(url)
-  var Args = process.argv.slice(2);
-  Args.forEach(function (val) {
-      if (val === "test") {
-          url = 'http://localhost:8100'
-      }
-  });
+
   //mainWindow.loadFile('index.html')
   mainWindow.loadURL(url);
    // Abre el DevTools.

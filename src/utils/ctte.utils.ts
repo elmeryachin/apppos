@@ -52,7 +52,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
 export const ENVIAR:string = "PATH_ENVIAR"
 export const PATH_ENVIAR:DtoTransaccion = {
     enabled :   true,
-    titulo  :   'Envios',
+    titulo  :   'Entregas',
     guardar :   true,
     nuevo   :   true,
     eliminar:   true,
