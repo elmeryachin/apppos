@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ArticuloRequest, ServListaResponse, ServObtenerResponse, ServResponse, DiscoResponse } from '../modelo/objeto.model';
+import { ServObtenerResponse, DiscoResponse } from '../modelo/objeto.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SERVIDOR } from '../utils/ctte.utils';
 import { StorageService } from './storage.service';
