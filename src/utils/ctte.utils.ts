@@ -6,6 +6,10 @@ export const PEDIDO:string = "PATH_PEDIDO"
 export const PATH_PEDIDO:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Pedidos',
+    guardar :   true,
+    nuevo   :   true,
+    eliminar:   true,
+    imprimir:   true,
     init    :   '/pedido/init',
     add     :   '/pedido/add',
     update  :   '/pedido/update',
@@ -49,6 +53,10 @@ export const ENVIAR:string = "PATH_ENVIAR"
 export const PATH_ENVIAR:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Envios',
+    guardar :   true,
+    nuevo   :   true,
+    eliminar:   true,
+    imprimir:   true,
     init    :   '/transferencia/envio/init',
     add     :   '/transferencia/envio/add',
     update  :   '/transferencia/envio/update',
@@ -92,8 +100,12 @@ export const RECIBIR:string = "PATH_RECIBIR"
 export const PATH_RECIBIR:DtoTransaccion = {
     enabled :   false,
     titulo  :   'Por Recibir',
+    guardar :   false,
+    nuevo   :   false,
+    eliminar:   false,
+    imprimir:   false,
     init    :   null,
-    add     :   null,
+    add     :   null,   
     update  :   null,
     delete  :   null,
     quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',      // {nro}  ******** DESARROLLAR ******
@@ -135,6 +147,58 @@ export const SOLICITUD:string = "PATH_SOLICITUD"
 export const PATH_SOLICITUD:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Solicitud Manual',
+    guardar :   true,
+    nuevo   :   true,
+    eliminar:   true,
+    imprimir:   true,
+    init    :   '/transferencia/recibir/solicitud/init',
+    add     :   '/transferencia/recibir/solicitud/add',
+    update  :   '/transferencia/recibir/solicitud/update',
+    delete  :   '/transferencia/recibir/solicitud/delete/',
+    quest   :   '/transferencia/recibir/solicitud/quest/movimiento/',       //{nro}
+    tipoE   :   'AMBIENTE',
+    listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
+    questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+
+    vMonto  :   true,
+
+    B       :   { 
+                    list        :   '/transferencia/recibir/solicitud/list', 
+                    titulo      :   'Lista Solicitudes',
+                    mProcesar   :   null,
+                    nProcesar   :   null,
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   true
+                },
+    C       :   { 
+                    list        :   null,
+                    titulo      :   null,
+                    mProcesar   :   null,
+                    nProcesar   :   null, 
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false
+                },
+    D       :   { 
+                    list        :   null,
+                    titulo      :   null,
+                    mProcesar   :   null,
+                    nProcesar   :   null, 
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false
+                }
+}
+
+export const SOLICITUD_DESTINO:string = "PATH_SOLICITUD_DESTINO"
+export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
+    enabled :   true,
+    titulo  :   'Destino Solicitudes',
+    guardar :   false,
+    nuevo   :   false,
+    eliminar:   false,
+    imprimir:   false,   
     init    :   '/transferencia/recibir/solicitud/init',
     add     :   '/transferencia/recibir/solicitud/add',
     update  :   '/transferencia/recibir/solicitud/update',
@@ -179,6 +243,10 @@ export const VENTA:string = "PATH_VENTA"
 export const PATH_VENTA:DtoTransaccion = {
     enabled :   true,
     titulo  :   'Ventas',
+    guardar :   true,
+    nuevo   :   true,
+    eliminar:   true,
+    imprimir:   true,
     init    :   '/ventas/init',
     add     :   '/ventas/add',
     update  :   '/ventas/update',

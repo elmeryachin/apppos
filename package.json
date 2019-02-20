@@ -49,9 +49,13 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
     "@types/node": "^10.12.21",
+    "electron": "^4.0.5",
+    "electron-builder": "^20.38.5",
+    "foreman": "^3.0.1",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
+  "main": "electron/main.js",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

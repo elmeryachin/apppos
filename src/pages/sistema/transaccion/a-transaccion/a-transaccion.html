@@ -2,13 +2,15 @@
         <ion-navbar color="cafe-claro">
             <ion-title>{{ dtoTransaccion.titulo }}</ion-title>
             <ion-buttons end>
-                <button ion-button outline
+                <button ion-button outline 
+                        *ngIf="dtoTransaccion.guardar"
                         title="Guardar"
                         (click)="onAlertGuardar(entrada.codigoNext)"
                         [disabled]="transaccionRequest.transaccionObjeto.nroMovimiento==undefined || transaccionRequest.transaccionObjeto.nroMovimiento == null || transaccionRequest.transaccionObjeto.nroMovimiento == 0">
                     <i class="pi pi-save"></i>
                 </button>
                 <button ion-button outline
+                        *ngIf="dtoTransaccion.nuevo"
                         title="Limpiar"
                         (click)="onAlertLimpiar()">
                     <i class="pi pi-file"></i>
@@ -34,6 +36,7 @@
                 </button>
                 
                 <button ion-button outline
+                        *ngIf="dtoTransaccion.eliminar"
                         title="Eliminar Transaccion"
                         (click)="onAlertEliminar()"
                         [disabled]="transaccionRequest.transaccionObjeto.id==null">

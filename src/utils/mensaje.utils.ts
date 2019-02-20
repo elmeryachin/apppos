@@ -16,7 +16,7 @@ export class MensajeUtils {
     getValidarRespuesta( data: any, next:any ) {
         let parcial:DatosComunes = data
         if( parcial.respuesta ) {
-            this.utilitarioUtils.onAlertMensaje(this.alertCtrl, next, 'Confirmacion', 'La operacion se ejecuto exitosamente')
+            this.utilitarioUtils.onAlertMensaje(this.alertCtrl, next, 'Confirmacion', 'Ejecucion completada. ' + (data.mensaje == null?'':data.mensaje))
         } else {
             this.utilitarioUtils.onAlertMensaje(this.alertCtrl, next, 'Alerta', data.mensaje)
         }

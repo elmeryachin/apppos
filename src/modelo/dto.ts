@@ -1,6 +1,10 @@
 export interface DtoTransaccion {
     enabled :   boolean
     titulo  :   string
+    guardar :   boolean
+    nuevo   :   boolean
+    eliminar:   boolean
+    imprimir:   boolean
     init    :   string
     add     :   string
     update  :   string
@@ -11,7 +15,7 @@ export interface DtoTransaccion {
     listE   :   string
     questE  :   string
 
-    vMonto  :   boolean
+    vMonto  :   boolean     // Si se debe validar el monto,( revisar si se mantiene o se quita)
     B       :   DtoDetalle
     C       :   DtoDetalle
     D       :   DtoDetalle
