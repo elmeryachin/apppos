@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../../../providers/storage.service';
+import { DiscoService } from '../../../providers/disco.service';
+import { DiscoResponse } from '../../../modelo/objeto.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-disco',
@@ -7,7 +10,9 @@ import { StorageService } from '../../../providers/storage.service';
 })
 export class DiscoPage {
 
-  constructor( public storageService: StorageService ) {
+  constructor( public storageService: StorageService,
+               public discoService:DiscoService ) {
+
   }
 
   onBasicUploadAuto(event) {
@@ -26,26 +31,26 @@ export class DiscoPage {
 
   }
   
-  private filesToUpload = null;
+  private file: File = null;
   public message = '';
   files(files) {
     this.message = '';
-    this.filesToUpload = files;
+    this.file = files.item(0);
+    console.log(this.file)
   }
 
   upload() {
-    const formData = new FormData();
-    const files = this.filesToUpload;
-    try {
-      /*for (f:any : files) {
-        console.log(f)
-        //formData.append(`fil${i}`, files.item(i), files.item(i).name);
-      } */ 
-    } catch (error) {
-      console.log(error)
-    }
-    console.log(formData)
-    //this.http.post('http://localhost:3000/upload', formData).subscribe(response => this.message = response['message']);
+     let service:Observable<DiscoResponse> = this.discoService.onActualizar(this.file)
+
+     service.subscribe(
+      data => {
+        console.log(data)
+      }
+    )
   }
 
+
+  download() {
+    console.log('ejecutando descarga ....')
+  }
 }

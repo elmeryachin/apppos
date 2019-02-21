@@ -117,15 +117,15 @@ export class QuestComponent {
       this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.precioNext, 'Alerta', 'Verifique el precio, avance con enter')
     } else {
 
-      if( !this.storageService.getDtoTransaccion().vMonto || this.cantidadExistente >= this.articuloResponseMin.cantidad ) {
+      //if( !this.storageService.getDtoTransaccion().vMonto || this.cantidadExistente >= this.articuloResponseMin.cantidad ) {
         if( this.existeEnLista ) {
           this.utilitarioUtils.onAlertGuardar(this.alertCtrl, this, this.codigoNext, 'Alerta', 'Existe otro registro en la lista desea reemplazar?')
         } else {
           this.onGuardar(this.codigoNext)
         }
-      } else {
+      /*} else {
         this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.cantidadNext, 'Alerta', 'Supero la cantidad existente del inventario')
-      }
+      }*/
     } 
   }
 

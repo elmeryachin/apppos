@@ -286,28 +286,32 @@ export class ATransaccionPage {
    */
   onGuardar( next:any ) {
     
-    let servicio: Observable<TransaccionResponse>
-    this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
-    if( this.transaccionRequest.transaccionObjeto.id == null && this.dtoTransaccion.add != null ) {
-      servicio = this.transaccionService.onAdicionar( this.transaccionRequest )
-    } else if( this.transaccionRequest.transaccionObjeto.id != null && this.dtoTransaccion.update != null ){
-      servicio = this.transaccionService.onActualizar( this.transaccionRequest )
-    }
+    if (this.transaccionRequest.transaccionObjeto.codigo != null ){
+      let servicio: Observable<TransaccionResponse>
+      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
+      if( this.transaccionRequest.transaccionObjeto.id == null && this.dtoTransaccion.add != null ) {
+        servicio = this.transaccionService.onAdicionar( this.transaccionRequest )
+      } else if( this.transaccionRequest.transaccionObjeto.id != null && this.dtoTransaccion.update != null ){
+        servicio = this.transaccionService.onActualizar( this.transaccionRequest )
+      }
 
-    if( servicio != null) {
-      servicio.subscribe(
-        data => {
-          if( this.mensajeUtils.getValidarRespuesta(data, next) ) {
-            this.transaccionRequest.getReset()
-            this.entradaNext.codigo = null
-            this.getInit()
-            this.productoNext.getReset()
-            this.codigo = null
-          } 
-        }
-      )
+      if( servicio != null) {
+        servicio.subscribe(
+          data => {
+            if( this.mensajeUtils.getValidarRespuesta(data, next) ) {
+              this.transaccionRequest.getReset()
+              this.entradaNext.codigo = null
+              this.getInit()
+              this.productoNext.getReset()
+              this.codigo = null
+            } 
+          }
+        )
+      }
+    } else {
+      this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.entradaNext.codigoNext,
+        'Alerta', ' Le falta completar el codigo ' + this.dtoTransaccion.tipoE.toLowerCase())
     }
-    
   }
 
   /**

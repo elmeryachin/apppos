@@ -1,8 +1,8 @@
       <button *ngFor="let item of list" class="btn-list" ion-button color="style-sucursales-{{item.propio}}">
         <p *ngIf="item.propio==1; else a1">
-          {{item.nombreAmbiente}}: {{item.cantidad}}
+          {{item.nombreAmbiente}}: <b>{{item.cantidad}}</b>
         </p>
         <ng-template #a1>
-          <p *ngIf="item.propio==0" >{{item.nombreAmbiente}}: {{item.cantidad}}</p>
+          <p *ngIf="item.propio==0" >{{item.nombreAmbiente}}: <b>{{item.cantidad}}</b></p>
         </ng-template>
       </button>

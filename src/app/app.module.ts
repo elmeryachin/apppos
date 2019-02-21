@@ -21,7 +21,8 @@ import { AccesoService,
          ArticuloService, 
          StorageService, 
          InventarioService, 
-         TransaccionService } from '../providers/servicios.providers';
+         TransaccionService,
+         DiscoService } from '../providers/servicios.providers';
 
 import {  InventarioComponent, 
           EntradaComponent, 
@@ -103,6 +104,7 @@ import {  AccesoPage,
     StorageService,
     InventarioService,
     TransaccionService,
+    DiscoService,
     MensajeUtils,
     UtilitarioUtils 
   ]
