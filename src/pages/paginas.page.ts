@@ -12,3 +12,5 @@ export { ERecibidoPage } from './sistema/transaccion/e-recibido/e-recibido'
 export { FVentaPage } from './sistema/transaccion/f-venta/f-venta'
 
 export { DiscoPage } from './sistema/disco/disco'
+
+export { InfoPage } from './sistema/info/info'

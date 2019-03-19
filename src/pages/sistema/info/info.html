@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="cafe-claro">
+        <ion-title>Discos</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+        <ion-card>
+            <ion-card-header>
+                Actualizarse 
+            </ion-card-header>
+            <ion-item>    
+                <input type="file"  id="file" (change)="files($event.target.files)">
+            </ion-item>
+            <ion-item>
+                <button ion-button outline (click)="upload()">
+                    <i class="pi pi-save"></i>
+                    Cargar Actualizacion
+                </button>
+            </ion-item>
+            <ion-item>
+                <p> Actualizacion exitosa</p> 
+            </ion-item>
+        </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Descargar lo procesado
+        </ion-card-header>
+        <ion-item>
+            <button ion-button outline (click)="download()">
+                <i class="pi pi-save"></i>
+                Descargar 
+            </button>
+        </ion-item>
+        <ion-item>
+            <p> Archivo descargado</p> 
+        </ion-item>
+    </ion-card>
+
+</ion-content>

@@ -28,6 +28,7 @@ export class ProductoPage {
               public utilitarioUtils:UtilitarioUtils,
               public articuloService:ArticuloService) {
     this.articuloRequest = new ArticuloRequest()
+    this.cargarAccesoRapido()
   }
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class ProductoPage {
    * Este metodo pertenece al ciclo de vida de ionic y contiene
    * Metodo que pueden ejecutarse tras conbinar la presion de teclas
    */
-  ionViewDidEnter(){
+  cargarAccesoRapido(){
     console.log(Mousetrap_global)
     Mousetrap.bindGlobal(['command+g', 'ctrl+g'], () => {
       this.onAlertGrabar(this.codigoNext)

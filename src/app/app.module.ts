@@ -40,7 +40,8 @@ import {  AccesoPage,
           DSolicitudPage,
           ERecibidoPage,
           FVentaPage,
-          DiscoPage } from '../pages/paginas.page';
+          DiscoPage,
+          InfoPage } from '../pages/paginas.page';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {  AccesoPage,
     ERecibidoPage,
     FVentaPage,
     DiscoPage,
+    InfoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,
@@ -90,6 +92,7 @@ import {  AccesoPage,
     ERecibidoPage,
     FVentaPage,
     DiscoPage,
+    InfoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,

@@ -41,6 +41,7 @@ export class ATransaccionPage {
               public storageService: StorageService) {
     //Quitar el storage para adicionarlo en transaccionService para org. el codigo
     this.transaccionRequest = new TransaccionRequest()
+    this.cargarAccesoRapido()
   }
 
   ngOnInit() {
@@ -56,22 +57,30 @@ export class ATransaccionPage {
    * Este metodo pertenece al ciclo de vida de ionic y contiene
    * Metodo que pueden ejecutarse tras conbinar la presion de teclas
    */
-  ionViewDidEnter(){
+  cargarAccesoRapido(){
     Mousetrap.bindGlobal(['command+g', 'ctrl+g'], () => {
-      this.onAlertGuardar(this.entradaNext.codigoNext)
+      if( this.dtoTransaccion.guardar ) {
+        this.onAlertGuardar(this.entradaNext.codigoNext)
+      }
     })
     Mousetrap.bindGlobal(['command+n', 'ctrl+n'], () => {
-      this.onAlertLimpiar()
+      if( this.dtoTransaccion.nuevo ) {
+        this.onAlertLimpiar()
+      }
     })
     Mousetrap.bindGlobal(['command+e', 'ctrl+e'], () => {
-      this.onAlertEliminar()
+      if( this.dtoTransaccion.eliminar ) {
+        this.onAlertEliminar()
+      }
     })
     Mousetrap.bindGlobal(['command+i', 'ctrl+i'], () => {
-      if( this.transaccionRequest.transaccionObjeto.id == null ) {
-        this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.entradaNext.codigoNext,
-          'Alerta', ' No se tiene presente un registro seleccionado a imprimir')
-      } else {
-        this.getPrint()
+      if( this.dtoTransaccion.imprimir ) {
+        if( this.transaccionRequest.transaccionObjeto.id == null ) {
+          this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.entradaNext.codigoNext,
+            'Alerta', ' No se tiene presente un registro seleccionado a imprimir')
+        } else {
+          this.getPrint()
+        }
       }
     })
   }
@@ -97,7 +106,7 @@ export class ATransaccionPage {
    */
   onAlertGuardar( next:any ) {
     this.utilitarioUtils.onAlertGuardar( this.alertCtrl, this, next, 'Confirmacion',
-     'Esta seguro de guardar el nuevo Pedido con Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
+     'Esta seguro de guardar la transaccion con Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
   }
 
   /**
