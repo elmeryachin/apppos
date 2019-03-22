@@ -188,7 +188,7 @@ export class DiscoResponse {
     constructor(public ruta:string = null,
                 public nombre:string = null,
                 public list:AbcOperaciones[],
-                public array:any,
+                public documento:string,
                 public respuesta:boolean,
                 public mensaje:string) {}
 }

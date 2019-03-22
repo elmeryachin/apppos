@@ -18,16 +18,23 @@ export class DiscoService {
   }
 
   onGenerar(proceso: string ): Observable<DiscoResponse> {
-    return this.http.post<DiscoResponse>( SERVIDOR + this.path + '/generar', null,
-    {headers:new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token ).set('proceso', proceso)} )
+    let headers:HttpHeaders = new HttpHeaders()
+    headers.set( 'token', this.storageService.getAccesoResponse().token )
+
+  
+
+    return this.http.get<DiscoResponse>( SERVIDOR + this.path + '/generar', { headers:new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token )  } )
+  
   }
 
   onActualizar(file: any ): Observable<DiscoResponse> {
     let formData = new FormData();
     formData.append("file", file);
+    console.log('actualizando ....')
     return this.http.post<DiscoResponse>( SERVIDOR + this.path + '/grabando', formData,
     {headers:new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token )} )
   }
+
 
 
 }
