@@ -16,8 +16,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
     delete  :   '/pedido/delete/',                          //{id}
     quest   :   '/pedido/quest/movimiento/',                //{nro}
     tipoE   :   'PROVEEDOR',
-    listE   :   '/pedido/proveedor/list',
-    questE  :   '/pedido/proveedor/quest/',                 //{codigo}
+    listE   :   '/usuario/proveedor/list',
+    questE  :   '/usuario/proveedor/quest/',                 //{codigo}
 
     vMonto  :   false,
 
@@ -26,7 +26,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     list        :   '/pedido/list', 
                     mProcesar   :   2,
                     nProcesar   :   'Hacer Llegada',
-                    procesar    :   '/pedido/llegada/confirmar/',   //{id}
+                    procesar    :   '/pedido/llegada/confirmar/',   
                     questDif    :   null,
                     ver         :   true
                 },
@@ -35,7 +35,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     titulo      :   'Lista Llegadas', 
                     nProcesar   :   'Cancelar Llegada',
                     mProcesar   :   2,
-                    procesar    :   '/pedido/llegada/cancelar/',    //{id}
+                    procesar    :   '/pedido/llegada/cancelar/', 
                     questDif    :   null,
                     ver         :   false
                 },
@@ -63,8 +63,8 @@ export const PATH_ENVIAR:DtoTransaccion = {
     delete  :   '/transferencia/envio/delete/',     //{id}
     quest   :   '/transferencia/envio/quest/movimiento/',                //{nro}  ******** DESARROLLAR ******
     tipoE   :   'AMBIENTE',
-    listE   :   '/transferencia/envio/ambiente/list',
-    questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+    listE   :   '/ambiente/list',
+    questE  :   '/ambiente/quest/',                  //{codigo}
     
     vMonto  :   true,
 
@@ -110,8 +110,8 @@ export const PATH_RECIBIR:DtoTransaccion = {
     delete  :   null,
     quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',      // {nro}  ******** DESARROLLAR ******
     tipoE   :   'ORIGEN',
-    listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
-    questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+    listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
+    questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   false,
 
@@ -157,8 +157,8 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     delete  :   '/transferencia/recibir/solicitud/delete/',
     quest   :   '/transferencia/recibir/solicitud/quest/movimiento/',       //{nro}
     tipoE   :   'AMBIENTE',
-    listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
-    questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+    listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
+    questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   true,
 
@@ -205,8 +205,8 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     delete  :   '/transferencia/recibir/solicitud/delete/',
     quest   :   '/transferencia/recibir/solicitud/quest/movimiento/',       //{nro}
     tipoE   :   'AMBIENTE',
-    listE   :   '/transferencia/envio/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
-    questE  :   '/transferencia/envio/ambiente/quest/',                  //{codigo}
+    listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
+    questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   true,
 
@@ -253,8 +253,8 @@ export const PATH_VENTA:DtoTransaccion = {
     delete  :   '/ventas/delete/',
     quest   :   '/ventas/quest/movimiento/',
     tipoE   :   'CLIENTE',
-    listE   :   '/ventas/cliente/list',
-    questE  :   '/ventas/cliente/quest/',
+    listE   :   '/usuario/cliente/list',
+    questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
 

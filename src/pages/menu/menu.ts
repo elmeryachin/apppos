@@ -8,7 +8,7 @@ import { ProductoPage,
          DiscoPage,
          InfoPage } from '../paginas.page'
 import { StorageService } from '../../providers/storage.service';
-import { Tabs, ModalController, Tab } from 'ionic-angular';
+import { ModalController, Tab } from 'ionic-angular';
 
 @Component({
   selector: 'page-menu',
