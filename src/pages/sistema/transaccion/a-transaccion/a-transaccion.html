@@ -109,7 +109,7 @@
                (enterInventario)="onEnterInventario( $event, producto )"
                (enterGuardar)="onEnterInventarioGuardar( $event )"></quest>
 
-        <ion-row>
+        <ion-row>{{ codigo }}
             <ng-container *ngIf="codigo!=null">
                 <inventario  [codigo]="codigo" (noEvent)="onNoEventInventario( $event )" ></inventario>
             </ng-container>

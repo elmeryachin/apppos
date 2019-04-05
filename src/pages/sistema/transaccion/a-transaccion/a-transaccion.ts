@@ -233,7 +233,6 @@ export class ATransaccionPage {
         producto.existeEnLista = true
       }
     }
-    
     setTimeout( () => {
       this.codigo = event.codigo
     }, 250)

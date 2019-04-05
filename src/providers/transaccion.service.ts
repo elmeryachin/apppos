@@ -21,7 +21,8 @@ export class TransaccionService {
     return new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token )
   }
   onObtenerArticulo( codigo:string ):Observable<ArticuloResponseMin> {
-    return this.http.get<ArticuloResponseMin>( SERVIDOR + '/articulo/quest/' + codigo , {headers: this.getHeaders()} )
+    console.log('codigo::: ' + codigo)
+    return this.http.get<ArticuloResponseMin>( SERVIDOR + '/articulo/quest/min/' + codigo , {headers: this.getHeaders()} )
   }
   // ############################ A
   // 1
