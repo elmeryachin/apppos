@@ -3,6 +3,7 @@ import { ProductoPage,
          BPedidoPage,
          CEnvioPage,
          DSolicitudPage,
+         DSolicitudDestinoPage,
          ERecibidoPage,
          FVentaPage,
          DiscoPage,
@@ -20,6 +21,7 @@ export class MenuPage {
   @ViewChild('idPedido') idPedido: Tab;
   @ViewChild('idEnvio') idEnvio: Tab;
   @ViewChild('idSolicitud') idSolicitud: Tab;
+  @ViewChild('idSolicitudDestino') idSolicitudDestino: Tab;
   @ViewChild('idDisco') idDisco: Tab;
   @ViewChild('idRecibido') idRecibido: Tab;
   @ViewChild('idVenta') idVenta: Tab;
@@ -27,6 +29,7 @@ export class MenuPage {
   bPedidoPage:any
   cEnvioPage:any
   dSolicitudPage:any
+  dSolicitudDestinoPage:any
   eRecibidoPage:any
   fVentaPage:any
   
@@ -40,6 +43,7 @@ export class MenuPage {
     this.bPedidoPage = BPedidoPage
     this.cEnvioPage = CEnvioPage
     this.dSolicitudPage = DSolicitudPage
+    this.dSolicitudDestinoPage = DSolicitudDestinoPage
     this.eRecibidoPage = ERecibidoPage
     this.fVentaPage = FVentaPage
     this.discoPage = DiscoPage
@@ -64,6 +68,10 @@ export class MenuPage {
 
   ondSolicitudPage() {
     this.idSolicitud.goToRoot(null)
+  }
+
+  ondSolicitudDestinoPage() {
+    this.idSolicitudDestino.goToRoot(null)
   }
 
   onDiscoPage() {

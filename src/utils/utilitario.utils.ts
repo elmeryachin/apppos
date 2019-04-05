@@ -179,4 +179,8 @@ export class UtilitarioUtils {
       })
       alert.present();
     }
+
+    onSaltoNext(next:any){
+      setTimeout( () => next.setFocus(), 350) 
+    }
 }

@@ -61,7 +61,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
     add     :   '/transferencia/envio/add',
     update  :   '/transferencia/envio/update',
     delete  :   '/transferencia/envio/delete/',     //{id}
-    quest   :   '/transferencia/envio/quest/movimiento/',                //{nro}  ******** DESARROLLAR ******
+    quest   :   '/transferencia/envio/quest/movimiento/', 
     tipoE   :   'AMBIENTE',
     listE   :   '/ambiente/list',
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -108,7 +108,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
     add     :   null,   
     update  :   null,
     delete  :   null,
-    quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',      // {nro}  ******** DESARROLLAR ******
+    quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',  
     tipoE   :   'ORIGEN',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -193,33 +193,33 @@ export const PATH_SOLICITUD:DtoTransaccion = {
 
 export const SOLICITUD_DESTINO:string = "PATH_SOLICITUD_DESTINO"
 export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
-    enabled :   true,
-    titulo  :   'Destino Solicitudes',
+    enabled :   false,
+    titulo  :   'Solicitantes',
     guardar :   false,
     nuevo   :   false,
     eliminar:   false,
-    imprimir:   false,   
-    init    :   '/transferencia/recibir/solicitud/init',
-    add     :   '/transferencia/recibir/solicitud/add',
-    update  :   '/transferencia/recibir/solicitud/update',
-    delete  :   '/transferencia/recibir/solicitud/delete/',
-    quest   :   '/transferencia/recibir/solicitud/quest/movimiento/',       //{nro}
-    tipoE   :   'AMBIENTE',
+    imprimir:   false,
+    init    :   null,
+    add     :   null,   
+    update  :   null,
+    delete  :   null,
+    quest   :   '/transferencia/solicitud/procesa/quest/movimiento/',  // DESARROLLAR
+    tipoE   :   'ORIGEN',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
 
-    vMonto  :   true,
+    vMonto  :   false,
 
     B       :   { 
-                    list        :   '/transferencia/recibir/solicitud/list', 
-                    titulo      :   'Lista Solicitudes',
+                    list        :   '/transferencia/solicitud/procesa/list',  // DESARROLLAR
+                    titulo      :   'Lista Solicitantes',
                     mProcesar   :   null,
                     nProcesar   :   null,
-                    procesar    :   null,
+                    procesar    :   null,  
                     questDif    :   null,
                     ver         :   true
                 },
-    C       :   { 
+                C       :   { 
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,

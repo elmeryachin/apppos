@@ -7,6 +7,7 @@ export { ADiferenciaPage } from './sistema/transaccion/a-diferencia/a-diferencia
 
 export { BPedidoPage } from './sistema/transaccion/b-pedido/b-pedido'
 export { CEnvioPage } from './sistema/transaccion/c-envio/c-envio'
+export { DSolicitudDestinoPage } from './sistema/transaccion/d-solicitud-destino/d-solicitud-destino'
 export { DSolicitudPage } from './sistema/transaccion/d-solicitud/d-solicitud'
 export { ERecibidoPage } from './sistema/transaccion/e-recibido/e-recibido'
 export { FVentaPage } from './sistema/transaccion/f-venta/f-venta'
