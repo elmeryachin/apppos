@@ -115,9 +115,6 @@ $colors: (
       color: #3c3c3c;
       font-weight: normal;
     }
-    /*.item-input {
-      font-weight: bold; 
-    }*/
   
     ion-label {
       padding: 0 !important;
@@ -156,9 +153,6 @@ $colors: (
       padding: 0px !important;
       padding-left: 10px !important;
       padding-right: 10px !important;
-      //min-height: 30px !important;
-      //height: 30px !important;
-      //margin: 0px !important;
   }
   .grid {
       .item-block{
@@ -186,7 +180,7 @@ $colors: (
   }
 
   // PARA TABLAS PRIMENG 
-  .ui-table { //, .ui-widget, .ui-table-hoverable-rows {
+  .ui-table { 
     font-size: 10px !important;
     color: black;
     font-family: "Roboto", "Helvetica Neue", sans-serif
@@ -219,33 +213,45 @@ $colors: (
 .md{
   font-size: 1.1rem !important;
 }
-@media (min-width: 700px) {
+@media (min-width: 400px) {
   .label-md[stacked]{
-    font-size: 1.3rem !important;//todo: tamanio de fuente
+    font-size: 1.23rem !important;//todo: tamanio de fuente
   }
   .item-md{
-    font-size: 1.3rem !important;//todo: tamanio de fuente
+    font-size: 1.23rem !important;//todo: tamanio de fuente
   }
   .grid .item-md{
-    font-size: 1.3rem !important;//todo: tamanio de fuente
+    font-size: 1.23rem !important;//todo: tamanio de fuente
   }
   .md{
-    font-size: 1.3rem !important;
+    font-size: 1.23rem !important;
   }
+
+    // PARA TABLAS PRIMENG 
+    .ui-table { 
+      font-size: 12px !important;
+      color: black;
+      font-family: "Roboto", "Helvetica Neue", sans-serif
+    }
+  
+    .ui-table .ui-table-tbody > tr {
+      background: #fffedf;
+    }
+  
+    .captionGlobal {
+      text-align: right;
+      margin: 0px;
+    }
+    .questGlobal {
+      width:auto;
+      height:20px;
+      padding:5px 1px 1px 5px;
+    }
+  
 }
-@media (min-width: 1000px) {
-  .label-md[stacked]{
-    font-size: 1.4rem !important;//todo: tamanio de fuente
-  }
-  .item-md{
-    font-size: 1.4rem !important;//todo: tamanio de fuente
-  }
-  .grid .item-md{
-    font-size: 1.4rem !important;//todo: tamanio de fuente
-  }
-  .md{
-    font-size: 1.4rem !important;
-  }
+@media (min-width: 800px) {
+  
+  @import "medio.scss";
 }
 
 

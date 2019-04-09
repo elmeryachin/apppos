@@ -6,4 +6,13 @@ inventario {
         min-width: 115px;
         font-size: 1.1rem;
       }
+
+      @media (min-width: 400px) {
+        .btn-list {
+          height: 2.5rem;
+          margin: 0.2rem 0.2rem;
+          min-width: 120px;
+          font-size: 1.1rem;
+        }
+      }
 }
