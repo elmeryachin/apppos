@@ -5,23 +5,45 @@
 </ion-header>
 
 <ion-content>
-        <ion-card>
-            <ion-card-header>
-                Actualizarse 
-            </ion-card-header>
-            <ion-item>    
-                <input type="file"  id="file" (change)="files($event.target.files)">
-            </ion-item>
+    <ion-card>
+            <ion-card-header></ion-card-header>
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="../../assets/imgs/descargar.png">
+            </ion-avatar>
+            <h2>Generar Archivo</h2>
+            <p>Genera un archivo con los datos que procesados</p>
+        </ion-item>
+
+    </ion-card>
+    <ion-card>
+            <ion-card-header></ion-card-header>
             <ion-item>
-                <button ion-button outline (click)="upload()" >
-                    <i class="pi pi-save"></i>
-                    Cargar Actualizacion
-                </button>
+                <ion-avatar item-start>
+                    <img src="../../assets/imgs/paquete.jpg">
+                </ion-avatar>
+                <h2>Actualizar</h2>
+                <p>Genera un archivo con los datos que procesados</p>
             </ion-item>
-            <ion-item>
-                <p> Actualizacion exitosa</p> 
-            </ion-item>
+    
         </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Actualizarse
+        </ion-card-header>
+        <ion-item>
+            <input type="file" id="file" (change)="files($event.target.files)">
+        </ion-item>
+        <ion-item>
+            <button ion-button outline (click)="upload()">
+                <i class="pi pi-save"></i>
+                Cargar Actualizacion
+            </button>
+        </ion-item>
+        <ion-item>
+            <p> Actualizacion exitosa</p>
+        </ion-item>
+    </ion-card>
     <ion-card>
         <ion-card-header>
             Descargar lo procesado
@@ -29,11 +51,11 @@
         <ion-item>
             <button ion-button outline (click)="download()">
                 <i class="pi pi-save"></i>
-                Descargar 
+                Descargar
             </button>
         </ion-item>
         <ion-item>
-            <p> Archivo descargado</p> 
+            <p> Archivo descargado</p>
         </ion-item>
     </ion-card>
 

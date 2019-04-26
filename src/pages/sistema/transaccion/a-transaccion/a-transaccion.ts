@@ -135,7 +135,8 @@ export class ATransaccionPage {
         this.productoNext.articuloResponseMin.cantidad = null
         this.productoNext.articuloResponseMin.precio = null 
       } else {
-        this.transaccionRequest.transaccionObjeto.nroMovimiento = paramTransaccionObjeto.nroMovimiento 
+        // parche: se manda el id sobre el nroMovimiento , esto para poder utilizar el metodo this.onQuest sin modificar.
+        this.transaccionRequest.transaccionObjeto.nroMovimiento = paramTransaccionObjeto.id 
         this.onQuest( null ) 
         this.getTotalesTransaccion()
         this.codigo = null

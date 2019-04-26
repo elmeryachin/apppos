@@ -26,16 +26,16 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     list        :   '/pedido/list', 
                     mProcesar   :   2,
                     nProcesar   :   'Hacer Llegada',
-                    procesar    :   '/pedido/llegada/confirmar/',   
+                    procesar    :   '/llegada/confirmar/',   
                     questDif    :   null,
                     ver         :   true
                 },
     C       :   { 
-                    list        :   '/pedido/llegada/list',
+                    list        :   '/llegada/list',
                     titulo      :   'Lista Llegadas', 
                     nProcesar   :   'Cancelar Llegada',
                     mProcesar   :   2,
-                    procesar    :   '/pedido/llegada/cancelar/', 
+                    procesar    :   '/llegada/cancelar/', 
                     questDif    :   null,
                     ver         :   false
                 },

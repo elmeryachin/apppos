@@ -181,6 +181,8 @@ export class UtilitarioUtils {
     }
 
     onSaltoNext(next:any){
-      setTimeout( () => next.setFocus(), 350) 
+      if(next != null) {
+        setTimeout( () => next.setFocus(), 350) 
+      }
     }
 }

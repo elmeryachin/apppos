@@ -56,19 +56,6 @@ export class DetalleComponent {
   ionViewDidLeave(){
     console.log('ionViewDidLeave()')
   }
-  /**
-   * invierte la lista detalle de los articulos y obtiene los totales
-   * @param lista lista oficial de los articulos
-   */
-  getSubTotales( lista:TransaccionDetalle[] ) {
-    console.log('test de suma de totales')
-    this.tsubcant = 0;
-    this.tsubprec = 0.00;
-    for( let i=0; i<lista.length; i++ ) {
-      this.tsubcant = this.tsubcant + lista[i].cantidad * 1
-      this.tsubprec = this.tsubprec + lista[i].cantidad * lista[i].precio
-    }
-  }
 
   /**
    * Solicita confirmacion antes de eliminar algun registro selecionado
