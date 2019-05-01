@@ -90,6 +90,27 @@ export class ADetallePage {
             diff[i] = reg
           }
           
+                    
+          if( data.transaccionObjeto.lista.length > this.selected.lista.length ) {
+            for( let j=0; j< data.transaccionObjeto.lista.length; j++ ) {
+              let noRepedidos:boolean = true;
+              for( let i=0; i<this.selected.lista.length; i++ ) {
+                if( data.transaccionObjeto.lista[j].codigoArticulo == this.selected.lista[i].codigoArticulo) {
+                  noRepedidos = false;
+                }
+              }
+              if( noRepedidos ) {
+                let reg = {
+                  codigo    : data.transaccionObjeto.lista[j].codigoArticulo,
+                  cant_1  : 0,
+                  cant_2  : (-1) * data.transaccionObjeto.lista[j].cantidad,
+                  cant_3  : data.transaccionObjeto.lista[j].cantidad
+                }
+                diff[diff.length] = reg;
+              }
+            } 
+          }
+
           let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
           modal.present()
         }

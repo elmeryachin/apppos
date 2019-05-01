@@ -7,7 +7,7 @@
 </ion-tabs>
 
 
-<ion-tabs *ngIf="getTipo()!='ALMACEN'" tabsPlacement="bottom" color="cafe-claro" preloadTabs="false">
+<ion-tabs *ngIf="getTipo()!='ALMACEN'" tabsPlacement="bottom" [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'" preloadTabs="false">
   <ion-tab #idSolicitud tabIcon="water" tabTitle="Solicitud" [root]="dSolicitudPage" (ionSelect)="ondSolicitudPage()" ></ion-tab>
   <ion-tab #idRecibido tabIcon="water" tabTitle="Entregas" [root]="eRecibidoPage" (ionSelect)="oneRecibidoPage()" ></ion-tab>
   <ion-tab #idVenta tabIcon="water" tabTitle="Venta" [root]="fVentaPage" (ionSelect)="onfVentaPage()" ></ion-tab>

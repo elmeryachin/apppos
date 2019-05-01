@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ExistenciaResponseList, ResumenExistencia } from '../../modelo/objeto.model';
-import { InventarioService } from '../../providers/servicios.providers';
+import { InventarioService, StorageService } from '../../providers/servicios.providers';
 
 @Component({
   selector: 'inventario',
@@ -13,7 +13,8 @@ export class InventarioComponent {
   ctrl:boolean = false
   list:ResumenExistencia[]
   @Output() noEvent = new EventEmitter()
-  constructor( public inventarioService:InventarioService ) {
+  constructor( public inventarioService:InventarioService,
+               public storageService:StorageService ) {
   }
 
   ngAfterViewInit() {

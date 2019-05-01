@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar color="cafe-claro">
+    <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
         <ion-title>Discos</ion-title>
     </ion-navbar>
 </ion-header>
