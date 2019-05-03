@@ -143,6 +143,31 @@ export class ADetallePage {
     )
   }
 
+    /**
+   * Muestra un mensaje antes de ejectar 
+   */
+  onAlertAgrupar() {
+    this.utilitarioUtils.onAlertAgrupar( this.alertCtrl, this, null, 'Agrupar',
+     'Esta seguro de agrupar los registros actuales (Venta 1er Borrador')
+  }
+  /**
+   * Procesa segun el path lo que se ejecuta, guarda un nuevo cambio de estado para el registro seleccionado
+   */
+  onAgrupar( next:any ) {
+    let servicio: Observable<ServResponse>
+  
+    servicio = this.transaccionService.onAgrupar( )
+      
+    servicio.subscribe(
+      data => {
+        if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
+            this.getLista()
+            this.selected = null
+        } 
+      }
+    )
+  }
+
   /**
    * retorna a la ventana principal que lo invoco enviando el objeto principal
    */

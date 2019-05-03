@@ -28,7 +28,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     nProcesar   :   'Hacer Llegada',
                     procesar    :   '/llegada/confirmar/',   
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
     C       :   { 
                     list        :   '/llegada/list',
@@ -37,7 +38,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     mProcesar   :   2,
                     procesar    :   '/llegada/cancelar/', 
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   null, 
@@ -46,7 +48,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }
 export const ENVIAR:string = "PATH_ENVIAR"
@@ -75,7 +78,8 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
     C       :   { 
                     list        :   '/transferencia/envio/confirmados/list', 
@@ -84,7 +88,8 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     nProcesar   :   'Reconfirmar Envio',
                     procesar    :   '/transferencia/envio/reconfirmar/',        //{id}
                     questDif    :   '/transferencia/envio/diferencia/quest/',    //{id}
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   '/transferencia/envio/reconfirmar/list',
@@ -93,7 +98,8 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }
 export const RECIBIR:string = "PATH_RECIBIR"
@@ -122,7 +128,8 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     nProcesar   :   'Confirmar Recepcion',
                     procesar    :   '/transferencia/recibir/confirmar/recepcion/',  //{id}
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
     C       :   { 
                     list        :   '/transferencia/recibir/recibidos/list', 
@@ -131,7 +138,8 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     nProcesar   :   'Cancelar Recepcion',
                     procesar    :   '/transferencia/recibir/cancelar/recepcion/',   //{id}
                     questDif    :   '/transferencia/envio/diferencia/quest/',       //{id}
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   null,
@@ -140,7 +148,8 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }
 export const SOLICITUD:string = "PATH_SOLICITUD"
@@ -169,7 +178,8 @@ export const PATH_SOLICITUD:DtoTransaccion = {
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
     C       :   { 
                     list        :   null,
@@ -178,7 +188,8 @@ export const PATH_SOLICITUD:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   null,
@@ -187,7 +198,8 @@ export const PATH_SOLICITUD:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }
 
@@ -217,16 +229,18 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
                     nProcesar   :   null,
                     procesar    :   null,  
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
-                C       :   { 
+    C       :   { 
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   null,
@@ -235,7 +249,8 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }
 
@@ -265,7 +280,8 @@ export const PATH_VENTA:DtoTransaccion = {
                     mProcesar   :   2,
                     procesar    :   '/ventas/confirmar/',   
                     questDif    :   null,
-                    ver         :   true
+                    ver         :   true,
+                    agrupa      :   null
                 },
     C       :   { 
                     list        :   '/ventas/confirmar/list', 
@@ -274,7 +290,8 @@ export const PATH_VENTA:DtoTransaccion = {
                     nProcesar   :   null,
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
                 },
     D       :   { 
                     list        :   null,
@@ -283,6 +300,109 @@ export const PATH_VENTA:DtoTransaccion = {
                     nProcesar   :   null, 
                     procesar    :   null,
                     questDif    :   null,
-                    ver         :   false
+                    ver         :   false,
+                    agrupa      :   null
+                }
+}
+
+export const BORRADOR:string = "PATH_BORRADOR"
+export const PATH_BORRADOR:DtoTransaccion = {
+    enabled :   true,
+    titulo  :   'Borrador',
+    guardar :   true,
+    nuevo   :   true,
+    eliminar:   true,
+    imprimir:   true,
+    init    :   '/borrador/init',
+    add     :   '/borrador/add',
+    update  :   '/borrador/update',
+    delete  :   '/borrador/delete/',
+    quest   :   '/borrador/quest/movimiento/',
+    tipoE   :   'CLIENTE',
+    listE   :   '/usuario/cliente/list',
+    questE  :   '/usuario/cliente/quest/',
+    
+    vMonto  :   true,
+
+    B       :   { 
+                    list        :   '/borrador/list', 
+                    titulo      :   'Ventas - Borrador',
+                    nProcesar   :   null, //'Confirmar Control Venta',
+                    mProcesar   :   2,
+                    procesar    :   null, //'/borrador/confirmar',   
+                    questDif    :   null,
+                    ver         :   true,
+                    agrupa      :   '/borrador/agrupar'
+                },
+    C       :   { 
+                    list        :   null, //'/borrador/agrupados/list',             Funciona pero esta oculta
+                    titulo      :   null, //'Lista de Ventas que se agruparon',     Funciona pero se oculta
+                    mProcesar   :   null,
+                    nProcesar   :   null,
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
+                },
+    D       :   { 
+                    list        :   null,
+                    titulo      :   null,
+                    mProcesar   :   null,
+                    nProcesar   :   null, 
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
+                }
+}
+
+export const AGRUPADOR:string = "PATH_AGRUPADOR"
+export const PATH_AGRUPADOR:DtoTransaccion = {
+    enabled :   false,
+    titulo  :   'Agrupado',
+    guardar :   true,
+    nuevo   :   false,
+    eliminar:   false,
+    imprimir:   true,
+    init    :   null, //'/agrupado/init',
+    add     :   null, //'/agrupado/add',
+    update  :   '/agrupado/update',
+    delete  :   null, //'/agrupado/delete/',
+    quest   :   '/agrupado/quest/movimiento/',
+    tipoE   :   'CLIENTE',
+    listE   :   '/usuario/cliente/list',
+    questE  :   '/usuario/cliente/quest/',
+    
+    vMonto  :   true,
+
+    B       :   { 
+                    list        :   '/agrupado/list', 
+                    titulo      :   'Ventas - Agrupadas',
+                    nProcesar   :   'Confirmar Venta - Agrupadas',
+                    mProcesar   :   2,
+                    procesar    :   '/agrupado/confirmar/',   
+                    questDif    :   null,
+                    ver         :   true,
+                    agrupa      :   null
+                },
+    C       :   { 
+                    list        :   '/agrupado/confirmar/list', 
+                    titulo      :   'Lista de Ventas que se agruparon',
+                    mProcesar   :   null,
+                    nProcesar   :   null,
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
+                },
+    D       :   { 
+                    list        :   null,
+                    titulo      :   null,
+                    mProcesar   :   null,
+                    nProcesar   :   null, 
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
                 }
 }

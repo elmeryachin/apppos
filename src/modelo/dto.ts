@@ -24,9 +24,10 @@ export interface DtoTransaccion {
 export interface DtoDetalle { 
     list        :   string
     titulo      :   string
-    mProcesar   :   number  //Mostrar en pantalla (1), pantalla (2), en todos (0)
-    nProcesar   :   string
-    procesar    :   string
+    mProcesar   :   number  //Mostrar boton procesar pantalla (2), en todos (0) 
+    nProcesar   :   string  //si es null oculta el boton que "procesa la confirmacion normal" (es un cambio de estado en la base de datos)
+    procesar    :   string  //Contiene el servicio que se ejecutara
     questDif    :   string
     ver         :   boolean
+    agrupa      :   string  // Muestra un boton llamado agrupar, agrupa todos los registros por cliente generando otros registros.
 }

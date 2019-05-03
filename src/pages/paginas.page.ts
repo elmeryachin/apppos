@@ -11,6 +11,8 @@ export { DSolicitudDestinoPage } from './sistema/transaccion/d-solicitud-destino
 export { DSolicitudPage } from './sistema/transaccion/d-solicitud/d-solicitud'
 export { ERecibidoPage } from './sistema/transaccion/e-recibido/e-recibido'
 export { FVentaPage } from './sistema/transaccion/f-venta/f-venta'
+export { GBorradorPage } from './sistema/transaccion/g-borrador/g-borrador'
+export { HAgrupadorPage } from './sistema/transaccion/h-agrupador/h-agrupador'
 
 export { DiscoPage } from './sistema/disco/disco'
 

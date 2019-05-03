@@ -69,9 +69,16 @@ export class TransaccionService {
     return this.http.get<TransaccionResponseList>( SERVIDOR + this.storageService.getDtoDetalle().list, {headers: this.getHeaders()} )
   }
 
-  onProcesar( id:string, request:any ): Observable<ServResponse> {
+  onProcesar( id:string, json:any ): Observable<ServResponse> {
     console.log("onProcesar(id): " + (this.storageService.getDtoDetalle().procesar + id))
-    return this.http.put<ServResponse>( SERVIDOR + this.storageService.getDtoDetalle().procesar + id, request, {headers: this.getHeaders()} )
+    console.log("objeto de request")
+    console.log(json)
+    return this.http.put<ServResponse>( SERVIDOR + this.storageService.getDtoDetalle().procesar + id, json, {headers: this.getHeaders()} )
+  }
+
+  onAgrupar( ): Observable<ServResponse> {
+    console.log("onAgrupar( ): ")
+    return this.http.post<ServResponse>( SERVIDOR + this.storageService.getDtoDetalle().agrupa, null, {headers: this.getHeaders()} )
   }
 
   onObtenerDiff( id:string ): Observable<TransaccionResponse> {

@@ -10,6 +10,8 @@
 <ion-tabs *ngIf="getTipo()!='ALMACEN'" tabsPlacement="bottom" [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'" preloadTabs="false">
   <ion-tab #idSolicitud tabIcon="water" tabTitle="Solicitud" [root]="dSolicitudPage" (ionSelect)="ondSolicitudPage()" ></ion-tab>
   <ion-tab #idRecibido tabIcon="water" tabTitle="Entregas" [root]="eRecibidoPage" (ionSelect)="oneRecibidoPage()" ></ion-tab>
-  <ion-tab #idVenta tabIcon="water" tabTitle="Venta" [root]="fVentaPage" (ionSelect)="onfVentaPage()" ></ion-tab>
+  <!--ion-tab #idVenta tabIcon="water" tabTitle="Venta" [root]="fVentaPage" (ionSelect)="onfVentaPage()" ></ion-tab-->
+  <ion-tab #idBorrador tabIcon="water" tabTitle="Venta" [root]="gBorradorPage" (ionSelect)="ongBorradorPage()" ></ion-tab>
+  <ion-tab #idAgrupador tabIcon="water" tabTitle="Agrupador" [root]="hAgrupadorPage" (ionSelect)="onhAgrupadorPage()" ></ion-tab>
   <ion-tab #idDisco tabIcon="water" tabTitle="Discos" [root]="discoPage" (ionSelect)="onDiscoPage()" ></ion-tab>
 </ion-tabs>

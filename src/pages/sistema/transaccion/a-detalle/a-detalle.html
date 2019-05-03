@@ -25,6 +25,13 @@
                     [disabled]="selected==null">
                 <i class="pi pi-eye"></i> 
             </button>
+            <button ion-button outline
+                    *ngIf="dtoDetalle.agrupa!=null"
+                    (click)="onAlertAgrupar()"
+                    [disabled]="tcan==0">
+                <i class="pi pi-cog"></i> 
+                Agrupa
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>

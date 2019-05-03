@@ -108,6 +108,27 @@ export class UtilitarioUtils {
     }
 
     /**
+     * Alerta para preguntar si se desea continuar para agrupar todos los registros en pantalla.
+     * @param alertCtrl Objeto que crea el alerta
+     * @param _objeto referencia a un componente/page
+     * @param next referenia a un componente/html para realizar un focus
+     * @param titulo Asigna un mensaje la cabecera
+     * @param mensaje Asigna un mensaje en el cuerpo
+     */
+    onAlertAgrupar(alertCtrl:AlertController, _objeto:any, next, titulo:string, mensaje:string) {
+      let confirm = alertCtrl.create()
+      confirm.setTitle(titulo)
+      confirm.setMessage(mensaje)
+      confirm.addButton('Cancelar')
+      confirm.addButton({
+        text: 'Aceptar',
+        handler: data => _objeto.onAgrupar(next)
+      })
+     
+      confirm.present();
+    }
+
+    /**
      * Crea un alert y tras confirmarse llama a un metodo (onLimpiar()) para limpiar  los registros 
      * @param alertCtrl Permite la construccion del alert en pantalla
      * @param _objeto referencia al componente/pagina del que se obtendra un metodo (onLimipiar())

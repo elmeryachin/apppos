@@ -6,6 +6,8 @@ import { ProductoPage,
          DSolicitudDestinoPage,
          ERecibidoPage,
          FVentaPage,
+         GBorradorPage,
+         HAgrupadorPage,
          DiscoPage,
          InfoPage } from '../paginas.page'
 import { StorageService } from '../../providers/storage.service';
@@ -25,14 +27,17 @@ export class MenuPage {
   @ViewChild('idDisco') idDisco: Tab;
   @ViewChild('idRecibido') idRecibido: Tab;
   @ViewChild('idVenta') idVenta: Tab;
- 
+  @ViewChild('idBorrador') idBorrador: Tab;
+  @ViewChild('idAgrupador') idAgrupador: Tab;
+
   bPedidoPage:any
   cEnvioPage:any
   dSolicitudPage:any
   dSolicitudDestinoPage:any
   eRecibidoPage:any
   fVentaPage:any
-  
+  gBorradorPage:any
+  hAgrupadorPage:any
   productoPage:any
   discoPage:any
 
@@ -46,6 +51,8 @@ export class MenuPage {
     this.dSolicitudDestinoPage = DSolicitudDestinoPage
     this.eRecibidoPage = ERecibidoPage
     this.fVentaPage = FVentaPage
+    this.gBorradorPage = GBorradorPage
+    this.hAgrupadorPage = HAgrupadorPage
     this.discoPage = DiscoPage
     this.infoPage = InfoPage
   }
@@ -84,5 +91,13 @@ export class MenuPage {
 
   onfVentaPage() {
     this.idVenta.goToRoot(null)
+  }
+
+  ongBorradorPage() {
+    this.idBorrador.goToRoot(null)
+  }
+
+  onhAgrupadorPage() {
+    this.idAgrupador.goToRoot(null)
   }
 }
