@@ -3,6 +3,12 @@
             <ion-title>{{ dtoTransaccion.titulo }}</ion-title>
             <ion-buttons end>
                 <button ion-button outline 
+                        *ngIf="dtoTransaccion.nuevo"
+                        title="Proveedor"
+                        (click)="onCrearUsuario()">
+                    <ion-icon name="md-person-add"></ion-icon>
+                </button>
+                <button ion-button outline 
                         *ngIf="dtoTransaccion.guardar"
                         title="Guardar"
                         (click)="onAlertGuardar(entrada.codigoNext)"

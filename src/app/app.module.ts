@@ -27,7 +27,8 @@ import { AccesoService,
 import {  InventarioComponent, 
           EntradaComponent, 
           QuestComponent,
-          DetalleComponent } from '../components/personal.component';
+          DetalleComponent,
+          UsuarioComponent } from '../components/personal.component';
 
 import {  AccesoPage, 
           MenuPage,
@@ -69,7 +70,8 @@ import {  AccesoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,
-    DetalleComponent
+    DetalleComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import {  AccesoPage,
     QuestComponent, 
     InventarioComponent,
     EntradaComponent,
-    DetalleComponent
+    DetalleComponent,
+    UsuarioComponent
   ],
   providers: [
     StatusBar,

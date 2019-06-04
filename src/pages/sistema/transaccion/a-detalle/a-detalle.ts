@@ -90,7 +90,8 @@ export class ADetallePage {
             diff[i] = reg
           }
           
-                    
+          let esSucursal:boolean = this.storageService.getAccesoResponse().tipo == 'SUCURSAL';
+          console.log("esSucursal: " + esSucursal)
           if( data.transaccionObjeto.lista.length > this.selected.lista.length ) {
             for( let j=0; j< data.transaccionObjeto.lista.length; j++ ) {
               let noRepedidos:boolean = true;
@@ -103,8 +104,8 @@ export class ADetallePage {
                 let reg = {
                   codigo    : data.transaccionObjeto.lista[j].codigoArticulo,
                   cant_1  : 0,
-                  cant_2  : (-1) * data.transaccionObjeto.lista[j].cantidad,
-                  cant_3  : data.transaccionObjeto.lista[j].cantidad
+                  cant_2  : ( -1 ) * data.transaccionObjeto.lista[j].cantidad,
+                  cant_3  : ( esSucursal?-1:1 ) * data.transaccionObjeto.lista[j].cantidad
                 }
                 diff[diff.length] = reg;
               }

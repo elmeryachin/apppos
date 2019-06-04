@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
+        <ion-title>{{ dtoDetalle.titulo }}</ion-title>
+        <ion-buttons end>
+            <button ion-button outline 
+                    *ngIf="dtoDetalle.nProcesar!=null"
+                    [disabled]="selected==null"
+                    (click)="onAlertProcesar()">
+                <i *ngIf="selected==null" class="pi pi-cog"></i>
+                {{ selected==null?'': dtoDetalle.nProcesar + ': ' + selected.nroMovimiento }}
+            </button>
+            <button ion-button outline
+                    (click)="onReturnModal(null)">
+                <i class="pi pi-arrow-left"></i> 
+            </button>
+            <button ion-button outline
+                    (click)="onVerDiferencia()"
+                    *ngIf="dtoDetalle.questDif!=null" 
+                    [disabled]="selected==null || (selected.observacion!=null && !selected.observacion.includes('editado'))">
+                <i class="pi pi-question-circle"></i> 
+            </button>
+            <button ion-button outline
+                    *ngIf="dtoDetalle.ver"
+                    (click)="onReturnModal(selected)" 
+                    [disabled]="selected==null">
+                <i class="pi pi-eye"></i> 
+            </button>
+            <button ion-button outline
+                    *ngIf="dtoDetalle.agrupa!=null"
+                    (click)="onAlertAgrupar()"
+                    [disabled]="tcan==0">
+                <i class="pi pi-cog"></i> 
+                Agrupa
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>{{ 'Codigo ' }}</ion-label>
+            <ion-input type="text" 
+                      tabindex="1"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label stacked>{{ 'Nombre: ' }}</ion-label>
+            <ion-input type="text" 
+                      tabindex="1"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label stacked>{{ 'Telefono ' }}</ion-label>
+            <ion-input type="text" 
+                      tabindex="1"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label stacked>{{ 'Direccion ' }}</ion-label>
+            <ion-input type="text" 
+                      tabindex="1"></ion-input>
+          </ion-item>
+    </ion-row>
+  </ion-grid>
+  <button ion-button full>Grabar</button>
+</ion-content>

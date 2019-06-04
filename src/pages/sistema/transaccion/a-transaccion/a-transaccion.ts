@@ -7,6 +7,7 @@ import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { Observable } from 'rxjs/Observable';
 import { SERVIDOR } from '../../../../utils/ctte.utils';
 import { ADetallePage } from '../a-detalle/a-detalle';
+import { UsuarioComponent } from '../../../../components/usuario/usuario';
 import { DtoTransaccion, DtoDetalle } from '../../../../modelo/dto';
 import { StorageService } from '../../../../providers/storage.service';
 declare var require: any;
@@ -394,6 +395,18 @@ export class ATransaccionPage {
         } 
       }
     )
+  }
+
+  onCrearUsuario() {  // Agregar dentro del generico dtoTransaccion // titulo Usuaro, Servicio Usuario
+    console.log('crear usuario');
+
+    let modal = this.modalCtrl.create( UsuarioComponent )
+    modal.present()
+    modal.onDidDismiss( paramTransaccionObjeto => {
+      console.log('se ejecuto onDidDismiss')
+      console.log(paramTransaccionObjeto)
+    })
+
   }
 
 }

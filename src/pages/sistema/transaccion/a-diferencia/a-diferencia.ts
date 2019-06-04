@@ -13,7 +13,7 @@ export class ADiferenciaPage {
     { field: 'codigo', header: 'Codigo Articulo', width:'18%' },
     { field: 'cant_1', header: 'Cantidad Enviada', width:'20%' },
     { field: 'cant_2', header: 'Llego', width:'20%' },
-    { field: 'cant_3', header: 'No llego/Retorno', width:'20%' }
+    { field: 'cant_3', header: 'LLegada', width:'20%' } //No llego/Retorno
   ];
 
   list:any[]
