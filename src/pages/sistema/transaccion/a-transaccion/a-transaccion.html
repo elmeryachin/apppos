@@ -3,8 +3,8 @@
             <ion-title>{{ dtoTransaccion.titulo }}</ion-title>
             <ion-buttons end>
                 <button ion-button outline 
-                        *ngIf="dtoTransaccion.nuevo"
-                        title="Proveedor"
+                        *ngIf="dtoTransaccion.usuario!=null"
+                        [title]="dtoTransaccion.tipoE"
                         (click)="onCrearUsuario()">
                     <ion-icon name="md-person-add"></ion-icon>
                 </button>
@@ -26,19 +26,19 @@
                         ion-button outline
                         title="Lista"
                         (click)="onModalList('B')">
-                    <i class="pi pi-list"></i>
+                    B
                 </button>
                 <button *ngIf="dtoTransaccion.C.list != null"
                         ion-button outline 
                         title="Lista"
                         (click)="onModalList('C')">
-                    <i class="pi pi-list"></i>
+                    L
                 </button>
                 <button *ngIf="dtoTransaccion.D.list != null"
                         ion-button outline
                         title="Lista"
                         (click)="onModalList('D')">
-                    <i class="pi pi-list"></i>
+                    C
                 </button>
                 
                 <button ion-button outline

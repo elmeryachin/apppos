@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { SERVIDOR } from '../utils/ctte.utils';
 import { Observable } from 'rxjs/Observable';
-import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin } from '../modelo/objeto.model';
+import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin, UsuarioRequest } from '../modelo/objeto.model';
 
 @Injectable()
 export class TransaccionService {
@@ -61,7 +61,11 @@ export class TransaccionService {
     console.log("onQuestEntrada(codigo): " + (this.storageService.getDtoTransaccion().questE + codigo))
     return this.http.get<UsuarioResponseMin>( SERVIDOR + this.storageService.getDtoTransaccion().questE + codigo, {headers: this.getHeaders()})
   }
-
+  // ############################# usuario alta
+  onNuevoUsuario(json: UsuarioRequest ): Observable<UsuarioResponseMin> {
+    console.log("onNuevoUsuario(json): " + this.storageService.getDtoTransaccion().usuario)
+    return this.http.post<UsuarioResponseMin>( SERVIDOR + this.storageService.getDtoTransaccion().usuario, json, {headers: this.getHeaders()} )
+  }
   // ############################ B | C | D
 
   onLista( ): Observable<TransaccionResponseList> {

@@ -21,6 +21,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
 
     vMonto  :   false,
 
+    usuario :   '/usuario/proveedor/add',
     B       :   { 
                     titulo      :   'Lista Pedidos',
                     list        :   '/pedido/list', 
@@ -70,7 +71,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
     
     vMonto  :   true,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/transferencia/envio/list',
                     titulo      :   'Lista Envios',
@@ -120,7 +121,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   false,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/transferencia/recibir/porrecibir/list',
                     titulo      :   'Lista Por Recibir',
@@ -170,7 +171,7 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   true,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/transferencia/recibir/solicitud/list', 
                     titulo      :   'Lista Solicitudes',
@@ -221,7 +222,7 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   false,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/transferencia/solicitud/procesa/list',  // DESARROLLAR
                     titulo      :   'Lista Solicitantes',
@@ -272,7 +273,7 @@ export const PATH_VENTA:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/ventas/list', 
                     titulo      :   'Lista de Ventas',
@@ -323,7 +324,7 @@ export const PATH_BORRADOR:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
-
+    usuario :   '/usuario/cliente/add',
     B       :   { 
                     list        :   '/borrador/list', 
                     titulo      :   'Ventas - Borrador',
@@ -374,7 +375,7 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
-
+    usuario :   null,
     B       :   { 
                     list        :   '/agrupado/list', 
                     titulo      :   'Ventas - Agrupadas',

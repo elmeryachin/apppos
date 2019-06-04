@@ -405,6 +405,12 @@ export class ATransaccionPage {
     modal.onDidDismiss( paramTransaccionObjeto => {
       console.log('se ejecuto onDidDismiss')
       console.log(paramTransaccionObjeto)
+      if( paramTransaccionObjeto == null) setTimeout( () => this.entradaNext.codigoNext.setFocus(), 350 )
+      else {
+        this.entradaNext.codigo = paramTransaccionObjeto.codigo
+        this.entradaNext.onQuest() 
+        setTimeout( () => this.productoNext.codigoNext.setFocus(), 350 )
+      }
     })
 
   }

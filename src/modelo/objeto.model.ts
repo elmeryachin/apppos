@@ -150,10 +150,11 @@ export class TransaccionResponseList {
 }
 
 export class UsuarioRequest {
-    constructor(public codigo:string,
-                public nombre:string,
-                public direccion:string,
-                public telefono){}
+    public codigo:string
+    public nombre:string
+    public direccion:string
+    public telefono
+    constructor(){}
 }
 
 export class UsuarioResponseMin { 

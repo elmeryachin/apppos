@@ -33,9 +33,9 @@ export class ProductoPage {
     this.cargarAccesoRapido()
   }
 
-  /*ngOnInit() {
+  ngOnInit() {
     setTimeout( () => this.codigoNext.setFocus(), 350 )
-  }*/
+  }
   /**
    * Este metodo pertenece al ciclo de vida de ionic y contiene
    * Metodo que pueden ejecutarse tras conbinar la presion de teclas
