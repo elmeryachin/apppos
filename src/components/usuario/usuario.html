@@ -1,6 +1,6 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>{{ 'usuario' }}</ion-title>
+    <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
+        <ion-title>CREAR {{ storageService.getDtoTransaccion().tipoE }}</ion-title>
         <ion-buttons end>
             <button ion-button outline
                     (click)="onReturnModal(null)">
@@ -10,38 +10,56 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-grid>
 
     <ion-grid>
         <ion-grid>
                 <ion-row>
-                <ion-item>
-                    <ion-label stacked>{{ 'Codigo ' }}</ion-label>
-                    <ion-input #codigo type="text"
-                                [(ngModel)]="usuarioRequest.codigo"
-                                tabindex="1"></ion-input>
-                </ion-item>
-                
-                <ion-item>
-                    <ion-label stacked>{{ 'Nombre: ' }}</ion-label>
-                    <ion-input #nombre type="text" 
-                                [(ngModel)]="usuarioRequest.nombre"
-                                tabindex="1"></ion-input>
-                </ion-item>
-                
-                <ion-item>
-                    <ion-label stacked>{{ 'Telefono ' }}</ion-label>
-                    <ion-input #telefono type="text" 
-                                [(ngModel)]="usuarioRequest.telefono"
-                                tabindex="1"></ion-input>
-                </ion-item>
-                
-                <ion-item>
-                    <ion-label stacked>{{ 'Direccion ' }}</ion-label>
-                    <ion-input #direccion type="text" 
-                                [(ngModel)]="usuarioRequest.direccion"
-                                tabindex="1"></ion-input>
-                </ion-item>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label stacked>{{ 'Codigo ' }}</ion-label>
+                            <ion-input #codigo type="text"
+                                        [(ngModel)]="usuarioRequest.codigo"
+                                        (ngModelChange)="usuarioRequest.codigo = $event.toLocaleUpperCase()"
+                                        (keyup.enter)="onVerificaCodigo(ººnombre)"
+                                        tabindex="1"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col>
+                            <ion-label stacked style="color: brown; font-size: 10px !important;">{{ 'Mensaje de advertencia ' }}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label stacked>{{ 'Nombre: ' }}</ion-label>
+                            <ion-input #nombre type="text" 
+                                        [(ngModel)]="usuarioRequest.nombre"
+                                        (keyup.enter)="onVerificaNombre(telefono)"
+                                        tabindex="1"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label stacked>{{ 'Telefono ' }}</ion-label>
+                            <ion-input #telefono type="text" 
+                                        [(ngModel)]="usuarioRequest.telefono"
+                                        (keyup.enter)="onVerificaTelefono(direccion)"
+                                        tabindex="1"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label stacked>{{ 'Direccion ' }}</ion-label>
+                            <ion-input #direccion type="text" 
+                                        [(ngModel)]="usuarioRequest.direccion"
+                                        (keyup.enter)="onAlertGrabar(codigo)"
+                                        tabindex="1"></ion-input>
+                        </ion-item>
+                    </ion-col>
                 </ion-row>
         </ion-grid>
         <button ion-button (click)="onGuardar(null)">
@@ -49,6 +67,5 @@
                 Guardar
             </button>
     </ion-grid>
-</ion-grid>
 
 </ion-content>

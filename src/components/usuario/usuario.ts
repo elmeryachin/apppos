@@ -34,14 +34,40 @@ export class UsuarioComponent {
     this.viewCtrl.dismiss( val )
   }
 
+  onVerificaCodigo(next:any){
+    let respuesta:Observable<UsuarioResponseMin>
+
+    if( this.usuarioRequest.codigo !=null && this.usuarioRequest.codigo.length > 0 ) {
+      respuesta = this.transaccionService.onQuestEntrada( this.usuarioRequest.codigo )
+
+      respuesta.subscribe (
+        data => {
+          if ( !this.mensajeUtils.getValidarRespuestaSinMensaje( data ) ) {
+            next.setFocus()
+          }
+        }
+      )
+     
+    }
+      
+  }
+  onVerificaNombre(next:any){
+    if( this.usuarioRequest.nombre !=null && this.usuarioRequest.nombre.length > 0 )
+      next.setFocus()
+  }
+  onVerificaTelefono(next:any){
+    if( this.usuarioRequest.telefono !=null && this.usuarioRequest.telefono.length > 0 )
+      next.setFocus()
+  }
+  
   /**
    * Antes de guardar un nuevo registro se debe despegar un alert de confirmacion
    * @param next componente/html para dirigir el focus
    */
   onAlertGrabar(next:any) {
     this.utilitarioUtils.onAlertGuardar(this.alertCtrl, this, next,  
-                                        'Nuevo ' + this.storageService.getDtoTransaccion().listE,
-                                        'Esta seguro de guardar al '+ + this.storageService.getDtoTransaccion().listE + ' con codigo ' + this.usuarioRequest.codigo )
+                                        'Nuevo ' + this.storageService.getDtoTransaccion().tipoE,
+                                        'Esta seguro de guardar al '+ + this.storageService.getDtoTransaccion().tipoE + ' con codigo ' + this.usuarioRequest.codigo )
   }
   /**
    * El proceso final para enviar y guardar la informacion
