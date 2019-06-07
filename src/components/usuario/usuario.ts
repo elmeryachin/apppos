@@ -16,7 +16,7 @@ export class UsuarioComponent {
   @ViewChild('codigo') codigoNext: any 
 
   usuarioRequest:UsuarioRequest
-
+  msg:string
   constructor(public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
               public utilitarioUtils:UtilitarioUtils,
@@ -44,17 +44,21 @@ export class UsuarioComponent {
         data => {
           if ( !this.mensajeUtils.getValidarRespuestaSinMensaje( data ) ) {
             next.setFocus()
+            this.msg = null
+          } else {
+            this.msg = 'Ya existe con nombre: \n' + data.nombre
           }
         }
       )
      
     }
-      
   }
+
   onVerificaNombre(next:any){
     if( this.usuarioRequest.nombre !=null && this.usuarioRequest.nombre.length > 0 )
       next.setFocus()
   }
+
   onVerificaTelefono(next:any){
     if( this.usuarioRequest.telefono !=null && this.usuarioRequest.telefono.length > 0 )
       next.setFocus()
@@ -67,7 +71,7 @@ export class UsuarioComponent {
   onAlertGrabar(next:any) {
     this.utilitarioUtils.onAlertGuardar(this.alertCtrl, this, next,  
                                         'Nuevo ' + this.storageService.getDtoTransaccion().tipoE,
-                                        'Esta seguro de guardar al '+ + this.storageService.getDtoTransaccion().tipoE + ' con codigo ' + this.usuarioRequest.codigo )
+                                        'Esta seguro de guardar al '+ this.storageService.getDtoTransaccion().tipoE + ' con codigo ' + this.usuarioRequest.codigo )
   }
   /**
    * El proceso final para enviar y guardar la informacion
