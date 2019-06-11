@@ -1,0 +1,40 @@
+(DI) - discos
+(DI) - grabar / actualizar al momento de modificar el registro ( evaluar | actualiza )
+(DI) - Se quita la solicitud. - modificar llegadas para recibirlo ahi ?????
+
+(IN) - estado de cuentas + con opcion de edicion.
+
+l(ME) - Corregir la ventana de confirmacion que tiene botones de cancelar y aceptar, para que con enter se pueda guardar.    (EN PROCESO)
+(ME) - si la lista esta vacia volver el focus al campo correspondiente.
+(ME) - print excel + impresora. en agrupar.  -   - La impresora debe estar habilitado el PDF y EXCEL.
+(ME) - Usar astedisco (*) en vez de %
+(ME) - Si se guardan los registro mantener el registro con los cambios en pantalla (transaccion).
+(ME) - En entregas bloquear el codigo del ambiente para que no existan conflictos. (es preferible q lo elimine)
+(ME) - En los registros de entregas - llegadas mantener por separado el movimiento de inventario entre una sucursal y el inventario.
+
+
+(RA) - cuando sea sucursal - diferencia -> debe ser invertido el no llego/Retorno a favor de la sucursal.
+(RA) - promedio 
+
+
+(OK) - Cambiar los colores de las descripciones a negrilla con color, no es muy claro el texto
+(OK) - trash - t12 -> lo q no se vende, perdidos robados, en mal estado ... (ocultar)
+(OK) - Aumentar tamaño del cuadro de escritorio
+(OK) - En lista inventario vs cantidad, cambiar el nombre Ambiente por el Codigo Ambiente.
+(OK) - En sucursal cambiar texto entregas por llegadas  ?????
+(OK-R) - corregir la funcion ges_operaciones (no se captura) 
+(OK) - en iconos lista poner letras BORRADOR (B) Y LIMPIO (L), y en todos una descripcion que se note 
+(OK) - abm proveedor/cliente
+
+- EN DETALLE ENTREGA SE DEBE DE MOSTRAR LA DIFERENCIA SI EXISTEN CAMPOS (OCULTAR DETALLE INICIAL Y MOSTRAR EL DETALLE DIFERENCIA)
+
+- los registros agrupado y estado de cuentas de sucursal asi lo salden el almacen debe de verificar tanto en venta(borrador) los precios y en estado de cuentas(su pago en efectivo)
+
+- total de totales por tienda en la que se encuentra.
+
+
+######################### LO NUEVO ##################################
+- Reporte por articulo (todos sus movimientos)  // Pero 
+- Reporte del item mas vendido,
+- (solo para salidas) filtrar precios diferencias (por precio unitario y precio real) (fiktro|colores)
+- codigo de barras y codigo de QR en productos
