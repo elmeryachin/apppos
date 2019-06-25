@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ModalController, ToastController } from 'ionic-angular';
 import { TransaccionService } from '../../../../providers/transaccion.service';
 import { TransaccionRequest, ArticuloResponseMin, TransaccionDetalle, TransaccionResponse, ServResponse } from '../../../../modelo/objeto.model';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
@@ -21,25 +21,26 @@ var PHE = require("print-html-element")
   templateUrl: 'a-transaccion.html',
 })
 export class ATransaccionPage {
-    
+
   @Input() tipoTransaccion:string         // Se manda el tipo ejm.: 'PEDIDO, RECIBIDO, SOLICITUD ...'
   transaccionRequest:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
-  
+
   @ViewChild('entrada') entradaNext       //Uso condicionado para realizar el focus a proveedor|Cliente|almacen
   @ViewChild('producto') productoNext     //Uso de producto para limpiar campos
-  
+
   dtoTransaccion:DtoTransaccion
   dtoDetalle:DtoDetalle   // Solo para ejecutar procesar
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
               public utilitarioUtils:UtilitarioUtils,
               public transaccionService:TransaccionService,
               public modalCtrl:ModalController,
-              public storageService: StorageService) {
+              public storageService: StorageService,
+              public toastController: ToastController) {
     //Quitar el storage para adicionarlo en transaccionService para org. el codigo
     this.transaccionRequest = new TransaccionRequest()
     this.cargarAccesoRapido()
@@ -53,7 +54,7 @@ export class ATransaccionPage {
     this.dtoDetalle = this.storageService.getDtoDetalle()
     this.getInit()
   }
-  
+
   /**
    * Este metodo pertenece al ciclo de vida de ionic y contiene
    * Metodo que pueden ejecutarse tras conbinar la presion de teclas
@@ -97,10 +98,10 @@ export class ATransaccionPage {
    * Muestra un alert antes de ejecutar onEliminar()
    */
   onAlertEliminar() {
-    this.utilitarioUtils.onAlertEliminar(this.alertCtrl, this, this.entradaNext.codigoNext, 
+    this.utilitarioUtils.onAlertEliminar(this.alertCtrl, this, this.entradaNext.codigoNext,
       'Eliminar', 'Esta seguro de eliminar el Nro. Movimiento ' + this.transaccionRequest.transaccionObjeto.nroMovimiento )
   }
-  
+
   /**
    * Pregunta previa antes de guardar el registro
    * @param next componente/html para asignar focus
@@ -122,7 +123,7 @@ export class ATransaccionPage {
     } else if( opcion == 'D' ) {
       this.storageService.setDtoDetalle( this.dtoTransaccion.D )
     }
-    
+
     this.dtoDetalle = this.storageService.getDtoDetalle()
 
     let modal = this.modalCtrl.create( ADetallePage )
@@ -134,16 +135,16 @@ export class ATransaccionPage {
         this.transaccionRequest.transaccionObjeto.nombreUsuario = null
         this.entradaNext.codigo = null
         this.productoNext.articuloResponseMin.cantidad = null
-        this.productoNext.articuloResponseMin.precio = null 
+        this.productoNext.articuloResponseMin.precio = null
       } else {
         // parche: se manda el id sobre el nroMovimiento , esto para poder utilizar el metodo this.onQuest sin modificar.
-        this.transaccionRequest.transaccionObjeto.nroMovimiento = paramTransaccionObjeto.id 
-        this.onQuest( null ) 
+        this.transaccionRequest.transaccionObjeto.nroMovimiento = paramTransaccionObjeto.id
+        this.onQuest( null )
         this.getTotalesTransaccion()
         this.codigo = null
         this.productoNext.articuloResponseMin.codigo = null
         this.productoNext.articuloResponseMin.cantidad = null
-        this.productoNext.articuloResponseMin.precio = null 
+        this.productoNext.articuloResponseMin.precio = null
       }
     })
   }
@@ -157,7 +158,7 @@ export class ATransaccionPage {
     xhttp.open("GET", SERVIDOR + "/reporte/porllegar_mov/html/view/"+this.transaccionRequest.transaccionObjeto.id, false);
     xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.setRequestHeader("token", "12345-1");
-    
+
     xhttp.send();
     PHE.printHtml(xhttp.responseText);
   }
@@ -176,12 +177,12 @@ export class ATransaccionPage {
           setTimeout( ()=> this.entradaNext.codigoNext.setFocus(), 350 )
         }
       )
-    }    
+    }
   }
 
   /**
    * Busca a partir del numero de Movimiento su respectiva transaccion
-   * @param present Es el componente/html del cual se ejecuta la funcion 
+   * @param present Es el componente/html del cual se ejecuta la funcion
    */
   onQuest(present:any) {
     console.log('onQuest ;;; ' + this.dtoTransaccion.quest)
@@ -198,11 +199,11 @@ export class ATransaccionPage {
         data => {
           if( this.mensajeUtils.getValidarRespuestaQuest( data, present, this.entradaNext.codigoNext ) ) {
             this.transaccionRequest.transaccionObjeto = data.transaccionObjeto
-            
+
             this.entradaNext.codigo = data.transaccionObjeto.codigo
-            this.entradaNext.onQuest() 
+            this.entradaNext.onQuest()
           } else {
-            
+
           }
         }
       )
@@ -223,12 +224,12 @@ export class ATransaccionPage {
   }
 
   /**
-   * Captura desde el componente Quest el codigo del articulo 
+   * Captura desde el componente Quest el codigo del articulo
    * nota: Se usa setTimeout para simular la renderizacion del componente.
    */
   onEnterInventario( event:any, producto:any ) {
-    this.codigo = null 
-    
+    this.codigo = null
+
     let len = this.transaccionRequest.transaccionObjeto.lista.length
     for( let i=0; i<len; i++ ) {
       if( this.transaccionRequest.transaccionObjeto.lista[i].codigoArticulo == event.codigo ) {
@@ -239,36 +240,36 @@ export class ATransaccionPage {
       this.codigo = event.codigo
     }, 250)
   }
- 
+
   /**
-   * Almacena un nuevo articulo en la lista 
-   * @param event 
+   * Almacena un nuevo articulo en la lista
+   * @param event
    */
   onEnterInventarioGuardar( event:ArticuloResponseMin ) {
 
-    this.transaccionRequest.transaccionObjeto.lista = 
+    this.transaccionRequest.transaccionObjeto.lista =
       this.transaccionRequest.transaccionObjeto.lista.filter(item => item.codigoArticulo !== event.codigo)
 
     this.codigo = null
-    
+
     let transaccionDetalle:TransaccionDetalle = new TransaccionDetalle()
     transaccionDetalle.codigoArticulo = event.codigo
     transaccionDetalle.cantidad = event.cantidad
     transaccionDetalle.precio = event.precio
-    
+
     this.transaccionRequest.transaccionObjeto.lista.push(transaccionDetalle)
     this.getTotalesTransaccion()
   }
 
   /**
-   * Se recupera los datos para validar 
+   * Se recupera los datos para validar
    */
-  cantidadExistente:number = 0 
+  cantidadExistente:number = 0
   onNoEventInventario( evento:any ) {
-    this.cantidadExistente = evento 
+    this.cantidadExistente = evento
   }
   /**
-   * Actualiza la lista y asigna un focus a un elementos 
+   * Actualiza la lista y asigna un focus a un elementos
    * @param event la nueva lista para actualizar la actual
    * @param next El componente/html para asignar el focus
    */
@@ -279,7 +280,7 @@ export class ATransaccionPage {
   }
 
   /**
-   * Limpia el objeto principal y restaura el focus a proveedor 
+   * Limpia el objeto principal y restaura el focus a proveedor
    * @param next Al punto donde se realizara el focus tras limpiar
    */
   onLimpiar( next:any ) {
@@ -295,7 +296,7 @@ export class ATransaccionPage {
    * @param next objeto al cual asignar el focus.
    */
   onGuardar( next:any ) {
-    
+
     if (this.transaccionRequest.transaccionObjeto.codigo != null ){
       let servicio: Observable<TransaccionResponse>
       this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
@@ -314,7 +315,7 @@ export class ATransaccionPage {
               this.getInit()
               this.productoNext.getReset()
               this.codigo = null
-            } 
+            }
           }
         )
       }
@@ -325,7 +326,7 @@ export class ATransaccionPage {
   }
 
   /**
-   * Obtiene los totales de la transaccion para el objeto que se enviara a la base TransaccionRequest 
+   * Obtiene los totales de la transaccion para el objeto que se enviara a la base TransaccionRequest
    */
   private getTotalesTransaccion() {
     let tcant :number = 0;
@@ -338,9 +339,9 @@ export class ATransaccionPage {
     this.transaccionRequest.transaccionObjeto.precio = tprec
 
   }
-  
+
   /**
-   * Se elimina el registro con id != null presente en pantalla. 
+   * Se elimina el registro con id != null presente en pantalla.
    * @param next Se asigna el focus
    */
   onEliminar( next:any ) {
@@ -348,7 +349,7 @@ export class ATransaccionPage {
       let service: Observable<ServResponse>
       this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
       service = this.transaccionService.onEliminar( this.transaccionRequest.transaccionObjeto.id )
-  
+
       service.subscribe(
         data => {
           if( this.mensajeUtils.getValidarRespuesta( data, next ) ) {
@@ -363,13 +364,13 @@ export class ATransaccionPage {
   }
 
   /**
-   * Muestra un mensaje antes de ejectar 
+   * Muestra un mensaje antes de ejectar
    */
   onAlertProcesar() {
     this.utilitarioUtils.onAlertProcesar( this.alertCtrl, this, null, 'Confirmacion',
      'Esta seguro de procesar ' + this.dtoDetalle.nProcesar + ' del  Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
   }
-  
+
   /**
    * Procesa segun el path lo que se ejecuta, guarda un nuevo cambio de estado para el registro seleccionado
    */
@@ -383,7 +384,7 @@ export class ATransaccionPage {
     }
     this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
     servicio = this.transaccionService.onProcesar( this.transaccionRequest.transaccionObjeto.id, ctrlEdicion?this.transaccionRequest:{} )
-      
+
     servicio.subscribe(
       data => {
         if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
@@ -392,7 +393,7 @@ export class ATransaccionPage {
           this.getInit()
           this.productoNext.getReset()
           this.codigo = null
-        } 
+        }
       }
     )
   }
@@ -408,11 +409,19 @@ export class ATransaccionPage {
       if( paramTransaccionObjeto == null) setTimeout( () => this.entradaNext.codigoNext.setFocus(), 350 )
       else {
         this.entradaNext.codigo = paramTransaccionObjeto.codigo
-        this.entradaNext.onQuest() 
+        this.entradaNext.onQuest()
         setTimeout( () => this.productoNext.codigoNext.setFocus(), 350 )
       }
     })
 
+  }
+
+  presentToast(mensaje: string) {
+    const toast = this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
