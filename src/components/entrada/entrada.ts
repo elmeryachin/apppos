@@ -57,7 +57,7 @@ export class EntradaComponent {
             this.presentToast('No existen datos para mostrar, intente con otro codigo.');
             setTimeout(() => {
               this.codigoNext.setFocus();
-            },250);
+            },1000);
           }
         }
       )
