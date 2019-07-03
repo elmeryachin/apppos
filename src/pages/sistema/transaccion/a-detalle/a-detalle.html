@@ -40,7 +40,7 @@
 <div class="content">
     <p-table #dt1 [columns]="cols" [value]="transaccionResponseList.list"
                  [scrollable]="true" scrollHeight="120px" 
-                 [resizableColumns]="true"
+                 [resizableColumns]="true" (onRowSelect)="onRowSelect($event)"
                  selectionMode="single" [(selection)]="selected" dataKey="nroMovimiento">
                  <ng-template pTemplate="caption">
                         <div class="captionGlobal">        
@@ -81,7 +81,7 @@
     </p-table>    
 </div>
 <div class="content" *ngIf="selected!=null">
-    <p-table #dt [columns]="colsD" [value]="selected.lista" 
+    <p-table #dt [columns]="colsD" [value]="listaDetalle" 
                  [scrollable]="true" scrollHeight="160px">
                  <ng-template pTemplate="caption">
                     <div class="captionGlobal">        

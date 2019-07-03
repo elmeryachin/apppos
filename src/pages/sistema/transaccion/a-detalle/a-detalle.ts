@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TransaccionResponseList, TransaccionObjeto, ServResponse } from '../../../../modelo/objeto.model';
+import { TransaccionResponseList, TransaccionObjeto, ServResponse, TransaccionDetalle } from '../../../../modelo/objeto.model';
 import { TransaccionService } from '../../../../providers/transaccion.service';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
 import { ViewController, AlertController, ModalController } from 'ionic-angular';
@@ -40,6 +40,7 @@ export class ADetallePage {
 
   selected: TransaccionObjeto = null
   dtoDetalle: DtoDetalle
+  listaDetalle:TransaccionDetalle[]
 
   constructor(public transaccionService:TransaccionService,
               public modalCtrl: ModalController,
@@ -119,6 +120,28 @@ export class ADetallePage {
     )
   }
 
+  /** 
+   * Reemplaza la lista detalle del registro si es que este contiene <editado>.
+  */
+  onRowSelect(event) {
+    if( !(this.selected==null || (this.selected.observacion!=null && !this.selected.observacion.includes('editado'))) ) {
+      let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
+      servicio.subscribe(
+        data => {
+          if( this.mensajeUtils.getValidarRespuestaSinMsgOk( data, null, null ) ) {
+            this.listaDetalle = data.transaccionObjeto.lista
+          }
+        }
+      )
+    } else {
+      this.listaDetalle = this.selected.lista
+    }
+  }
+
+  onRowUnselect(event) {
+    this.listaDetalle = null
+  }
+  
   /**
    * Muestra un mensaje antes de ejectar 
    */
