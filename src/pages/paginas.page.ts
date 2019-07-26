@@ -13,6 +13,7 @@ export { ERecibidoPage } from './sistema/transaccion/e-recibido/e-recibido'
 export { FVentaPage } from './sistema/transaccion/f-venta/f-venta'
 export { GBorradorPage } from './sistema/transaccion/g-borrador/g-borrador'
 export { HAgrupadorPage } from './sistema/transaccion/h-agrupador/h-agrupador'
+export { IEstadoDeCuentasPage } from './sistema/transaccion/i-estado-de-cuentas/i-estado-de-cuentas'
 
 export { DiscoPage } from './sistema/disco/disco'
 

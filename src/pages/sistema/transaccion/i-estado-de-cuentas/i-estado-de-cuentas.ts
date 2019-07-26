@@ -3,10 +3,10 @@ import { StorageService } from '../../../../providers/storage.service';
 import { AGRUPADOR, PATH_AGRUPADOR } from '../../../../utils/ctte.utils';
 
 @Component({
-  selector: 'page-h-agrupador',
-  templateUrl: 'h-agrupador.html',
+  selector: 'page-i-estado-de-cuentas',
+  templateUrl: 'i-estado-de-cuentas.html',
 })
-export class HAgrupadorPage {
+export class IEstadoDeCuentasPage {
   tipoTransaccion:string
   constructor( public storageService: StorageService ) {
     this.tipoTransaccion = AGRUPADOR
@@ -16,7 +16,7 @@ export class HAgrupadorPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HAgrupadorPage');
+    console.log('ionViewDidLoad IEstadoDeCuentasPage');
   }
 
 }

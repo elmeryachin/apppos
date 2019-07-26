@@ -8,6 +8,7 @@ import { ProductoPage,
          FVentaPage,
          GBorradorPage,
          HAgrupadorPage,
+         IEstadoDeCuentasPage,
          DiscoPage,
          InfoPage } from '../paginas.page'
 import { StorageService } from '../../providers/storage.service';
@@ -29,6 +30,7 @@ export class MenuPage {
   @ViewChild('idVenta') idVenta: Tab;
   @ViewChild('idBorrador') idBorrador: Tab;
   @ViewChild('idAgrupador') idAgrupador: Tab;
+  @ViewChild('idEstadoDeCuentas') idEstadoDeCuentas: Tab;
 
   bPedidoPage:any
   cEnvioPage:any
@@ -38,6 +40,8 @@ export class MenuPage {
   fVentaPage:any
   gBorradorPage:any
   hAgrupadorPage:any
+  iEstadoDeCuentasPage:any
+
   productoPage:any
   discoPage:any
 
@@ -53,6 +57,7 @@ export class MenuPage {
     this.fVentaPage = FVentaPage
     this.gBorradorPage = GBorradorPage
     this.hAgrupadorPage = HAgrupadorPage
+    this.iEstadoDeCuentasPage = IEstadoDeCuentasPage
     this.discoPage = DiscoPage
     this.infoPage = InfoPage
   }
@@ -100,4 +105,9 @@ export class MenuPage {
   onhAgrupadorPage() {
     this.idAgrupador.goToRoot(null)
   }
+
+  oniEstadoDeCuentasPage() {
+    this.idEstadoDeCuentas.goToRoot(null)
+  }
+  
 }
