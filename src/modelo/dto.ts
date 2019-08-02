@@ -16,6 +16,9 @@ export interface DtoTransaccion {
     questE  :   string
 
     vMonto  :   boolean     // Si se debe validar el monto,( revisar si se mantiene o se quita)
+
+    conCredito:   boolean     // Para mostrar el componente de saldo y registrar pagos. 
+
     usuario :   string
     B       :   DtoDetalle
     C       :   DtoDetalle

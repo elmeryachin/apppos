@@ -21,6 +21,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
 
     vMonto  :   false,
 
+    conCredito : false,
+
     usuario :   '/usuario/proveedor/add',
     B       :   { 
                     titulo      :   'Lista Pedidos',
@@ -71,6 +73,9 @@ export const PATH_ENVIAR:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
     
     vMonto  :   true,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/transferencia/envio/list',
@@ -121,6 +126,9 @@ export const PATH_RECIBIR:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   false,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/transferencia/recibir/porrecibir/list',
@@ -171,6 +179,9 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   true,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/transferencia/recibir/solicitud/list', 
@@ -222,6 +233,9 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     questE  :   '/ambiente/quest/',                  //{codigo}
 
     vMonto  :   false,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/transferencia/solicitud/procesa/list',  // DESARROLLAR
@@ -273,6 +287,9 @@ export const PATH_VENTA:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/ventas/list', 
@@ -324,6 +341,9 @@ export const PATH_BORRADOR:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
+
+    conCredito : false,
+
     usuario :   '/usuario/cliente/add',
     B       :   { 
                     list        :   '/borrador/list', 
@@ -375,6 +395,63 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
+
+    conCredito : false,
+
+    usuario :   null,
+    B       :   { 
+                    list        :   '/agrupado/list', 
+                    titulo      :   'Ventas - Agrupadas',
+                    nProcesar   :   'Confirmar Venta - Agrupadas',
+                    mProcesar   :   2,
+                    procesar    :   '/agrupado/confirmar/',   
+                    questDif    :   null,
+                    ver         :   true,
+                    agrupa      :   null
+                },
+    C       :   { 
+                    list        :   '/agrupado/confirmar/list', 
+                    titulo      :   'Lista de Ventas que se agruparon',
+                    mProcesar   :   null,
+                    nProcesar   :   null,
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
+                },
+    D       :   { 
+                    list        :   null,
+                    titulo      :   null,
+                    mProcesar   :   null,
+                    nProcesar   :   null, 
+                    procesar    :   null,
+                    questDif    :   null,
+                    ver         :   false,
+                    agrupa      :   null
+                }
+}
+
+export const ESTADO_CUENTA:string = "PATH_ESTADO_CUENTA"
+export const PATH_ESTADO_CUENTA:DtoTransaccion = {
+    enabled :   false,
+    titulo  :   'Estado de Cuenta',
+    guardar :   true,
+    nuevo   :   false,
+    eliminar:   false,
+    imprimir:   true,
+    init    :   null, //'/agrupado/init',
+    add     :   null, //'/agrupado/add',
+    update  :   '/agrupado/update',
+    delete  :   null, //'/agrupado/delete/',
+    quest   :   '/agrupado/quest/movimiento/',
+    tipoE   :   'CLIENTE',
+    listE   :   '/usuario/cliente/list',
+    questE  :   '/usuario/cliente/quest/',
+    
+    vMonto  :   true,
+
+    conCredito : false,
+
     usuario :   null,
     B       :   { 
                     list        :   '/agrupado/list', 

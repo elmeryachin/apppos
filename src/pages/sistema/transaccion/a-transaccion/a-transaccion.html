@@ -110,9 +110,12 @@
             </ion-col>
             <ion-col>
                 <ion-item>
-                    <ion-label stacked>{{ 'Saldo por Cancelar ' }} </ion-label>
-                    <ion-label stacked>{{ '10.50' }} </ion-label>
-                    <button ion-button clear item-end>add</button>
+                    <ion-label stacked>{{ 'Saldo por Pagar' }}</ion-label>
+                            <ion-input type="text"
+                                       [(ngModel)]="transaccionRequest.transaccionObjeto.nombreUsuario" 
+                                       disabled="true"></ion-input>
+                                       
+                        <button ion-button clear item-end ><ion-icon name="add-circle"></ion-icon></button>
                   </ion-item>
             </ion-col>
         </ion-row>
