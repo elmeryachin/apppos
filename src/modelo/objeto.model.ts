@@ -1,4 +1,4 @@
-import { ResumenArticulo, AbcOperaciones } from "./tabla.model";
+import { ResumenArticulo, AbcOperaciones, PagPago } from "./tabla.model";
 
 export class AccesoRequest {
     constructor(public usuario:string,
@@ -192,4 +192,18 @@ export class DiscoResponse {
                 public documento:string,
                 public respuesta:boolean,
                 public mensaje:string) {}
+}
+
+export class PagoResponse {
+    constructor(public list:PagPago[],
+                public respuesta:boolean,
+                public mensaje:string){}
+}
+
+export class SaldoResponse {
+    public porPagar:number
+    public PagosRegistrados:number
+    public respuesta:boolean
+    public mensaje:string
+    constructor(){}
 }

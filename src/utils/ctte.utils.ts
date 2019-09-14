@@ -22,6 +22,9 @@ export const PATH_PEDIDO:DtoTransaccion = {
     vMonto  :   false,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   '/usuario/proveedor/add',
     B       :   { 
@@ -75,6 +78,9 @@ export const PATH_ENVIAR:DtoTransaccion = {
     vMonto  :   true,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -128,6 +134,9 @@ export const PATH_RECIBIR:DtoTransaccion = {
     vMonto  :   false,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -181,6 +190,9 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     vMonto  :   true,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -235,6 +247,9 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     vMonto  :   false,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -289,6 +304,9 @@ export const PATH_VENTA:DtoTransaccion = {
     vMonto  :   true,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -343,6 +361,9 @@ export const PATH_BORRADOR:DtoTransaccion = {
     vMonto  :   true,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   '/usuario/cliente/add',
     B       :   { 
@@ -397,6 +418,9 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     vMonto  :   true,
 
     conCredito : false,
+    pagoDia :   null,
+    saldo   :   null,
+    listaPag:   null,
 
     usuario :   null,
     B       :   { 
@@ -441,31 +465,34 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
     imprimir:   true,
     init    :   null, //'/agrupado/init',
     add     :   null, //'/agrupado/add',
-    update  :   '/agrupado/update',
+    update  :   '/est_cta/update',
     delete  :   null, //'/agrupado/delete/',
-    quest   :   '/agrupado/quest/movimiento/',
+    quest   :   '/est_cta/quest/movimiento/',
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
     
     vMonto  :   true,
 
-    conCredito : false,
+    conCredito : true,
+    pagoDia :   '/pago/add',
+    saldo   :   '/pago/saldo/',
+    listaPag:   '/pago/list/',
 
     usuario :   null,
     B       :   { 
-                    list        :   '/agrupado/list', 
-                    titulo      :   'Ventas - Agrupadas',
-                    nProcesar   :   'Confirmar Venta - Agrupadas',
+                    list        :   '/est_cta/confirmar/list', 
+                    titulo      :   'Revisar Ventas Sucursales',
+                    nProcesar   :   'Venta Revisada',
                     mProcesar   :   2,
-                    procesar    :   '/agrupado/confirmar/',   
+                    procesar    :   '/est_cta/confirmar/',   
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
     C       :   { 
-                    list        :   '/agrupado/confirmar/list', 
-                    titulo      :   'Lista de Ventas que se agruparon',
+                    list        :   null,
+                    titulo      :   null,
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,

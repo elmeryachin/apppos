@@ -108,16 +108,19 @@
                                        disabled="true"></ion-input>
                     </ion-item>
             </ion-col>
+            <ng-container *ngIf="dtoTransaccion.conCredito">
             <ion-col>
                 <ion-item>
                     <ion-label stacked>{{ 'Saldo por Pagar' }}</ion-label>
                             <ion-input type="text"
-                                       [(ngModel)]="transaccionRequest.transaccionObjeto.nombreUsuario" 
-                                       disabled="true"></ion-input>
+                                       [(ngModel)]="saldoResponse.porPagar" 
+                                       disabled="true"
+                                       (click)="onPago( transaccionRequest.transaccionObjeto.id )"></ion-input>
                                        
                         <button ion-button clear item-end ><ion-icon name="add-circle"></ion-icon></button>
                   </ion-item>
             </ion-col>
+            </ng-container>
         </ion-row>
 
         <quest #producto 

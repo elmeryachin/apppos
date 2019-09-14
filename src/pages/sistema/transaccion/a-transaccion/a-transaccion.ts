@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController, ModalController, ToastController } from 'ionic-angular';
 import { TransaccionService } from '../../../../providers/transaccion.service';
-import { TransaccionRequest, ArticuloResponseMin, TransaccionDetalle, TransaccionResponse, ServResponse } from '../../../../modelo/objeto.model';
+import { TransaccionRequest, ArticuloResponseMin, TransaccionDetalle, TransaccionResponse, ServResponse, SaldoResponse } from '../../../../modelo/objeto.model';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +10,8 @@ import { ADetallePage } from '../a-detalle/a-detalle';
 import { UsuarioComponent } from '../../../../components/usuario/usuario';
 import { DtoTransaccion, DtoDetalle } from '../../../../modelo/dto';
 import { StorageService } from '../../../../providers/storage.service';
+import { PagPago } from '../../../../modelo/tabla.model';
+import { APagoPage } from '../a-pago/a-pago';
 declare var require: any;
 var Mousetrap = require('mousetrap')  // Para que funcione require "npm install --save @types/node" -- declare var require: any;
 var Mousetrap_global = require('mousetrap-global-bind')
@@ -25,6 +27,7 @@ export class ATransaccionPage {
   @Input() tipoTransaccion:string         // Se manda el tipo ejm.: 'PEDIDO, RECIBIDO, SOLICITUD ...'
   transaccionRequest:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
+  saldoResponse: SaldoResponse
 
   @ViewChild('entrada') entradaNext       //Uso condicionado para realizar el focus a proveedor|Cliente|almacen
   @ViewChild('producto') productoNext     //Uso de producto para limpiar campos
@@ -44,6 +47,7 @@ export class ATransaccionPage {
     //Quitar el storage para adicionarlo en transaccionService para org. el codigo
     this.transaccionRequest = new TransaccionRequest()
     this.cargarAccesoRapido()
+    this.saldoResponse = new SaldoResponse()
   }
 
   ngOnInit() {
@@ -139,6 +143,7 @@ export class ATransaccionPage {
       } else {
         // parche: se manda el id sobre el nroMovimiento , esto para poder utilizar el metodo this.onQuest sin modificar.
         this.transaccionRequest.transaccionObjeto.nroMovimiento = paramTransaccionObjeto.id
+        this.onSaldo( paramTransaccionObjeto.id );
         this.onQuest( null )
         this.getTotalesTransaccion()
         this.codigo = null
@@ -149,6 +154,34 @@ export class ATransaccionPage {
     })
   }
 
+  /**
+   * Carga el saldo actual de la transaccion cargada
+   * @param idTrans es el idTransaccion 
+   */
+  onSaldo(idTrans:string) {
+    if( this.dtoTransaccion.conCredito ) {
+      let service: Observable<SaldoResponse>
+      this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
+      service = this.transaccionService.onSaldo( idTrans )
+      service.subscribe(
+        data => {
+          if( this.mensajeUtils.getValidarRespuestaSinMensaje( data ) ) {
+            this.saldoResponse = data
+
+          }
+        }
+      )
+    }
+  }  
+
+  /**
+   * 
+   */
+  onPago( idTrans ) {
+    let modal = this.modalCtrl.create( APagoPage )
+    modal.present()
+    modal.onDidDismiss( data => { this.onSaldo( idTrans ) } )
+  }
 
   /**
    * Permite imprimir un objeto

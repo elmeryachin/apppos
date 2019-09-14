@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { SERVIDOR } from '../utils/ctte.utils';
 import { Observable } from 'rxjs/Observable';
-import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin, UsuarioRequest } from '../modelo/objeto.model';
+import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin, UsuarioRequest, SaldoResponse, PagoResponse } from '../modelo/objeto.model';
+import { PagPago } from '../modelo/tabla.model';
 
 @Injectable()
 export class TransaccionService {
@@ -66,6 +67,19 @@ export class TransaccionService {
     console.log("onNuevoUsuario(json): " + this.storageService.getDtoTransaccion().usuario)
     return this.http.post<UsuarioResponseMin>( SERVIDOR + this.storageService.getDtoTransaccion().usuario, json, {headers: this.getHeaders()} )
   }
+
+  // ############################# saldo y pagos
+  onProcesarPagoDelDia( pagPago:PagPago ){
+    return this.http.post<UsuarioResponseMin>( SERVIDOR + this.storageService.getDtoTransaccion().pagoDia, pagPago, {headers: this.getHeaders()} )
+  }
+
+  onSaldo( idTrans:string ) {
+    return this.http.get<SaldoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().saldo + idTrans, {headers: this.getHeaders()} )
+  }
+
+  onListaPagos( idTrans:string ) {
+    return this.http.get<PagoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans, {headers: this.getHeaders()} )    
+  }
   // ############################ B | C | D
 
   onLista( ): Observable<TransaccionResponseList> {
@@ -87,7 +101,10 @@ export class TransaccionService {
 
   onObtenerDiff( id:string ): Observable<TransaccionResponse> {
     console.log("onObtenerDiff(id): " + (this.storageService.getDtoDetalle().questDif + id))
-    return this.http.get<TransaccionResponse>( SERVIDOR + this.storageService.getDtoDetalle().questDif + id, {headers: this.getHeaders()} )
+    if ( this.storageService.getDtoDetalle().questDif == null ) {
+      return null;
+    } else {
+      return this.http.get<TransaccionResponse>( SERVIDOR + this.storageService.getDtoDetalle().questDif + id, {headers: this.getHeaders()} )
+    }
   }
-
 }

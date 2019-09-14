@@ -11,10 +11,10 @@ import { ADiferenciaPage } from '../a-diferencia/a-diferencia';
 
 
 @Component({
-  selector: 'page-a-detalle',
+  selector: 'page-a-pago',
   templateUrl: 'a-detalle.html',
 })
-export class ADetallePage {
+export class APagoPage {
   
   private transaccionResponseList:TransaccionResponseList = new TransaccionResponseList()
   
@@ -28,15 +28,9 @@ export class ADetallePage {
   cols:any = [
     { field: 'codigo', header: 'Codigo', width:'18%' },
     { field: 'fechaMovimiento', header: 'Fecha', width:'24%' },
-    { field: 'nroMovimiento', header: 'Nro.Mov', width:'20%' },
-    { field: 'observacion', header: 'Observacion', width:'38%' }
+    { field: 'Monto', header: 'Observacion', width:'38%' }
   ];
 
-  colsD:any = [
-    { field: 'codigoArticulo', header: 'Codigo', width:'18%' },
-    { field: 'cantidad', header: 'Cantidad', width:'24%' },
-    { field: 'precio', header: 'Precio', width:'20%' }
-  ]
 
   selected: TransaccionObjeto = null
   dtoDetalle: DtoDetalle
@@ -59,91 +53,6 @@ export class ADetallePage {
 
   }
 
-  /**
-   * Popup para ver la diferencia entre registros.
-   */
-  onVerDiferencia() {
-    console.log('ver difrencias..')
-    let diff = new Array()
-    let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
-    servicio.subscribe(
-      data => {
-        if( this.mensajeUtils.getValidarRespuestaSinMsgOk( data, null, null ) ) {
-          //console.log(data)
-          for( let i=0; i<this.selected.lista.length; i++ ) {
-            //console.log(this.selected.lista[i])
-            let seCod = this.selected.lista[i].codigoArticulo
-            let reg = {
-              codigo    : seCod,
-              cant_1  : this.selected.lista[i].cantidad,
-              cant_2  : this.selected.lista[i].cantidad,
-              cant_3  : 0
-            }
-            for( let j=0; j<data.transaccionObjeto.lista.length; j++ ) {
-              let daCod = data.transaccionObjeto.lista[j].codigoArticulo
-
-              if( seCod == daCod ) {
-                reg.cant_2 = reg.cant_2 - data.transaccionObjeto.lista[j].cantidad
-                reg.cant_3 = data.transaccionObjeto.lista[j].cantidad
-              } 
-            }
-
-            diff[i] = reg
-          }
-          
-          let esSucursal:boolean = this.storageService.getAccesoResponse().tipo == 'SUCURSAL';
-          console.log("esSucursal: " + esSucursal)
-          if( data.transaccionObjeto.lista.length > this.selected.lista.length ) {
-            for( let j=0; j< data.transaccionObjeto.lista.length; j++ ) {
-              let noRepedidos:boolean = true;
-              for( let i=0; i<this.selected.lista.length; i++ ) {
-                if( data.transaccionObjeto.lista[j].codigoArticulo == this.selected.lista[i].codigoArticulo) {
-                  noRepedidos = false;
-                }
-              }
-              if( noRepedidos ) {
-                let reg = {
-                  codigo    : data.transaccionObjeto.lista[j].codigoArticulo,
-                  cant_1  : 0,
-                  cant_2  : ( -1 ) * data.transaccionObjeto.lista[j].cantidad,
-                  cant_3  : ( esSucursal?-1:1 ) * data.transaccionObjeto.lista[j].cantidad
-                }
-                diff[diff.length] = reg;
-              }
-            } 
-          }
-
-          let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
-          modal.present()
-        }
-      }
-    )
-  }
-
-  /** 
-   * Reemplaza la lista detalle del registro si es que este contiene <editado>.
-  */
-  onRowSelect(event) {
-    
-    this.listaDetalle = this.selected.lista
-
-    if( this.storageService.getDtoDetalle().questDif != null ) { //!(this.selected.observacion!=null && !this.selected.observacion.includes('editado')) ) {
-      
-      let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
-
-      servicio.subscribe(
-        data => {
-          if( this.mensajeUtils.getValidarRespuestaSinMsgOk( data, null, null ) ) {
-            this.listaDetalle = data.transaccionObjeto.lista
-          }
-        }
-      )
-    } 
-  }
-
-  onRowUnselect(event) {
-    this.listaDetalle = null
-  }
   
   /**
    * Muestra un mensaje antes de ejectar 

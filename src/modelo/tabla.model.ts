@@ -17,3 +17,10 @@ export interface AbcOperaciones {
     operador:string
 
 }
+
+export interface PagPago {
+    id:string
+    idTransaccion:string
+    fecha:Date
+    monto:number
+}

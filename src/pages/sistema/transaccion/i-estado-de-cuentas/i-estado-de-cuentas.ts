@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../../../../providers/storage.service';
-import { AGRUPADOR, PATH_AGRUPADOR } from '../../../../utils/ctte.utils';
+import { ESTADO_CUENTA, PATH_ESTADO_CUENTA } from '../../../../utils/ctte.utils';
 
 @Component({
   selector: 'page-i-estado-de-cuentas',
@@ -9,10 +9,10 @@ import { AGRUPADOR, PATH_AGRUPADOR } from '../../../../utils/ctte.utils';
 export class IEstadoDeCuentasPage {
   tipoTransaccion:string
   constructor( public storageService: StorageService ) {
-    this.tipoTransaccion = AGRUPADOR
+    this.tipoTransaccion = ESTADO_CUENTA
     console.log( 'transaccion: ' + this.tipoTransaccion )
     this.storageService.setAsignacionDtoTransaccion( this.tipoTransaccion )
-    this.storageService.setDtoTransaccion( PATH_AGRUPADOR )
+    this.storageService.setDtoTransaccion( PATH_ESTADO_CUENTA )
   }
 
   ionViewDidLoad() {
