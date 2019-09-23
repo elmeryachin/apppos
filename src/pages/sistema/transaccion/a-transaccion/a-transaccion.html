@@ -114,10 +114,12 @@
                     <ion-label stacked>{{ 'Saldo por Pagar' }}</ion-label>
                             <ion-input type="text"
                                        [(ngModel)]="saldoResponse.porPagar" 
-                                       disabled="true"
-                                       (click)="onPago( transaccionRequest.transaccionObjeto.id )"></ion-input>
+                                       disabled="true"></ion-input>
                                        
-                        <button ion-button clear item-end ><ion-icon name="add-circle"></ion-icon></button>
+                        <button ion-button clear item-end 
+                                (click)="onPago( transaccionRequest.transaccionObjeto.id )">
+                            <ion-icon name="add-circle"></ion-icon>
+                        </button>
                   </ion-item>
             </ion-col>
             </ng-container>

@@ -77,7 +77,7 @@ export class TransaccionService {
     return this.http.get<SaldoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().saldo + idTrans, {headers: this.getHeaders()} )
   }
 
-  onListaPagos( idTrans:string ) {
+  onListaPagos( idTrans:string ): Observable<PagoResponse>{
     return this.http.get<PagoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans, {headers: this.getHeaders()} )    
   }
   // ############################ B | C | D

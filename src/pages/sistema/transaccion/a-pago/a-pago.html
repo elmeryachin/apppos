@@ -64,9 +64,15 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="rowData" (click)="onSubTotal()">
-                        <td *ngFor="let col of columns" class="ui-resizable-column">
-                            {{rowData[col.field]}}
+                    <tr>
+                        <td>
+                            {{rowData['fecha']}}
+                        </td>
+                        <td style="text-align: center;">
+                            {{rowData['monto']}}
+                        </td>
+                        <td style="text-align: center;" (click)="onAlertElminar(rowData)">
+                            <i class="pi pi-trash"></i>
                         </td>
                     </tr>
                 </ng-template>

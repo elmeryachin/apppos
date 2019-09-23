@@ -41,7 +41,7 @@
     <p-table #dt1 [columns]="cols" [value]="transaccionResponseList.list"
                  [scrollable]="true" scrollHeight="120px" 
                  [resizableColumns]="true" (onRowSelect)="onRowSelect($event)"
-                 selectionMode="single" [(selection)]="selected" dataKey="nroMovimiento">
+                 selectionMode="single" [(selection)]="selected" dataKey="id">
                  <ng-template pTemplate="caption">
                         <div class="captionGlobal">        
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>

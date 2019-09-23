@@ -18,3 +18,5 @@ export { IEstadoDeCuentasPage } from './sistema/transaccion/i-estado-de-cuentas/
 export { DiscoPage } from './sistema/disco/disco'
 
 export { InfoPage } from './sistema/info/info'
+
+export { APagoPage } from './sistema/transaccion/a-pago/a-pago'
