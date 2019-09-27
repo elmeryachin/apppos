@@ -10,6 +10,7 @@
               <ion-label floating color="light">Usuario</ion-label>
               <ion-input color="light" 
                          [(ngModel)]="accesoRequest.usuario" 
+                         (ngModelChange)="accesoRequest.usuario = $event.toLocaleUpperCase()"
                          accesskey="u" 
                          autofocus 
                          type="text" 
@@ -17,7 +18,7 @@
                          (keyup.enter)="onAcceso()"></ion-input>
             </ion-item>
       
-            <ion-item color="cafe-claro">
+            <ion-item color="cafe-claro" *ngIf="false">
               <ion-label floating color="light">Constraseña</ion-label>
               <ion-input color="light" 
                          [(ngModel)]="accesoRequest.contrasenia" 

@@ -195,9 +195,10 @@ export class DiscoResponse {
 }
 
 export class PagoResponse {
-    constructor(public list:PagPago[],
-                public respuesta:boolean,
-                public mensaje:string){}
+    public list:PagPago[]
+    public respuesta:boolean
+    public mensaje:string
+    constructor(){}
 }
 
 export class SaldoResponse {

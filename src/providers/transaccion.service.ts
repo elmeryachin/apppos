@@ -78,6 +78,7 @@ export class TransaccionService {
   }
 
   onListaPagos( idTrans:string ): Observable<PagoResponse>{
+    console.log( 'URL PAGO :::: ' + SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans )
     return this.http.get<PagoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans, {headers: this.getHeaders()} )    
   }
   // ############################ B | C | D

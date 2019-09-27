@@ -1,34 +1,26 @@
 <ion-header>
     <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
-        <ion-title>{{ dtoDetalle.titulo }}</ion-title>
+        <ion-title>{{ 'Lista de Pagos' }}</ion-title>
         <ion-buttons end>
             <button ion-button outline 
-                    *ngIf="dtoDetalle.nProcesar!=null"
-                    [disabled]="selected==null"
                     (click)="onAlertProcesar()">
-                <i *ngIf="selected==null" class="pi pi-cog"></i>
-                {{ selected==null?'': dtoDetalle.nProcesar + ': ' + selected.nroMovimiento }}
+                <i class="pi pi-cog"></i>
+                {{ procesos }}
             </button>
             <button ion-button outline
                     (click)="onReturnModal(null)">
                 <i class="pi pi-arrow-left"></i> 
             </button>
             <button ion-button outline
-                    (click)="onVerDiferencia()"
-                    *ngIf="dtoDetalle.questDif!=null" 
-                    [disabled]="selected==null || (selected.observacion!=null && !selected.observacion.includes('editado'))">
+                    (click)="onVerDiferencia()">
                 <i class="pi pi-question-circle"></i> 
             </button>
             <button ion-button outline
-                    *ngIf="dtoDetalle.ver"
-                    (click)="onReturnModal(selected)" 
-                    [disabled]="selected==null">
+                    (click)="onReturnModal(selected)" >
                 <i class="pi pi-eye"></i> 
             </button>
             <button ion-button outline
-                    *ngIf="dtoDetalle.agrupa!=null"
-                    (click)="onAlertAgrupar()"
-                    [disabled]="tcan==0">
+                    (click)="onAlertAgrupar()">
                 <i class="pi pi-cog"></i> 
                 Agrupa
             </button>
@@ -38,53 +30,28 @@
       
 <ion-content>
 <div class="content">
-    <p-table #dt1 [columns]="cols" [value]="transaccionResponseList.list"
-                 [scrollable]="true" scrollHeight="120px" 
-                 [resizableColumns]="true" (onRowSelect)="onRowSelect($event)"
-                 selectionMode="single" [(selection)]="selected" dataKey="nroMovimiento">
-                <ng-template pTemplate="caption">
-                        <div class="captionGlobal">        
-                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input type="text" pInputText size="20" 
-                                   placeholder="Busqueda Global"
-                                   (input)="dt1.filterGlobal($event.target.value, 'contains')" 
-                                   class="questGlobal">
-                        </div>
-                </ng-template>
-                <ng-template pTemplate="colgroup" let-columns>
-                    <colgroup>
-                        <col *ngFor="let col of columns" [style.width]="col.width">
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header" let-columns>
-                    <tr>
-                        <th *ngFor="let col of columns" pResizableColumn>
-                            {{col.header}}
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr>
-                        <td>
-                            {{rowData['fecha']}}
-                        </td>
-                        <td style="text-align: center;">
-                            {{rowData['monto']}}
-                        </td>
-                        <td style="text-align: center;" (click)="onAlertElminar(rowData)">
-                            <i class="pi pi-trash"></i>
-                        </td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <tr>
-                        <td>Cantidad</td>
-                        <td>{{ tcan }}</td>
-                        <td>Precio</td>
-                        <td>{{ tprec | number:'1.2-2' }}</td>
-                    </tr>
-                </ng-template>
-    </p-table>    
+        <p-table [value]="pagoResponse.list">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols">
+                        {{ col.header }}
+                    </th>
+                    <th>
+                        Accion
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td *ngFor="let col of columns">
+                        {{ row[col.field] }}
+                    </td>
+                    <td>
+                        boton {{ row.id }}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
 </div>
 
 </ion-content>

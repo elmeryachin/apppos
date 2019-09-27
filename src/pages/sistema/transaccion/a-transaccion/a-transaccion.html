@@ -116,7 +116,8 @@
                                        [(ngModel)]="saldoResponse.porPagar" 
                                        disabled="true"></ion-input>
                                        
-                        <button ion-button clear item-end 
+                        <button ion-button clear item-end  
+                                [disabled]="transaccionRequest.transaccionObjeto.id == null"
                                 (click)="onPago( transaccionRequest.transaccionObjeto.id )">
                             <ion-icon name="add-circle"></ion-icon>
                         </button>
