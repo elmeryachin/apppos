@@ -195,7 +195,7 @@ export class DiscoResponse {
 }
 
 export class PagoResponse {
-    public list:PagPago[]
+    public list:PagPago[] = new Array();
     public respuesta:boolean
     public mensaje:string
     constructor(){}

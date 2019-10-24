@@ -29,8 +29,9 @@
 </ion-header>
       
 <ion-content>
+
 <div class="content">
-        <p-table [value]="pagoResponse.list">
+        <p-table  *ngIf="pagoResponse!=null" [value]="pagoResponse.list">
             <ng-template pTemplate="header">
                 <tr>
                     <th *ngFor="let col of cols">
@@ -52,6 +53,7 @@
                 </tr>
             </ng-template>
         </p-table>
+        
 </div>
 
 </ion-content>

@@ -14,13 +14,6 @@ import { Observable } from 'rxjs';
 })
 export class APagoPage {
   
-  private tcan:number
-  private tprec:number
-
-  private tsubtotl:number
-  private tsubprec:number
-  private tsubcant:number
-
   cols:any = [
     { field: 'fecha', header: 'Fecha', width:'24%' },
     { field: 'monto', header: 'Monto', width:'38%' }
@@ -50,7 +43,6 @@ export class APagoPage {
     service.subscribe(
       data => {
         if( this.mensajeUtils.getValidarRespuestaQuest( data, null, null ) ) {
-          console.log(data)
           this.pagoResponse = data
         }
       }
