@@ -1,7 +1,7 @@
 <ion-header>
         <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
             <ion-title>Productos</ion-title>
-            <ion-buttons end>
+            <ion-buttons end *ngIf="false">
                 <button ion-button outline
                         [disabled]="articuloRequest.objetoArticulo.codigo==undefined || articuloRequest.objetoArticulo.codigo == null || articuloRequest.objetoArticulo.codigo.trim().length == 0" 
                         (click)="onAlertGrabar(codigo)" >
@@ -12,7 +12,8 @@
                         [disabled]="!esActualizar">
                     <i class="pi pi-trash"></i> 
                 </button>
-                <button ion-button outline 
+                <button ion-button outline  
+                        (click)="onModalReporte()"
                         [disabled]="!esActualizar">
                     <i class="pi pi-print"></i>
                 </button>

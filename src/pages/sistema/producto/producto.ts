@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 import { ArticuloRequest, ServResponse } from '../../../modelo/objeto.model';
 import { UtilitarioUtils } from '../../../utils/utilitario.utils';
 import { ArticuloService } from '../../../providers/articulo.service';
 import { MensajeUtils } from '../../../utils/mensaje.utils';
 import { Observable } from 'rxjs/Observable';
 import { StorageService } from '../../../providers/storage.service';
+import { ReportePage } from '../reporte/reporte'
+//import { from } from 'rxjs/observable/from';
 declare var require: any;
 var Mousetrap = require('mousetrap');// Para que funcione require "npm install --save @types/node"
 var Mousetrap_global = require('mousetrap-global-bind');
@@ -28,7 +30,8 @@ export class ProductoPage {
               public mensajeUtils:MensajeUtils,
               public utilitarioUtils:UtilitarioUtils,
               public articuloService:ArticuloService,
-              public storageService: StorageService) {
+              public storageService: StorageService,
+              public modalCtrl: ModalController) {
     this.articuloRequest = new ArticuloRequest()
     this.cargarAccesoRapido()
   }
@@ -178,5 +181,18 @@ export class ProductoPage {
   onLimpiar(next:any) {
     this.articuloRequest.getReset()
     setTimeout( () => next.setFocus(), 450)
+  }
+
+  onModalReporte() {
+    console.log('imprimiendo reporte ... ' + this.articuloRequest.objetoArticulo.codigo)
+    //llamar al componente de impresion
+    // - in    
+    // - out    
+    let modal = this.modalCtrl.create( ReportePage,  
+      { 
+        nombre: 'Reporte de Productos',
+        url: 'url://reportes'
+      })
+    modal.present()
   }
 }

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
+        <ion-title>CREAR {{ storageService.getDtoTransaccion() }}</ion-title>
+        <ion-buttons end>
+            <button ion-button outline
+                    (click)="onReturnModal(null)">
+                <i class="pi pi-arrow-left"></i> 
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <ion-card>
+        <ion-card-header center>
+          Ver el reporte todos los productos en stock
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+              <ion-row>
+                  <ion-col><button ion-button full color="danger" (click)="onReporte('pdf')">PDF</button></ion-col>
+                  <ion-col><button ion-button full color="secondary" (click)="onReporte('xls')">EXCEL</button></ion-col>
+                  <ion-col><button ion-button full color="light" (click)="onReporte('print')">Imprimir</button></ion-col>
+              </ion-row>
+          </ion-grid>
+          
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>

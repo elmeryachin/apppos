@@ -47,7 +47,8 @@ import {  AccesoPage,
           HAgrupadorPage,
           IEstadoDeCuentasPage,
           DiscoPage,
-          InfoPage } from '../pages/paginas.page';
+          InfoPage,
+          ReportePage } from '../pages/paginas.page';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {  AccesoPage,
     InventarioComponent,
     EntradaComponent,
     DetalleComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    ReportePage
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,8 @@ import {  AccesoPage,
     InventarioComponent,
     EntradaComponent,
     DetalleComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    ReportePage
   ],
   providers: [
     StatusBar,

@@ -20,3 +20,5 @@ export { DiscoPage } from './sistema/disco/disco'
 export { InfoPage } from './sistema/info/info'
 
 export { APagoPage } from './sistema/transaccion/a-pago/a-pago'
+
+export { ReportePage } from './sistema/reporte/reporte'

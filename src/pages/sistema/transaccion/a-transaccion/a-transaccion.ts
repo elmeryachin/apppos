@@ -343,11 +343,12 @@ export class ATransaccionPage {
         servicio.subscribe(
           data => {
             if( this.mensajeUtils.getValidarRespuesta(data, next) ) {
-              this.transaccionRequest.getReset()
+              /*this.transaccionRequest.getReset()
               this.entradaNext.codigo = null
               this.getInit()
               this.productoNext.getReset()
-              this.codigo = null
+              this.codigo = null*/
+              console.log( 'registro guardado ... ' + data.transaccionObjeto.id ) 
             }
           }
         )
