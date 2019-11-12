@@ -1,44 +1,48 @@
 <ion-header>
         <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
-            <ion-title>{{ dtoTransaccion.titulo }}</ion-title>
+            <ion-title>
+                {{ transaccionRequest.transaccionObjeto.id==undefined?transaccionRequest.transaccionObjeto.nroMovimiento==undefined?'':'Crear ':'Actualizar ' }}
+                {{ dtoTransaccion.titulo }}</ion-title>
             <ion-buttons end>
                 <button ion-button outline 
                         *ngIf="dtoTransaccion.usuario!=null"
-                        [title]="dtoTransaccion.tipoE"
+                        title="CREAR {{ dtoTransaccion.tipoE }}"
                         (click)="onCrearUsuario()">
                     <ion-icon name="md-person-add"></ion-icon>
                 </button>
                 <button ion-button outline 
                         *ngIf="dtoTransaccion.guardar"
-                        title="Guardar"
+                        [title]="(transaccionRequest.transaccionObjeto.id==undefined || transaccionRequest.transaccionObjeto.id == null || transaccionRequest.transaccionObjeto.id == 0)?'GUARDAR TRANSACCION':'ACTUALIZAR TRANSACCION'"
                         (click)="onAlertGuardar(entrada.codigoNext)"
                         [disabled]="transaccionRequest.transaccionObjeto.nroMovimiento==undefined || transaccionRequest.transaccionObjeto.nroMovimiento == null || transaccionRequest.transaccionObjeto.nroMovimiento == 0">
                     <i class="pi pi-save"></i>
                 </button>
                 <button ion-button outline
                         *ngIf="dtoTransaccion.nuevo"
-                        title="Limpiar"
+                        title="Nuevo"
                         (click)="onAlertLimpiar()">
                     <i class="pi pi-file"></i>
                 </button>
 
                 <button *ngIf="dtoTransaccion.B.list != null"
                         ion-button outline
-                        title="Lista"
+                        title="Lista de {{ dtoTransaccion.titulo }}"
                         (click)="onModalList('B')">
-                    B
+                    <i class="pi pi-bars"></i>
+                    Lista
                 </button>
                 <button *ngIf="dtoTransaccion.C.list != null"
                         ion-button outline 
-                        title="Lista"
+                        title="Procesados o En Proceso"
                         (click)="onModalList('C')">
-                    L
+                    <i class="pi pi-th-large"></i>
+                    Procesado
                 </button>
                 <button *ngIf="dtoTransaccion.D.list != null"
                         ion-button outline
-                        title="Lista"
+                        title="Historial de transacciones finalizadas"
                         (click)="onModalList('D')">
-                    C
+                    <i class="pi pi-briefcase"></i>
                 </button>
                 
                 <button ion-button outline
