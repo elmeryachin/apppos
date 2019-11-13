@@ -23,6 +23,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -79,6 +80,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -135,6 +137,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -191,6 +194,7 @@ export const PATH_SOLICITUD:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -248,6 +252,7 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -305,6 +310,7 @@ export const PATH_VENTA:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -362,6 +368,7 @@ export const PATH_BORRADOR:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -419,6 +426,7 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
 
     conCredito : false,
     pagoDia :   null,
+    pagoDel :   null,
     saldo   :   null,
     listaPag:   null,
 
@@ -476,6 +484,7 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
 
     conCredito : true,
     pagoDia :   '/pago/add',
+    pagoDel :   '/pago/delete/',
     saldo   :   '/pago/saldo/',
     listaPag:   '/pago/list/',
 

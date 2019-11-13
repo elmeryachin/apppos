@@ -178,7 +178,7 @@ export class ATransaccionPage {
    * 
    */
   onPago( idTrans:string ) {
-    let modal = this.modalCtrl.create( APagoPage, {idTransaccion: idTrans } )
+    let modal = this.modalCtrl.create( APagoPage, { registro: this.transaccionRequest } )
     modal.present()
     modal.onDidDismiss( data => { this.onSaldo( idTrans ) } )
   }

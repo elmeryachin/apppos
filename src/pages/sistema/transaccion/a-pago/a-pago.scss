@@ -1,12 +1,11 @@
 page-a-pago {
-    .content {
-        padding-top: 2px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: #FEF6AD;
-    }
 
+    .colTextArea .item-textarea, .colTextArea textarea, .colTextArea .item-inner{
+        resize: none;
+        height: 100% !important;
+        width: 100% !important;
+        font-weight: normal;
+      }
 }
 
 

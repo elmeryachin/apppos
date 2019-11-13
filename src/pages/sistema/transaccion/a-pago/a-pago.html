@@ -2,27 +2,9 @@
     <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
         <ion-title>{{ 'Lista de Pagos' }}</ion-title>
         <ion-buttons end>
-            <button ion-button outline 
-                    (click)="onAlertProcesar()">
-                <i class="pi pi-cog"></i>
-                {{ procesos }}
-            </button>
             <button ion-button outline
                     (click)="onReturnModal(null)">
                 <i class="pi pi-arrow-left"></i> 
-            </button>
-            <button ion-button outline
-                    (click)="onVerDiferencia()">
-                <i class="pi pi-question-circle"></i> 
-            </button>
-            <button ion-button outline
-                    (click)="onReturnModal(selected)" >
-                <i class="pi pi-eye"></i> 
-            </button>
-            <button ion-button outline
-                    (click)="onAlertAgrupar()">
-                <i class="pi pi-cog"></i> 
-                Agrupa
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -30,33 +12,56 @@
       
 <ion-content>
 
-<div class="content">
         <!-- Formulario de registro de pagos -->
-
-        <!-- Lista de Pagos registrados-->
-        <p-table  *ngIf="pagoResponse!=null" [value]="pagoResponse.list">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th *ngFor="let col of cols">
-                        {{ col.header }}
-                    </th>
-                    <th>
-                        Accion
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body">
-                <tr>
-                    <td *ngFor="let col of columns">
-                        {{ row[col.field] }}
-                    </td>
-                    <td>
-                        boton {{ row.id }}
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <ion-card>
+            <ion-card-header>
+                Adicionar el Nuevo Pago
+            </ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label >Monto</ion-label>
+                                <ion-input type="text" [(ngModel)]="monto" autofocus ></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                <button ion-button color="light" (click)="onAgregar()" >Agregar</button>
+                            </div>
+                        </ion-col>
+                    </ion-row>        
+                </ion-list>        
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                Lista de Pagos Registrados
+                <button ion-button color="danger"
+                        [disabled]="selected==undefined || selected==null"
+                        (click)="onEliminar()">Eliminar</button>
+            </ion-card-header>
+            <ion-card-content>
+                    <p-table  #dt1  *ngIf="pagoResponse!=null" 
+                              [value]="pagoResponse.list"
+                              selectionMode="single"
+                              [(selection)]="selected"
+                              dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-row>
+                                <tr [pSelectableRow]="row">
+                                    <td>{{ row.fecha | date:'dd/MM/y'}}</td>
+                                    <td>{{ row.monto }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+            </ion-card-content>
+        </ion-card>
         
-</div>
-
 </ion-content>

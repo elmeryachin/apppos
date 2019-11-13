@@ -5,21 +5,20 @@ import { ViewController, AlertController, ModalController, NavController, NavPar
 import { StorageService } from '../../../../providers/storage.service';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { EventEmitter } from 'events';
-import { PagoResponse } from '../../../../modelo/objeto.model';
+import { PagoResponse, TransaccionRequest, ServResponse } from '../../../../modelo/objeto.model';
 import { Observable } from 'rxjs';
+import { PagPago } from '../../../../modelo/tabla.model';
 
 @Component({
   selector: 'page-a-pago',
   templateUrl: 'a-pago.html',
 })
 export class APagoPage {
-  
-  cols:any = [
-    { field: 'fecha', header: 'Fecha', width:'24%' },
-    { field: 'monto', header: 'Monto', width:'38%' }
-  ];
 
+  transaccionRequest:TransaccionRequest
   pagoResponse : PagoResponse
+  selected     : PagPago
+  monto:number = 0.00;
 
   constructor(public transaccionService:TransaccionService,
               public modalCtrl: ModalController,
@@ -30,15 +29,15 @@ export class APagoPage {
               public mensajeUtils:MensajeUtils,
               public viewCtrl:ViewController,
               public storageService: StorageService) {
-    console.log("Constructor .. APagoPage ...")
 
   }
 
   ngOnInit() {
     let idTransaccion:string = this.navParams.get('idTransaccion');
     let service: Observable<PagoResponse>
-
-    service = this.transaccionService.onListaPagos( this.navParams.get('idTransaccion') )
+    
+    this.transaccionRequest = this.navParams.get('registro')
+    service = this.transaccionService.onListaPagos( this.transaccionRequest.transaccionObjeto.id )
 
     service.subscribe(
       data => {
@@ -48,5 +47,43 @@ export class APagoPage {
       }
     )
   }
- 
+
+  onAgregar() {
+    let pagPago:PagPago = {    
+      id:null,
+      idTransaccion:this.transaccionRequest.transaccionObjeto.id,
+      fecha:new Date(),
+      monto:this.monto
+    }
+    let service: Observable<ServResponse>
+    service = this.transaccionService.onProcesarPagoEnElDia( pagPago )
+
+    service.subscribe(
+      data => {
+        if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
+          console.log('<<<<< guardado: OK >>>>')
+          this.ngOnInit()
+        }
+      }
+    )
+  }
+
+  onEliminar() {
+    let service: Observable<ServResponse>
+
+    service = this.transaccionService.onEliminarPago( this.selected.id )
+
+    service.subscribe( 
+      data => {
+        if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
+          console.log('<<<<< eliminado: OK >>>>')
+          this.ngOnInit()
+        }
+      }
+    )
+  }
+
+  onReturnModal(value:any) {
+    this.viewCtrl.dismiss( value )
+  }
 }

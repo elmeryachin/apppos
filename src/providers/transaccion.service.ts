@@ -69,8 +69,12 @@ export class TransaccionService {
   }
 
   // ############################# saldo y pagos
-  onProcesarPagoDelDia( pagPago:PagPago ){
-    return this.http.post<UsuarioResponseMin>( SERVIDOR + this.storageService.getDtoTransaccion().pagoDia, pagPago, {headers: this.getHeaders()} )
+  onProcesarPagoEnElDia( pagPago:PagPago ): Observable<ServResponse> {
+    return this.http.post<ServResponse>( SERVIDOR + this.storageService.getDtoTransaccion().pagoDia, pagPago, {headers: this.getHeaders()} )
+  }
+
+  onEliminarPago( idPago:string ): Observable<ServResponse> {
+    return this.http.delete<ServResponse>( SERVIDOR + this.storageService.getDtoTransaccion().pagoDel + idPago, {headers: this.getHeaders()} )
   }
 
   onSaldo( idTrans:string ) {

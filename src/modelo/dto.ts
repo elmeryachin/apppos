@@ -19,6 +19,7 @@ export interface DtoTransaccion {
 
     conCredito:   boolean     // Para mostrar el componente de saldo y registrar pagos. 
     pagoDia :   string
+    pagoDel :   string
     saldo   :   string
     listaPag:   string
 
