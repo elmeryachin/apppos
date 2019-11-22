@@ -227,6 +227,7 @@ export class ATransaccionPage {
       this.entradaNext.codigo = null
       let service: Observable<TransaccionResponse>
       this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
+      console.log('this.transaccionRequest.transaccionObjeto.nroMovimiento:: ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
       service = this.transaccionService.onObtener(this.transaccionRequest.transaccionObjeto.nroMovimiento )
       service.subscribe(
         data => {
@@ -347,8 +348,14 @@ export class ATransaccionPage {
               this.entradaNext.codigo = null
               this.getInit()
               this.productoNext.getReset()
-              this.codigo = null*/
-              console.log( 'registro guardado ... ' + data.transaccionObjeto.id ) 
+              this.codigo = null
+              console.log( 'registro guardado ... ' + data.transaccionObjeto.id ) */
+              if ( this.transaccionRequest.transaccionObjeto.id != null ) { // que locura el ANY
+                let a:any = this.transaccionRequest.transaccionObjeto.id
+                this.transaccionRequest.transaccionObjeto.nroMovimiento = a
+              }
+                
+              this.onQuest( null )
             }
           }
         )

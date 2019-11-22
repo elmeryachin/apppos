@@ -1,7 +1,7 @@
 <ion-header>
         <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
             <ion-title>Productos</ion-title>
-            <ion-buttons end *ngIf="false">
+            <ion-buttons end *ngIf="esMenu">
                 <button ion-button outline
                         [disabled]="articuloRequest.objetoArticulo.codigo==undefined || articuloRequest.objetoArticulo.codigo == null || articuloRequest.objetoArticulo.codigo.trim().length == 0" 
                         (click)="onAlertGrabar(codigo)" >
@@ -13,11 +13,29 @@
                     <i class="pi pi-trash"></i> 
                 </button>
                 <button ion-button outline  
-                        (click)="onModalReporte()"
+                        (click)="onReporte()"
                         [disabled]="!esActualizar">
                     <i class="pi pi-print"></i>
                 </button>
             </ion-buttons>
+            <ion-buttons end *ngIf="!esMenu">
+              <button ion-button outline
+                      (click)="onPdf(codigo)" >
+                  Pdf
+              </button>
+              <button ion-button outline
+                      (click)="onExcel(codigo)">
+                  Excel 
+              </button>
+              <button ion-button outline
+                      (click)="onImprimir(codigo)">
+                  Imprimir 
+              </button>
+              <button ion-button outline  
+                      (click)="onCancelar()">
+                  volver
+              </button>
+          </ion-buttons>
         </ion-navbar>
 </ion-header>
 

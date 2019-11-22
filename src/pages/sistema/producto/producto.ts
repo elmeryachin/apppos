@@ -11,6 +11,8 @@ import { ReportePage } from '../reporte/reporte'
 declare var require: any;
 var Mousetrap = require('mousetrap');// Para que funcione require "npm install --save @types/node"
 var Mousetrap_global = require('mousetrap-global-bind');
+var PHE = require("print-html-element");
+
 @Component({
   selector: 'page-producto',
   templateUrl: 'producto.html',
@@ -25,6 +27,7 @@ export class ProductoPage {
   
   @ViewChild('codigo') codigoNext   //Requerido para dar focus al componente ccodigo
   
+  esMenu:boolean = true;
 
   constructor(public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
@@ -183,16 +186,44 @@ export class ProductoPage {
     setTimeout( () => next.setFocus(), 450)
   }
 
-  onModalReporte() {
-    console.log('imprimiendo reporte ... ' + this.articuloRequest.objetoArticulo.codigo)
-    //llamar al componente de impresion
-    // - in    
-    // - out    
-    let modal = this.modalCtrl.create( ReportePage,  
-      { 
-        nombre: 'Reporte de Productos',
-        url: 'url://reportes'
-      })
-    modal.present()
+  /**
+   * abre los botones para la impresion de botones
+   */
+  onReporte() {
+    this.esMenu = false;
   }
+
+  /**
+   * Cierra los botones de impresiones
+   */
+  onCancelar() {
+    this.esMenu = true;
+  }
+
+  /**
+   * Ejecuta la impresion de un reporte 
+   */
+  onImprimir() {
+    console.log('onImprimir()')
+    var xhttp = new XMLHttpRequest();
+    //xhttp.open("GET", this.url + "/reporte/porllegar_mov/html/view/"+this.idPedidoRecuperado, false);
+    xhttp.setRequestHeader("Content-type", "text/plain");
+    xhttp.send();
+    PHE.printHtml(xhttp.responseText);
+  }
+
+  /**
+   * Genera un documento Pdf
+   */
+  onPdf(){
+    console.log('onPdf()')
+  }
+
+  /**
+   * Genera un documento Excel
+   */
+  onExcel(){
+    console.log('onExcel()')
+  }
+
 }
