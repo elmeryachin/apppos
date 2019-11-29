@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
+      <ion-title>Discos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-header>
+      <ion-label>Nombre:</ion-label>
+      <br/>
+      <ion-label>Almacen:</ion-label>
+    </ion-card-header>
+
+  </ion-card>
+  <ion-card>
+      <ion-card-content>
+      <button ion-button block (click)="irReportesMenu()">Ver Reportes</button>
+      </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <img src="../../../assets/imgs/marty-avatar.png" >
+      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <img src="../../../assets/imgs/marty-avatar.png" >
+      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <img src="../../../assets/imgs/marty-avatar.png" >
+      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-card-content>
+        <button ion-button block>Cerrar Gestión</button>
+      </ion-card-content>
+  </ion-card>
+
+</ion-content>

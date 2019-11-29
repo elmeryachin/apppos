@@ -1,3 +1,6 @@
+import { ReportesMenuPage } from './reportes-menu/reportes-menu';
+import { from } from 'rxjs/observable/from';
+import { DiscoMenuPage } from './sistema/disco-menu/disco-menu';
 export { AccesoPage } from './acceso/acceso'
 export { MenuPage } from './menu/menu'
 export { ProductoPage } from './sistema/producto/producto'
@@ -22,3 +25,5 @@ export { InfoPage } from './sistema/info/info'
 export { APagoPage } from './sistema/transaccion/a-pago/a-pago'
 
 export { ReportePage } from './sistema/reporte/reporte'
+export { DiscoMenuPage} from './sistema/disco-menu/disco-menu'
+export { ReportesMenuPage } from './sistema/reportes-menu/reportes-menu'

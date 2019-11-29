@@ -1,5 +1,6 @@
+
 import { Component, ViewChild } from '@angular/core';
-import { ProductoPage, 
+import { ProductoPage,
          BPedidoPage,
          CEnvioPage,
          DSolicitudPage,
@@ -10,6 +11,7 @@ import { ProductoPage,
          HAgrupadorPage,
          IEstadoDeCuentasPage,
          DiscoPage,
+         DiscoMenuPage,
          InfoPage } from '../paginas.page'
 import { StorageService } from '../../providers/storage.service';
 import { ModalController, Tab } from 'ionic-angular';
@@ -26,6 +28,7 @@ export class MenuPage {
   @ViewChild('idSolicitud') idSolicitud: Tab;
   @ViewChild('idSolicitudDestino') idSolicitudDestino: Tab;
   @ViewChild('idDisco') idDisco: Tab;
+  @ViewChild('idDiscoMenuPage') idDiscoMenuPage: Tab;
   @ViewChild('idRecibido') idRecibido: Tab;
   @ViewChild('idVenta') idVenta: Tab;
   @ViewChild('idBorrador') idBorrador: Tab;
@@ -44,6 +47,7 @@ export class MenuPage {
 
   productoPage:any
   discoPage:any
+  discoMenuPage: any
 
   infoPage:any
   constructor( public storageService: StorageService, public modalCtrl: ModalController ) {
@@ -59,9 +63,10 @@ export class MenuPage {
     this.hAgrupadorPage = HAgrupadorPage
     this.iEstadoDeCuentasPage = IEstadoDeCuentasPage
     this.discoPage = DiscoPage
+    this.discoMenuPage = DiscoMenuPage
     this.infoPage = InfoPage
   }
-  
+
   getTipo():string {
     return this.storageService.getAccesoResponse().tipo
   }
@@ -89,6 +94,9 @@ export class MenuPage {
   onDiscoPage() {
     this.idDisco.goToRoot(null)
   }
+  onDiscoMenuPage() {
+    this.idDiscoMenuPage.goToRoot(null);
+  }
 
   oneRecibidoPage() {
     this.idRecibido.goToRoot(null)
@@ -109,5 +117,5 @@ export class MenuPage {
   oniEstadoDeCuentasPage() {
     this.idEstadoDeCuentas.goToRoot(null)
   }
-  
+
 }
