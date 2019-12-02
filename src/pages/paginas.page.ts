@@ -1,4 +1,4 @@
-import { ReportesMenuPage } from './reportes-menu/reportes-menu';
+import { ReportesMenuPage } from './sistema/reportes-menu/reportes-menu';
 import { from } from 'rxjs/observable/from';
 import { DiscoMenuPage } from './sistema/disco-menu/disco-menu';
 export { AccesoPage } from './acceso/acceso'
