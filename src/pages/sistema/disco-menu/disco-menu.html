@@ -16,28 +16,68 @@
   </ion-card>
   <ion-card>
       <ion-card-content>
-      <button ion-button block (click)="irReportesMenu()">Ver Reportes</button>
+      <button ion-button block>Ver Reportes</button>
       </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-content>
-      <img src="../../../assets/imgs/marty-avatar.png" >
-      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
-
+    <ion-card-content  (click)="prepararDescarga()">
+      <img src="../../../assets/imgs/marty-avatar.png"  (click)="irReportesMenu()">
+      <p>Elija esta opcion cuando desee <ion-badge>enviar a las sucursales</ion-badge> las actualizaciones de STOCK Y ENTREGAS de su central o sucursal</p>
+      
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <button ion-button clear small>
+           Descargar a un directorio
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button  clear small>
+            Envio Remoto
+          </button>
+        </ion-col>
+      </ion-row>
+      
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-content>
       <img src="../../../assets/imgs/marty-avatar.png" >
-      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
+      <p>Elija esta opcion cuando desee <ion-badge>recibir la informacion</ion-badge> acerca de las VENTAS y CUENTAS de las sucursales o central</p>
+      <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+              <input type="file" id="file" (change)="files($event.target.files)">
 
+              <button ion-button clear small>
+                  Proceder a Guardar
+              </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button  clear small>
+              Actualizacion Remota
+            </button>
+          </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-content>
       <img src="../../../assets/imgs/marty-avatar.png" >
-      <p>Elija esta opcion cuando desee enviar a las sucirsales las actualizaciones de STOCK y ENTREGAS de central.</p>
-
+      <p>Esta opcion permite <ion-badge>reproducir su base de CENTRAL</ion-badge> en un equipo diferente.  Puede buscar el archivo.</p>
+      <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            <button ion-button clear small>
+             Descargar mi Base de Datos
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button  clear small>
+              nueva base de datos
+            </button>
+          </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
   <ion-card>

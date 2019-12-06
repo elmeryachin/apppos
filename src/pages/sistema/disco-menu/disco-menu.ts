@@ -31,4 +31,31 @@ export class DiscoMenuPage {
     this.navCtrl.push(ReportesMenuPage);
   }
 
+  prepararDescarga1 ( ) {  
+    console.log('prepararDescarga')
+  }
+
+  prepararDescarga( ) {
+    console.log('ejecutando descarga ....')
+
+    let service = this.discoService.onGenerar( null )
+
+    service.subscribe(
+      data => {
+        console.log(data)
+
+        let link = document.createElement( 'a' )
+        link.setAttribute( 'href', 'data:text/plain;base64,' + data.documento )
+        link.setAttribute( 'download', data.nombre + '.zip' )
+        link.style.display = 'none'
+
+        document.body.appendChild( link )
+    
+        link.click()
+    
+        document.body.removeChild( link )
+
+      }
+    )
+  }
 }
