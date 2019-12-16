@@ -77,12 +77,12 @@ export class UtilitarioUtils {
       let confirm = alertCtrl.create()
       confirm.setTitle(titulo)
       confirm.setMessage(mensaje)
-      confirm.addButton('Cancelar')
       confirm.addButton({
         text: 'Aceptar',
         handler: data => _objeto.onGuardar(next)
       })
-     
+      confirm.addButton('Cancelar')
+
       confirm.present();
     }
 

@@ -16,24 +16,19 @@
   </ion-card>
   <ion-card>
       <ion-card-content>
-      <button ion-button block>Ver Reportes</button>
+      <button  (click)="irReportesMenu()" ion-button block>Ver Reportes</button>
       </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-content  (click)="prepararDescarga()">
-      <img src="../../../assets/imgs/marty-avatar.png"  (click)="irReportesMenu()">
+      <img src="../../../assets/imgs/marty-avatar.png">
       <p>Elija esta opcion cuando desee <ion-badge>enviar a las sucursales</ion-badge> las actualizaciones de STOCK Y ENTREGAS de su central o sucursal</p>
       
       <ion-row>
         <ion-col></ion-col>
         <ion-col>
-          <button ion-button clear small>
+          <button ion-button clear small [disabled]="true">
            Descargar a un directorio
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button  clear small>
-            Envio Remoto
           </button>
         </ion-col>
       </ion-row>
@@ -49,14 +44,9 @@
           <ion-col>
               <input type="file" id="file" (change)="files($event.target.files)">
 
-              <button ion-button clear small>
-                  Proceder a Guardar
+              <button ion-button clear small [disabled]="true">
+                  Cargue un archivo para procesar en su base
               </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button  clear small>
-              Actualizacion Remota
-            </button>
           </ion-col>
       </ion-row>
     </ion-card-content>
@@ -66,15 +56,14 @@
       <img src="../../../assets/imgs/marty-avatar.png" >
       <p>Esta opcion permite <ion-badge>reproducir su base de CENTRAL</ion-badge> en un equipo diferente.  Puede buscar el archivo.</p>
       <ion-row>
-          <ion-col></ion-col>
           <ion-col>
             <button ion-button clear small>
-             Descargar mi Base de Datos
+             Descargar mi Base
             </button>
           </ion-col>
           <ion-col>
             <button ion-button  clear small>
-              nueva base de datos
+              Crear nueva base
             </button>
           </ion-col>
       </ion-row>

@@ -22,7 +22,8 @@ import { AccesoService,
          StorageService,
          InventarioService,
          TransaccionService,
-         DiscoService } from '../providers/servicios.providers';
+         DiscoService,
+         ReporteService } from '../providers/servicios.providers';
 
 import {  InventarioComponent,
           EntradaComponent,
@@ -137,6 +138,7 @@ import {  AccesoPage,
     InventarioService,
     TransaccionService,
     DiscoService,
+    ReporteService,
     MensajeUtils,
     UtilitarioUtils
   ]

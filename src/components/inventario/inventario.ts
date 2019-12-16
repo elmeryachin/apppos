@@ -20,7 +20,7 @@ export class InventarioComponent {
   ngAfterViewInit() {
     console.log('INGRESANDIO,.,,,,, EX ARC')
     this.inventarioService.onExistenciaArticulo(this.codigo).subscribe(
-      data => {
+      data => { console.log(data)
         if(data.respuesta) {
           this.list = data.list
           

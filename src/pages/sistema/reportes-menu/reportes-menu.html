@@ -8,15 +8,15 @@
     <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
         <ion-buttons end>
       <button ion-button outline
-                      (click)="prueba()" >
+                      (click)="pdf()" >
                   Pdf
               </button>
               <button ion-button outline
-                      (click)="prueba()">
+                      (click)="excel()">
                   Excel
               </button>
               <button ion-button outline
-                      (click)="prueba()">
+                      (click)="imprimir()">
                   Imprimir
               </button>
             </ion-buttons>
@@ -25,40 +25,40 @@
 
 
 <ion-content padding>
-    <form (submit)="doSubmit($event)" [formGroup]="langForm">
+    <form [formGroup]="langForm">
         <ion-list radio-group formControlName="langs">
 
           <ion-list-header>
-            Language
+            Lista de Reportes
           </ion-list-header>
 
           <ion-item>
             <ion-label>Stock de Compras</ion-label>
-            <ion-radio value="01" checked="true"></ion-radio>
+            <ion-radio value="stock_con_precio" checked="true"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Entregas a Tienda</ion-label>
-            <ion-radio value="02"></ion-radio>
+            <ion-label>Entregas a Tienda (desde {{ 'T1' }})</ion-label>
+            <ion-radio value="entrega_stock_tienda"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Lista de Precios</ion-label>
-            <ion-radio value="03"></ion-radio>
+            <ion-radio value="lista_precios"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Existencias</ion-label>
-            <ion-radio value="04"></ion-radio>
+            <ion-radio value="articulo_existencia_report"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Estado de Cuentas</ion-label>
-            <ion-radio value="05"></ion-radio>
+            <ion-radio value="estado_de_cuentas"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Detalle de Movimientos</ion-label>
+            <ion-label>Detalle de Movimientos (?)</ion-label>
             <ion-radio value="06"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Llegada a Almacen</ion-label>
-            <ion-radio value="07"></ion-radio>
+            <ion-radio value="pedido_llegada_report"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Ventas en Almacen</ion-label>

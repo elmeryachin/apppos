@@ -39,3 +39,9 @@ export interface DtoDetalle {
     ver         :   boolean
     agrupa      :   string  // Muestra un boton llamado agrupar, agrupa todos los registros por cliente generando otros registros.
 }
+
+export interface ResponseReporte {
+    reporte     :   any
+    respuesta   :   boolean
+    mensaje     :   string
+}

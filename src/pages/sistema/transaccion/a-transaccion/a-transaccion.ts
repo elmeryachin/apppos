@@ -188,9 +188,9 @@ export class ATransaccionPage {
    */
   getPrint() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", SERVIDOR + "/reporte/porllegar_mov/html/view/"+this.transaccionRequest.transaccionObjeto.id, false);
+    xhttp.open("GET", SERVIDOR + "reporte/porllegar_mov/html/view/"+this.transaccionRequest.transaccionObjeto.id, false);
     xhttp.setRequestHeader("Content-type", "text/plain");
-    xhttp.setRequestHeader("token", "12345-1");
+    xhttp.setRequestHeader("token", "token-1");
 
     xhttp.send();
     PHE.printHtml(xhttp.responseText);

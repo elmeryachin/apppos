@@ -27,7 +27,8 @@ export class DiscoMenuPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DiscoMenuPage');
   }
-  public irReportesMenu() {
+  irReportesMenu() {
+    console.log('asdasdds')
     this.navCtrl.push(ReportesMenuPage);
   }
 
