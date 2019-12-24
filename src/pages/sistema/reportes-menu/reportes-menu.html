@@ -8,15 +8,15 @@
     <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
         <ion-buttons end>
       <button ion-button outline
-                      (click)="pdf()" >
+                      (click)="onPdf()" >
                   Pdf
               </button>
               <button ion-button outline
-                      (click)="excel()">
+                      (click)="onExcel()">
                   Excel
               </button>
               <button ion-button outline
-                      (click)="imprimir()">
+                      (click)="onImprimir()">
                   Imprimir
               </button>
             </ion-buttons>
@@ -61,9 +61,14 @@
             <ion-radio value="pedido_llegada_report"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Ventas en Almacen</ion-label>
+            <ion-label>Ventas en Almacen (?)</ion-label>
             <ion-radio value="dotnet"></ion-radio>
           </ion-item>
+          <ion-item>
+            <ion-label>Stock de Articulos</ion-label>
+            <ion-radio value="dotnet"></ion-radio>
+          </ion-item>
+
         </ion-list>
       </form>
 </ion-content>

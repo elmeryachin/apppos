@@ -39,7 +39,7 @@ export class ReportesMenuPage {
     console.log('ionViewDidLoad ReportesMenuPage');
   }
 
-  pdf() {
+  onPdf() {
     console.log(this.langForm.value.langs)
     let service:Observable<ResponseReporte> = this.reporteService.onGenerarReporte(this.langForm.value.langs, 'pdf')
     service.subscribe(
@@ -52,16 +52,16 @@ export class ReportesMenuPage {
         link.style.display = 'none'
 
         document.body.appendChild( link )
-    
+
         link.click()
-    
+
         document.body.removeChild( link )
 
       }
     )
   }
 
-  excel() {
+  onExcel() {
     let service = this.reporteService.onGenerarReporte(this.langForm.value.langs, 'xls')
     service.subscribe(
       data => {
@@ -73,9 +73,9 @@ export class ReportesMenuPage {
         link.style.display = 'none'
 
         document.body.appendChild( link )
-    
+
         link.click()
-    
+
         document.body.removeChild( link )
 
       }
@@ -85,11 +85,11 @@ export class ReportesMenuPage {
   /**
    * Permite imprimir un objeto
    */
-  imprimir() {
+  onImprimir() {
     let url:string = this.reporteService.onPrintReporte( this.langForm.value.langs, 'html' )
-    
+
     let xhttp = new XMLHttpRequest()
-    
+
     xhttp.open("GET", url, false);
     xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.setRequestHeader("token", this.storageService.getAccesoResponse().token );

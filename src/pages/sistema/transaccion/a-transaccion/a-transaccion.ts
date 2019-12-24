@@ -8,10 +8,12 @@ import { Observable } from 'rxjs/Observable';
 import { SERVIDOR } from '../../../../utils/ctte.utils';
 import { ADetallePage } from '../a-detalle/a-detalle';
 import { UsuarioComponent } from '../../../../components/usuario/usuario';
-import { DtoTransaccion, DtoDetalle } from '../../../../modelo/dto';
+import {DtoTransaccion, DtoDetalle, ResponseReporte} from '../../../../modelo/dto';
 import { StorageService } from '../../../../providers/storage.service';
 import { PagPago } from '../../../../modelo/tabla.model';
 import { APagoPage } from '../a-pago/a-pago';
+import {DiscoService} from "../../../../providers/disco.service";
+import {ReporteService} from "../../../../providers/reporte.service";
 declare var require: any;
 var Mousetrap = require('mousetrap')  // Para que funcione require "npm install --save @types/node" -- declare var require: any;
 var Mousetrap_global = require('mousetrap-global-bind')
@@ -24,6 +26,7 @@ var PHE = require("print-html-element")
 })
 export class ATransaccionPage {
 
+  esMenu:boolean = true
   @Input() tipoTransaccion:string         // Se manda el tipo ejm.: 'PEDIDO, RECIBIDO, SOLICITUD ...'
   transaccionRequest:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
@@ -43,7 +46,8 @@ export class ATransaccionPage {
               public transaccionService:TransaccionService,
               public modalCtrl:ModalController,
               public storageService: StorageService,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              public reporteService:ReporteService) {
     //Quitar el storage para adicionarlo en transaccionService para org. el codigo
     this.transaccionRequest = new TransaccionRequest()
     this.cargarAccesoRapido()
@@ -156,7 +160,7 @@ export class ATransaccionPage {
 
   /**
    * Carga el saldo actual de la transaccion cargada
-   * @param idTrans es el idTransaccion 
+   * @param idTrans es el idTransaccion
    */
   onSaldo(idTrans:string) {
     if( this.dtoTransaccion.conCredito ) {
@@ -172,10 +176,10 @@ export class ATransaccionPage {
         }
       )
     }
-  }  
+  }
 
   /**
-   * 
+   *
    */
   onPago( idTrans:string ) {
     let modal = this.modalCtrl.create( APagoPage, { registro: this.transaccionRequest } )
@@ -354,7 +358,7 @@ export class ATransaccionPage {
                 let a:any = this.transaccionRequest.transaccionObjeto.id
                 this.transaccionRequest.transaccionObjeto.nroMovimiento = a
               }
-                
+
               this.onQuest( null )
             }
           }
@@ -457,12 +461,72 @@ export class ATransaccionPage {
 
   }
 
-  presentToast(mensaje: string) {
+  /*presentToast(mensaje: string) {
     const toast = this.toastController.create({
       message: mensaje,
       duration: 2000
     });
     toast.present();
+  }*/
+
+  onPdf() {
+    let service = this.reporteService.onReporteTransaccion(this.dtoTransaccion.B.reporte,'pdf', this.transaccionRequest.transaccionObjeto.id)
+    service.subscribe(
+      data => {
+        console.log(data)
+
+        let link = document.createElement( 'a' )
+        link.setAttribute( 'href', 'data:text/plain;base64,' + data.reporte )
+        link.setAttribute( 'download', this.dtoTransaccion.B.reporte + "_" + this.transaccionRequest.transaccionObjeto.nroMovimiento + '.pdf' )
+        link.style.display = 'none'
+
+        document.body.appendChild( link )
+
+        link.click()
+
+        document.body.removeChild( link )
+
+      }
+    )
   }
+
+  onExcel() {
+    let service = this.reporteService.onReporteTransaccion(this.dtoTransaccion.B.reporte, 'xls', this.transaccionRequest.transaccionObjeto.id)
+    service.subscribe(
+      data => {
+        console.log(data)
+
+        let link = document.createElement( 'a' )
+        link.setAttribute( 'href', 'data:text/plain;base64,' + data.reporte )
+        link.setAttribute( 'download', this.dtoTransaccion.B.reporte + "_" + this.transaccionRequest.transaccionObjeto.nroMovimiento + '.xls' )
+        link.style.display = 'none'
+
+        document.body.appendChild( link )
+
+        link.click()
+
+        document.body.removeChild( link )
+
+      }
+    )
+  }
+
+  /**
+   * Permite imprimir un objeto
+   */
+  onImprimir() {
+    let url:string = this.reporteService.onPrintTransaccion( this.dtoTransaccion.B.reporte, 'html', this.transaccionRequest.transaccionObjeto.id )
+
+    let xhttp = new XMLHttpRequest()
+
+    xhttp.open("GET", url, false);
+    xhttp.setRequestHeader("Content-type", "text/plain");
+    xhttp.setRequestHeader("token", this.storageService.getAccesoResponse().token );
+
+    xhttp.send();
+
+    PHE.printHtml( xhttp.responseText );
+  }
+
 
 }

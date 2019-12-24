@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar [color]="storageService.getAccesoResponse().tipo=='SUCURSAL'?'primary':'cafe-claro'">
         <ion-title>{{ dtoDetalle.titulo }}</ion-title>
-        <ion-buttons end>
-            <button ion-button outline 
+        <ion-buttons end *ngIf="esMenu">
+            <button ion-button outline
                     *ngIf="dtoDetalle.nProcesar!=null"
                     [disabled]="selected==null"
                     (click)="onAlertProcesar()">
@@ -11,43 +11,67 @@
             </button>
             <button ion-button outline
                     (click)="onReturnModal(null)">
-                <i class="pi pi-arrow-left"></i> 
+                <i class="pi pi-arrow-left"></i>
             </button>
             <button ion-button outline
                     (click)="onVerDiferencia()"
-                    *ngIf="dtoDetalle.questDif!=null" 
+                    *ngIf="dtoDetalle.questDif!=null"
                     [disabled]="selected==null || (selected.observacion!=null && !selected.observacion.includes('editado'))">
-                <i class="pi pi-question-circle"></i> 
+                <i class="pi pi-question-circle"></i>
             </button>
             <button ion-button outline
                     *ngIf="dtoDetalle.ver"
-                    (click)="onReturnModal(selected)" 
+                    (click)="onReturnModal(selected)"
                     [disabled]="selected==null">
-                <i class="pi pi-eye"></i> 
+                <i class="pi pi-eye"></i>
             </button>
             <button ion-button outline
                     *ngIf="dtoDetalle.agrupa!=null"
                     (click)="onAlertAgrupar()"
                     [disabled]="tcan==0">
-                <i class="pi pi-cog"></i> 
+                <i class="pi pi-cog"></i>
                 Agrupa
             </button>
+            <button ion-button outline
+                    title=""
+                    (click)="esMenu=false"
+                    [disabled]="selected==null">
+              <i class="pi pi-print"></i>
+            </button>
         </ion-buttons>
+      <ion-buttons end *ngIf="!esMenu">
+        <button ion-button outline
+                (click)="onPdf()" >
+          Pdf
+        </button>
+        <button ion-button outline
+                (click)="onExcel()">
+          Excel
+        </button>
+        <button ion-button outline
+                (click)="onImprimir()">
+          Imprimir
+        </button>
+        <button ion-button outline
+                (click)="esMenu=true">
+          volver
+        </button>
+      </ion-buttons>
     </ion-navbar>
 </ion-header>
-      
+
 <ion-content>
 <div class="content">
     <p-table #dt1 [columns]="cols" [value]="transaccionResponseList.list"
-                 [scrollable]="true" scrollHeight="120px" 
+                 [scrollable]="true" scrollHeight="120px"
                  [resizableColumns]="true" (onRowSelect)="onRowSelect($event)"
                  selectionMode="single" [(selection)]="selected" dataKey="id">
                  <ng-template pTemplate="caption">
-                        <div class="captionGlobal">        
+                        <div class="captionGlobal">
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input type="text" pInputText size="20" 
+                            <input type="text" pInputText size="20"
                                    placeholder="Busqueda Global"
-                                   (input)="dt1.filterGlobal($event.target.value, 'contains')" 
+                                   (input)="dt1.filterGlobal($event.target.value, 'contains')"
                                    class="questGlobal">
                         </div>
                 </ng-template>
@@ -78,17 +102,17 @@
                         <td>{{ tprec | number:'1.2-2' }}</td>
                     </tr>
                 </ng-template>
-    </p-table>    
+    </p-table>
 </div>
 <div class="content" *ngIf="selected!=null">
-    <p-table #dt [columns]="colsD" [value]="listaDetalle" 
+    <p-table #dt [columns]="colsD" [value]="listaDetalle"
                  [scrollable]="true" scrollHeight="160px">
                  <ng-template pTemplate="caption">
-                    <div class="captionGlobal">        
+                    <div class="captionGlobal">
                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                        <input type="text" pInputText size="20" 
+                        <input type="text" pInputText size="20"
                                placeholder="Busqueda Global"
-                               (input)="dt.filterGlobal($event.target.value, 'contains')" 
+                               (input)="dt.filterGlobal($event.target.value, 'contains')"
                                class="questGlobal">
                     </div>
                 </ng-template>
@@ -131,6 +155,6 @@
                             <td style="text-align: right">{{ tsubtotl | number:'1.2-2' }}</td>
                         </tr>
                 </ng-template>
-    </p-table>    
+    </p-table>
 </div>
 </ion-content>

@@ -28,32 +28,35 @@ export const PATH_PEDIDO:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   '/usuario/proveedor/add',
-    B       :   { 
+    B       :   {
                     titulo      :   'Lista Pedidos',
-                    list        :   '/pedido/list', 
+                    list        :   '/pedido/list',
                     mProcesar   :   2,
                     nProcesar   :   'Hacer Llegada',
-                    procesar    :   '/llegada/confirmar/',   
+                    procesar    :   '/llegada/confirmar/',
+                    reporte     :   "pedido_porllegar_movmiento",
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
+    C       :   {
                     list        :   '/llegada/list',
-                    titulo      :   'Lista Llegadas', 
+                    titulo      :   'Lista Llegadas',
                     nProcesar   :   'Cancelar Llegada',
                     mProcesar   :   2,
-                    procesar    :   '/llegada/cancelar/', 
+                    procesar    :   '/llegada/cancelar/',
+                    reporte     :   "pedido_llegada_movimiento",
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
-                    list        :   null, 
+    D       :   {
+                    list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -71,11 +74,11 @@ export const PATH_ENVIAR:DtoTransaccion = {
     add     :   '/transferencia/envio/add',
     update  :   '/transferencia/envio/update',
     delete  :   '/transferencia/envio/delete/',     //{id}
-    quest   :   '/transferencia/envio/quest/movimiento/', 
+    quest   :   '/transferencia/envio/quest/movimiento/',
     tipoE   :   'AMBIENTE',
     listE   :   '/ambiente/list',
     questE  :   '/ambiente/quest/',                  //{codigo}
-    
+
     vMonto  :   true,
 
     conCredito : false,
@@ -85,32 +88,35 @@ export const PATH_ENVIAR:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
+    B       :   {
                     list        :   '/transferencia/envio/list',
                     titulo      :   'Lista Envios',
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
-                    list        :   '/transferencia/envio/confirmados/list', 
+    C       :   {
+                    list        :   '/transferencia/envio/confirmados/list',
                     titulo      :   'Lista de Confirmados',
                     mProcesar   :   2,
                     nProcesar   :   'Reconfirmar Envio',
                     procesar    :   '/transferencia/envio/reconfirmar/',        //{id}
+                    reporte     :   null,
                     questDif    :   '/transferencia/envio/diferencia/quest/',    //{id}
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   '/transferencia/envio/reconfirmar/list',
                     titulo      :   'Lista de Reconfirmados',
                     mProcesar   :   2,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -125,10 +131,10 @@ export const PATH_RECIBIR:DtoTransaccion = {
     eliminar:   false,
     imprimir:   false,
     init    :   null,
-    add     :   null,   
+    add     :   null,
     update  :   null,
     delete  :   null,
-    quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',  
+    quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',
     tipoE   :   'ORIGEN',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -142,32 +148,35 @@ export const PATH_RECIBIR:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
+    B       :   {
                     list        :   '/transferencia/recibir/porrecibir/list',
                     titulo      :   'Lista Por Recibir',
                     mProcesar   :   0,
                     nProcesar   :   'Confirmar Recepcion',
                     procesar    :   '/transferencia/recibir/confirmar/recepcion/',  //{id}
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
-                    list        :   '/transferencia/recibir/recibidos/list', 
+    C       :   {
+                    list        :   '/transferencia/recibir/recibidos/list',
                     titulo      :   'Lista Recibidos',
                     mProcesar   :   0,
                     nProcesar   :   'Cancelar Recepcion',
                     procesar    :   '/transferencia/recibir/cancelar/recepcion/',   //{id}
+                    reporte     :   null,
                     questDif    :   '/transferencia/envio/diferencia/quest/',       //{id}
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
-                    titulo      :   null, 
+                    titulo      :   null,
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -199,32 +208,35 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
-                    list        :   '/transferencia/recibir/solicitud/list', 
+    B       :   {
+                    list        :   '/transferencia/recibir/solicitud/list',
                     titulo      :   'Lista Solicitudes',
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
+    C       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -240,7 +252,7 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     eliminar:   false,
     imprimir:   false,
     init    :   null,
-    add     :   null,   
+    add     :   null,
     update  :   null,
     delete  :   null,
     quest   :   '/transferencia/solicitud/procesa/quest/movimiento/',  // DESARROLLAR
@@ -257,32 +269,35 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
+    B       :   {
                     list        :   '/transferencia/solicitud/procesa/list',  // DESARROLLAR
                     titulo      :   'Lista Solicitantes',
                     mProcesar   :   null,
                     nProcesar   :   null,
-                    procesar    :   null,  
+                    procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
+    C       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -305,7 +320,7 @@ export const PATH_VENTA:DtoTransaccion = {
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
-    
+
     vMonto  :   true,
 
     conCredito : false,
@@ -315,32 +330,35 @@ export const PATH_VENTA:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
-                    list        :   '/ventas/list', 
+    B       :   {
+                    list        :   '/ventas/list',
                     titulo      :   'Lista de Ventas',
                     nProcesar   :   'Confirmar Control Venta',
                     mProcesar   :   2,
-                    procesar    :   '/ventas/confirmar/',   
+                    procesar    :   '/ventas/confirmar/',
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
-                    list        :   '/ventas/confirmar/list', 
+    C       :   {
+                    list        :   '/ventas/confirmar/list',
                     titulo      :   'Lista de Ventas Confirmadas',
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -363,7 +381,7 @@ export const PATH_BORRADOR:DtoTransaccion = {
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
-    
+
     vMonto  :   true,
 
     conCredito : false,
@@ -373,32 +391,35 @@ export const PATH_BORRADOR:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   '/usuario/cliente/add',
-    B       :   { 
-                    list        :   '/borrador/list', 
+    B       :   {
+                    list        :   '/borrador/list',
                     titulo      :   'Ventas - Borrador',
                     nProcesar   :   null, //'Confirmar Control Venta',
                     mProcesar   :   2,
-                    procesar    :   null, //'/borrador/confirmar',   
+                    procesar    :   null, //'/borrador/confirmar',
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   '/borrador/agrupar'
                 },
-    C       :   { 
+    C       :   {
                     list        :   null, //'/borrador/agrupados/list',             Funciona pero esta oculta
                     titulo      :   null, //'Lista de Ventas que se agruparon',     Funciona pero se oculta
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -421,7 +442,7 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
-    
+
     vMonto  :   true,
 
     conCredito : false,
@@ -431,32 +452,35 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     listaPag:   null,
 
     usuario :   null,
-    B       :   { 
-                    list        :   '/agrupado/list', 
+    B       :   {
+                    list        :   '/agrupado/list',
                     titulo      :   'Ventas - Agrupadas',
                     nProcesar   :   'Confirmar Venta - Agrupadas',
                     mProcesar   :   2,
-                    procesar    :   '/agrupado/confirmar/',   
+                    procesar    :   '/agrupado/confirmar/',
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
-                    list        :   '/agrupado/confirmar/list', 
+    C       :   {
+                    list        :   '/agrupado/confirmar/list',
                     titulo      :   'Lista de Ventas que se agruparon',
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -479,7 +503,7 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
-    
+
     vMonto  :   true,
 
     conCredito : true,
@@ -489,32 +513,35 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
     listaPag:   '/pago/list/',
 
     usuario :   null,
-    B       :   { 
-                    list        :   '/est_cta/confirmar/list', 
+    B       :   {
+                    list        :   '/est_cta/confirmar/list',
                     titulo      :   'Revisar Ventas Sucursales',
                     nProcesar   :   'Venta Revisada',
                     mProcesar   :   2,
-                    procesar    :   '/est_cta/confirmar/',   
+                    procesar    :   '/est_cta/confirmar/',
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
                 },
-    C       :   { 
+    C       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
                 },
-    D       :   { 
+    D       :   {
                     list        :   null,
                     titulo      :   null,
                     mProcesar   :   null,
-                    nProcesar   :   null, 
+                    nProcesar   :   null,
                     procesar    :   null,
+      reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null

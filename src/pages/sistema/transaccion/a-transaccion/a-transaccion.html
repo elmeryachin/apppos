@@ -3,14 +3,14 @@
             <ion-title>
                 {{ transaccionRequest.transaccionObjeto.id==undefined?transaccionRequest.transaccionObjeto.nroMovimiento==undefined?'':'Crear ':'Actualizar ' }}
                 {{ dtoTransaccion.titulo }}</ion-title>
-            <ion-buttons end>
-                <button ion-button outline 
+            <ion-buttons end *ngIf="esMenu">
+                <button ion-button outline
                         *ngIf="dtoTransaccion.usuario!=null"
                         title="CREAR {{ dtoTransaccion.tipoE }}"
                         (click)="onCrearUsuario()">
                     <ion-icon name="md-person-add"></ion-icon>
                 </button>
-                <button ion-button outline 
+                <button ion-button outline
                         *ngIf="dtoTransaccion.guardar"
                         [title]="(transaccionRequest.transaccionObjeto.id==undefined || transaccionRequest.transaccionObjeto.id == null || transaccionRequest.transaccionObjeto.id == 0)?'GUARDAR TRANSACCION':'ACTUALIZAR TRANSACCION'"
                         (click)="onAlertGuardar(entrada.codigoNext)"
@@ -29,14 +29,14 @@
                         title="Lista de {{ dtoTransaccion.titulo }}"
                         (click)="onModalList('B')">
                     <i class="pi pi-bars"></i>
-                    Lista
+                    Pendiente
                 </button>
                 <button *ngIf="dtoTransaccion.C.list != null"
-                        ion-button outline 
+                        ion-button outline
                         title="Procesados o En Proceso"
                         (click)="onModalList('C')">
                     <i class="pi pi-th-large"></i>
-                    Procesado
+                    historico
                 </button>
                 <button *ngIf="dtoTransaccion.D.list != null"
                         ion-button outline
@@ -44,21 +44,21 @@
                         (click)="onModalList('D')">
                     <i class="pi pi-briefcase"></i>
                 </button>
-                
+
                 <button ion-button outline
                         *ngIf="dtoTransaccion.eliminar"
                         title="Eliminar Transaccion"
                         (click)="onAlertEliminar()"
                         [disabled]="transaccionRequest.transaccionObjeto.id==null">
-                    <i class="pi pi-trash"></i> 
+                    <i class="pi pi-trash"></i>
                 </button>
                 <button ion-button outline
-                        title="" 
-                        (click)="getPrint()"
+                        title=""
+                        (click)="esMenu=false"
                         [disabled]="transaccionRequest.transaccionObjeto.id==null">
                     <i class="pi pi-print"></i>
                 </button>
-                <button ion-button outline 
+                <button ion-button outline
                         *ngIf="dtoDetalle!= null && dtoDetalle.mProcesar==0"
                         [disabled]="transaccionRequest.transaccionObjeto.id==null"
                         (click)="onAlertProcesar()">
@@ -66,29 +66,47 @@
                     <label style="font-size: 10px">{{ transaccionRequest.transaccionObjeto.id==null?'': dtoDetalle.nProcesar }}</label>
                 </button>
             </ion-buttons>
+            <ion-buttons end *ngIf="!esMenu">
+              <button ion-button outline
+                      (click)="onPdf()" >
+                Pdf
+              </button>
+              <button ion-button outline
+                      (click)="onExcel()">
+                Excel
+              </button>
+              <button ion-button outline
+                      (click)="onImprimir()">
+                Imprimir
+              </button>
+              <button ion-button outline
+                      (click)="esMenu=true">
+                volver
+              </button>
+            </ion-buttons>
         </ion-navbar>
 </ion-header>
 <ion-content>
-            
+
     <ion-grid>
         <ion-row>
             <ion-col>
                 <ion-item>
                     <ion-label stacked>{{ 'Numero de Movimiento' }}</ion-label>
-                    <ion-input #movimiento type="number" 
-                               [disabled]="!dtoTransaccion.enabled" 
-                               [(ngModel)]="transaccionRequest.transaccionObjeto.nroMovimiento" 
+                    <ion-input #movimiento type="number"
+                               [disabled]="!dtoTransaccion.enabled"
+                               [(ngModel)]="transaccionRequest.transaccionObjeto.nroMovimiento"
                                [class.inputExistente]="transaccionRequest.transaccionObjeto.id != null"
                                (keyup.enter)="onQuest(movimiento)"></ion-input>
                 </ion-item>
                 <ion-item>
                         <ion-label stacked>{{ 'Fecha de Movimiento' }}</ion-label>
-                        <ion-input type="text" 
+                        <ion-input type="text"
                                    [disabled]="!dtoTransaccion.enabled"
                                    [(ngModel)]="transaccionRequest.transaccionObjeto.fechaMovimiento"></ion-input>
                 </ion-item>
-                
-                <entrada #entrada 
+
+                <entrada #entrada
                          [disabled]="!dtoTransaccion.enabled"
                          [tipo]="dtoTransaccion.tipoE"
                          [tipoTransaccion]="tipoTransaccion"
@@ -108,7 +126,7 @@
                     <ion-item>
                             <ion-label stacked>{{ 'Nombre ' }} {{ dtoTransaccion.tipoE | titlecase }}</ion-label>
                             <ion-input type="text"
-                                       [(ngModel)]="transaccionRequest.transaccionObjeto.nombreUsuario" 
+                                       [(ngModel)]="transaccionRequest.transaccionObjeto.nombreUsuario"
                                        disabled="true"></ion-input>
                     </ion-item>
             </ion-col>
@@ -117,10 +135,10 @@
                 <ion-item>
                     <ion-label stacked>{{ 'Saldo por Pagar' }}</ion-label>
                             <ion-input type="text"
-                                       [(ngModel)]="saldoResponse.porPagar" 
+                                       [(ngModel)]="saldoResponse.porPagar"
                                        disabled="true"></ion-input>
-                                       
-                        <button ion-button clear item-end  
+
+                        <button ion-button clear item-end
                                 [disabled]="transaccionRequest.transaccionObjeto.id == null"
                                 (click)="onPago( transaccionRequest.transaccionObjeto.id )">
                             <ion-icon name="add-circle"></ion-icon>
@@ -130,7 +148,7 @@
             </ng-container>
         </ion-row>
 
-        <quest #producto 
+        <quest #producto
                [cantidadExistente]="cantidadExistente"
                (enterInventario)="onEnterInventario( $event, producto )"
                (enterGuardar)="onEnterInventarioGuardar( $event )"></quest>

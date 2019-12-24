@@ -2,22 +2,25 @@ import { Component } from '@angular/core';
 import { TransaccionResponseList, TransaccionObjeto, ServResponse, TransaccionDetalle } from '../../../../modelo/objeto.model';
 import { TransaccionService } from '../../../../providers/transaccion.service';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
-import { ViewController, AlertController, ModalController } from 'ionic-angular';
+import {ViewController, AlertController, ModalController} from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { StorageService } from '../../../../providers/storage.service';
 import { DtoDetalle } from '../../../../modelo/dto';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { ADiferenciaPage } from '../a-diferencia/a-diferencia';
+import {ReporteService} from "../../../../providers/reporte.service";
 
+var PHE = require("print-html-element")
 
 @Component({
   selector: 'page-a-detalle',
   templateUrl: 'a-detalle.html',
 })
 export class ADetallePage {
-  
+
+  esMenu:boolean = true
   private transaccionResponseList:TransaccionResponseList = new TransaccionResponseList()
-  
+
   private tcan:number
   private tprec:number
 
@@ -48,13 +51,14 @@ export class ADetallePage {
               public alertCtrl:AlertController,
               public mensajeUtils:MensajeUtils,
               public viewCtrl:ViewController,
-              public storageService: StorageService) {
+              public storageService: StorageService,
+              public reporteService:ReporteService) {
     console.log("Constructor .. a-detalle ...")
 
     this.dtoDetalle = storageService.getDtoDetalle()
 
     this.transaccionResponseList = new TransaccionResponseList()
-    
+
     this.getLista()
 
   }
@@ -85,12 +89,12 @@ export class ADetallePage {
               if( seCod == daCod ) {
                 reg.cant_2 = reg.cant_2 - data.transaccionObjeto.lista[j].cantidad
                 reg.cant_3 = data.transaccionObjeto.lista[j].cantidad
-              } 
+              }
             }
 
             diff[i] = reg
           }
-          
+
           let esSucursal:boolean = this.storageService.getAccesoResponse().tipo == 'SUCURSAL';
           console.log("esSucursal: " + esSucursal)
           if( data.transaccionObjeto.lista.length > this.selected.lista.length ) {
@@ -110,7 +114,7 @@ export class ADetallePage {
                 }
                 diff[diff.length] = reg;
               }
-            } 
+            }
           }
 
           let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
@@ -120,15 +124,15 @@ export class ADetallePage {
     )
   }
 
-  /** 
+  /**
    * Reemplaza la lista detalle del registro si es que este contiene <editado>.
   */
   onRowSelect(event) {
-    
+
     this.listaDetalle = this.selected.lista
 
     if( this.storageService.getDtoDetalle().questDif != null ) { //!(this.selected.observacion!=null && !this.selected.observacion.includes('editado')) ) {
-      
+
       let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
 
       servicio.subscribe(
@@ -138,15 +142,15 @@ export class ADetallePage {
           }
         }
       )
-    } 
+    }
   }
 
   onRowUnselect(event) {
     this.listaDetalle = null
   }
-  
+
   /**
-   * Muestra un mensaje antes de ejectar 
+   * Muestra un mensaje antes de ejectar
    */
   onAlertProcesar() {
     this.utilitarioUtils.onAlertProcesar( this.alertCtrl, this, null, 'Confirmacion',
@@ -157,21 +161,21 @@ export class ADetallePage {
    */
   onProcesar( next:any ) {
     let servicio: Observable<ServResponse>
-  
+
     servicio = this.transaccionService.onProcesar( this.selected.id, this.selected )
-      
+
     servicio.subscribe(
       data => {
         if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
             this.getLista()
             this.selected = null
-        } 
+        }
       }
     )
   }
 
     /**
-   * Muestra un mensaje antes de ejectar 
+   * Muestra un mensaje antes de ejectar
    */
   onAlertAgrupar() {
     this.utilitarioUtils.onAlertAgrupar( this.alertCtrl, this, null, 'Agrupar',
@@ -182,15 +186,15 @@ export class ADetallePage {
    */
   onAgrupar( next:any ) {
     let servicio: Observable<ServResponse>
-  
+
     servicio = this.transaccionService.onAgrupar( )
-      
+
     servicio.subscribe(
       data => {
         if( this.mensajeUtils.getValidarRespuesta( data, null ) ) {
             this.getLista()
             this.selected = null
-        } 
+        }
       }
     )
   }
@@ -199,7 +203,7 @@ export class ADetallePage {
    * retorna a la ventana principal que lo invoco enviando el objeto principal
    */
   onReturnModal(selected:any) {
-    
+
     this.viewCtrl.dismiss( selected )
 
   }
@@ -227,14 +231,14 @@ export class ADetallePage {
     this.tcan = 0
     this.tprec = 0.00
     for( let i=0; i<this.transaccionResponseList.list.length; i++) {
-      this.tcan = this.tcan + this.transaccionResponseList.list[i].cantidad 
+      this.tcan = this.tcan + this.transaccionResponseList.list[i].cantidad
       this.tprec = this.tprec + this.transaccionResponseList.list[i].precio
     }
   }
 
   /**
    * Solicitud para mandar a imprimir un registro en forma de reporte
-   * @param row 
+   * @param row
    */
   onPrint( row:any ){
     console.log('onPrint ...')
@@ -249,7 +253,7 @@ export class ADetallePage {
     this.tsubprec = 0.00
     this.tsubcant = 0
     if( this.selected != null ) {
-      
+
       for(let i=0; i<this.selected.lista.length; i++) {
         this.tsubcant = this.tsubcant * 1 + this.selected.lista[i].cantidad * 1
         this.tsubprec = this.tsubprec * 1 + this.selected.lista[i].precio * 1
@@ -257,4 +261,65 @@ export class ADetallePage {
       }
     }
   }
+
+
+  onPdf() {
+    let service = this.reporteService.onReporteTransaccion(this.dtoDetalle.reporte,'pdf', this.selected.id)
+    service.subscribe(
+      data => {
+        console.log(data)
+
+        let link = document.createElement( 'a' )
+        link.setAttribute( 'href', 'data:text/plain;base64,' + data.reporte )
+        link.setAttribute( 'download', this.dtoDetalle.reporte + "_" + this.selected.nroMovimiento + '.pdf' )
+        link.style.display = 'none'
+
+        document.body.appendChild( link )
+
+        link.click()
+
+        document.body.removeChild( link )
+
+      }
+    )
+  }
+
+  onExcel() {
+    let service = this.reporteService.onReporteTransaccion(this.dtoDetalle.reporte, 'xls', this.selected.id)
+    service.subscribe(
+      data => {
+        console.log(data)
+
+        let link = document.createElement( 'a' )
+        link.setAttribute( 'href', 'data:text/plain;base64,' + data.reporte )
+        link.setAttribute( 'download', this.dtoDetalle.reporte + "_" + this.selected.nroMovimiento + '.xls' )
+        link.style.display = 'none'
+
+        document.body.appendChild( link )
+
+        link.click()
+
+        document.body.removeChild( link )
+
+      }
+    )
+  }
+
+  /**
+   * Permite imprimir un objeto
+   */
+  onImprimir() {
+    let url:string = this.reporteService.onPrintTransaccion( this.dtoDetalle.reporte, 'html', this.selected.id )
+
+    let xhttp = new XMLHttpRequest()
+
+    xhttp.open("GET", url, false);
+    xhttp.setRequestHeader("Content-type", "text/plain");
+    xhttp.setRequestHeader("token", this.storageService.getAccesoResponse().token );
+
+    xhttp.send();
+
+    PHE.printHtml( xhttp.responseText );
+  }
+
 }
