@@ -94,7 +94,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
-                    reporte     :   null,
+                    reporte     :   'entrega_porentregar_movimiento',
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
@@ -105,7 +105,7 @@ export const PATH_ENVIAR:DtoTransaccion = {
                     mProcesar   :   2,
                     nProcesar   :   'Reconfirmar Envio',
                     procesar    :   '/transferencia/envio/reconfirmar/',        //{id}
-                    reporte     :   null,
+                    reporte     :   'entrega_entregado_movimiento',
                     questDif    :   '/transferencia/envio/diferencia/quest/',    //{id}
                     ver         :   false,
                     agrupa      :   null
