@@ -15,6 +15,7 @@ export class ReporteService {
   path: string = "/reporte"
 
   onReporteTransaccion(nombre:string, tipo:string , id:string): Observable<ResponseReporte> {
+    console.log(SERVIDOR + this.path + "/" + nombre + "/" + tipo + "/" + id)
     return this.http.get<ResponseReporte>( SERVIDOR + this.path + "/" + nombre + "/" + tipo + "/" + id, {headers:new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token )} )
   }
   onPrintTransaccion(nombre:string, tipo:string , id:string): string {

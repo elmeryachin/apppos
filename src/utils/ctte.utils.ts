@@ -154,7 +154,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     mProcesar   :   0,
                     nProcesar   :   'Confirmar Recepcion',
                     procesar    :   '/transferencia/recibir/confirmar/recepcion/',  //{id}
-                    reporte     :   null,
+                    reporte     :   "llegada_porrecibir_movimiento",
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
@@ -165,7 +165,7 @@ export const PATH_RECIBIR:DtoTransaccion = {
                     mProcesar   :   0,
                     nProcesar   :   'Cancelar Recepcion',
                     procesar    :   '/transferencia/recibir/cancelar/recepcion/',   //{id}
-                    reporte     :   null,
+                    reporte     :   "llegada_recibido_movimiento",
                     questDif    :   '/transferencia/envio/diferencia/quest/',       //{id}
                     ver         :   false,
                     agrupa      :   null
@@ -397,7 +397,7 @@ export const PATH_BORRADOR:DtoTransaccion = {
                     nProcesar   :   null, //'Confirmar Control Venta',
                     mProcesar   :   2,
                     procesar    :   null, //'/borrador/confirmar',
-                    reporte     :   null,
+                    reporte     :   "venta_borrador_movimiento",
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   '/borrador/agrupar'
@@ -458,7 +458,7 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
                     nProcesar   :   'Confirmar Venta - Agrupadas',
                     mProcesar   :   2,
                     procesar    :   '/agrupado/confirmar/',
-      reporte     :   null,
+                    reporte     :   "venta_agrupado_movimiento",
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
@@ -469,7 +469,7 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
-      reporte     :   null,
+                    reporte     :   "agrupa_confirmado_movimiento",
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null
@@ -519,7 +519,7 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
                     nProcesar   :   'Venta Revisada',
                     mProcesar   :   2,
                     procesar    :   '/est_cta/confirmar/',
-      reporte     :   null,
+                    reporte     :   "estado_cuentas_ver_movimiento",
                     questDif    :   null,
                     ver         :   true,
                     agrupa      :   null
@@ -530,7 +530,7 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
                     mProcesar   :   null,
                     nProcesar   :   null,
                     procesar    :   null,
-      reporte     :   null,
+                    reporte     :   null,
                     questDif    :   null,
                     ver         :   false,
                     agrupa      :   null

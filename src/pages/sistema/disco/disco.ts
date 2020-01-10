@@ -30,7 +30,7 @@ export class DiscoPage {
   onLista() {
 
   }
-  
+
   private file: File = null;
   public message = '';
   files(files) {
@@ -38,7 +38,7 @@ export class DiscoPage {
     this.file = files.item(0);
     console.log(this.file)
   }
-  
+
   upload() {
      let service:Observable<DiscoResponse> = this.discoService.onActualizar(this.file)
 
@@ -50,8 +50,8 @@ export class DiscoPage {
     )
   }
 
-  nombreProceso:string 
-  
+  nombreProceso:string
+
   download( ) {
     console.log('ejecutando descarga ....')
 
@@ -67,9 +67,9 @@ export class DiscoPage {
         link.style.display = 'none'
 
         document.body.appendChild( link )
-    
+
         link.click()
-    
+
         document.body.removeChild( link )
 
       }

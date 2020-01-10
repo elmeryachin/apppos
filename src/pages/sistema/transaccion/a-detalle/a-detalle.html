@@ -13,12 +13,12 @@
                     (click)="onReturnModal(null)">
                 <i class="pi pi-arrow-left"></i>
             </button>
-            <button ion-button outline
+            <!--button ion-button outline
                     (click)="onVerDiferencia()"
                     *ngIf="dtoDetalle.questDif!=null"
                     [disabled]="selected==null || (selected.observacion!=null && !selected.observacion.includes('editado'))">
                 <i class="pi pi-question-circle"></i>
-            </button>
+            </button-->
             <button ion-button outline
                     *ngIf="dtoDetalle.ver"
                     (click)="onReturnModal(selected)"
@@ -104,6 +104,12 @@
                 </ng-template>
     </p-table>
 </div>
+  <div class="content">
+    <button ion-button round full color="cafe-claro" (click)="onVerDiferencia()" *ngIf="diff!=null" padding>
+      <ion-icon name="cart" item-start></ion-icon>
+      El destinatario hizo cambios, click aqui para ver
+    </button>
+  </div>
 <div class="content" *ngIf="selected!=null">
     <p-table #dt [columns]="colsD" [value]="listaDetalle"
                  [scrollable]="true" scrollHeight="160px">

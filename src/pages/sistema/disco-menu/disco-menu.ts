@@ -3,6 +3,8 @@ import { DiscoService } from './../../../providers/disco.service';
 import { StorageService } from './../../../providers/storage.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Observable} from "rxjs/Observable";
+import {DiscoResponse} from "../../../modelo/objeto.model";
 
 /**
  * Generated class for the DiscoMenuPage page.
@@ -32,10 +34,6 @@ export class DiscoMenuPage {
     this.navCtrl.push(ReportesMenuPage);
   }
 
-  prepararDescarga1 ( ) {  
-    console.log('prepararDescarga')
-  }
-
   prepararDescarga( ) {
     console.log('ejecutando descarga ....')
 
@@ -51,11 +49,30 @@ export class DiscoMenuPage {
         link.style.display = 'none'
 
         document.body.appendChild( link )
-    
+
         link.click()
-    
+
         document.body.removeChild( link )
 
+      }
+    )
+  }
+
+  private file: File = null;
+  public message = '';
+  files(files) {
+    this.message = '';
+    this.file = files.item(0);
+    console.log(this.file)
+  }
+
+  upload() {
+    let service:Observable<DiscoResponse> = this.discoService.onActualizar(this.file)
+
+    service.subscribe(
+      data => {
+        console.log('uploadd.....')
+        console.log(data)
       }
     )
   }

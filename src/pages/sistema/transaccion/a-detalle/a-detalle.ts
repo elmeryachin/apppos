@@ -66,7 +66,8 @@ export class ADetallePage {
   /**
    * Popup para ver la diferencia entre registros.
    */
-  onVerDiferencia() {
+  private diff = null
+  onVerDiferencia2() {
     console.log('ver difrencias..')
     let diff = new Array()
     let servicio = this.transaccionService.onObtenerDiff( this.selected.id )
@@ -117,17 +118,23 @@ export class ADetallePage {
             }
           }
 
-          let modal = this.modalCtrl.create(ADiferenciaPage, {'diff':diff})
-          modal.present()
+
         }
       }
     )
   }
-
+  onVerDiferencia (){
+    if ( this.diff != null ) {
+      let modal = this.modalCtrl.create(ADiferenciaPage, {'diff': this.diff})
+      modal.present()
+    }
+  }
   /**
    * Reemplaza la lista detalle del registro si es que este contiene <editado>.
   */
   onRowSelect(event) {
+
+    this.diff = null
 
     this.listaDetalle = this.selected.lista
 
@@ -138,7 +145,66 @@ export class ADetallePage {
       servicio.subscribe(
         data => {
           if( this.mensajeUtils.getValidarRespuestaSinMsgOk( data, null, null ) ) {
-            this.listaDetalle = data.transaccionObjeto.lista
+
+            let diff = new Array()
+
+            //console.log(data)
+            for( let i=0; i<this.selected.lista.length; i++ ) {
+              //console.log(this.selected.lista[i])
+              let seCod = this.selected.lista[i].codigoArticulo
+              let reg = {
+                codigo    : seCod,
+                cant_1  : this.selected.lista[i].cantidad,
+                cant_2  : this.selected.lista[i].cantidad,
+                cant_3  : 0
+              }
+              for( let j=0; j<data.transaccionObjeto.lista.length; j++ ) {
+                let daCod = data.transaccionObjeto.lista[j].codigoArticulo
+
+                if( seCod == daCod ) {
+                  reg.cant_2 = reg.cant_2 - data.transaccionObjeto.lista[j].cantidad
+                  reg.cant_3 = data.transaccionObjeto.lista[j].cantidad
+                }
+              }
+
+              diff[i] = reg
+            }
+
+            let esSucursal:boolean = this.storageService.getAccesoResponse().tipo == 'SUCURSAL';
+            console.log("esSucursal: " + esSucursal)
+            if( data.transaccionObjeto.lista.length > this.selected.lista.length ) {
+              for( let j=0; j< data.transaccionObjeto.lista.length; j++ ) {
+                let noRepedidos:boolean = true;
+                for( let i=0; i<this.selected.lista.length; i++ ) {
+                  if( data.transaccionObjeto.lista[j].codigoArticulo == this.selected.lista[i].codigoArticulo) {
+                    noRepedidos = false;
+                  }
+                }
+                if( noRepedidos ) {
+                  let reg = {
+                    codigo    : data.transaccionObjeto.lista[j].codigoArticulo,
+                    cant_1  : 0,
+                    cant_2  : ( -1 ) * data.transaccionObjeto.lista[j].cantidad,
+                    cant_3  : ( esSucursal?-1:1 ) * data.transaccionObjeto.lista[j].cantidad
+                  }
+                  diff[diff.length] = reg;
+                }
+              }
+            }
+
+            this.diff = diff
+
+            for( let i=0; i < this.diff.length; i++ ) {
+              for( let k=0; k < this.listaDetalle.length; k++ ) {
+                if( this.listaDetalle[k].codigoArticulo == diff[i].codigo ) {
+                  this.listaDetalle[k].codigoArticulo = diff[i].codigo
+                  this.listaDetalle[k].cantidad = diff[i].cant_2
+                }
+              }
+
+            }
+            //this.listaDetalle = data.transaccionObjeto.lista
+            console.log(data.transaccionObjeto.lista)
           }
         }
       )
