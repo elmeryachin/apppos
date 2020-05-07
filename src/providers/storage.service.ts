@@ -4,16 +4,16 @@ import { DtoTransaccion, DtoDetalle } from '../modelo/dto';
 
 @Injectable()
 export class StorageService {
-  
-  localStorageService: any
-  dtoTransaccion:string
 
-  constructor() {  
+  localStorageService: any
+  tipoTransaccion:string
+
+  constructor() {
     this.localStorageService = localStorage
   }
 
-  setAsignacionDtoTransaccion( dtoTransaccion:string ) {
-    this.dtoTransaccion = dtoTransaccion
+  setAsignacionDtoTransaccion( tipoTransaccion:string ) {
+    this.tipoTransaccion = tipoTransaccion
   }
 
   getCargarJson(item:string) {
@@ -31,20 +31,20 @@ export class StorageService {
   }
 
   setDtoTransaccion( response: DtoTransaccion ) {
-    this.localStorageService.setItem( this.dtoTransaccion, JSON.stringify( response ) )
+    this.localStorageService.setItem( this.tipoTransaccion, JSON.stringify( response ) )
   }
 
   getDtoTransaccion():DtoTransaccion {
-    let dto:any = this.getCargarJson( this.dtoTransaccion )
+    let dto:any = this.getCargarJson( this.tipoTransaccion )
     return dto
   }
 
   setDtoDetalle( response: DtoDetalle ) {
-    this.localStorageService.setItem( this.dtoTransaccion + '_DETALLE', JSON.stringify( response ) )
+    this.localStorageService.setItem( this.tipoTransaccion + '_DETALLE', JSON.stringify( response ) )
   }
 
   getDtoDetalle():DtoDetalle {
-    let dto:any = this.getCargarJson( this.dtoTransaccion + '_DETALLE' )
+    let dto:any = this.getCargarJson( this.tipoTransaccion + '_DETALLE' )
     return dto
   }
 

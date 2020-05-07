@@ -44,17 +44,18 @@
     "primeicons": "^1.0.0",
     "primeng": "^5.0.0",
     "print-html-element": "^0.5.1",
+    "require": "^2.4.20",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
-    "@types/node": "^10.12.21",
+    "@types/node": "^10.17.14",
     "electron": "^4.0.5",
     "electron-builder": "^20.38.5",
     "foreman": "^3.0.1",
-    "typescript": "~2.6.2"
+    "typescript": "^2.6.2"
   },
   "description": "An Ionic project",
   "main": "electron/main.js",

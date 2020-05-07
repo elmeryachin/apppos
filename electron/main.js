@@ -9,8 +9,9 @@ function createWindow () {
   // Crear la ventana del navegador.
 
   mainWindow = new BrowserWindow({
-    width: 470,
-    height: 550,
+    x: 100, y: 0,
+    width: 500,
+    height: 600,
     webPreferences: {
       nodeIntegration: true
     }

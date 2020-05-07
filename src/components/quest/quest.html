@@ -3,7 +3,7 @@
                 <ion-item>
                         <ion-label stacked>{{ 'Codigo Articulo' }}</ion-label>
                         <ion-input #codigo
-                                   type="text" 
+                                   type="text"
                                    [(ngModel)]="articuloResponseMin.codigo"
                                    (ngModelChange)="articuloResponseMin.codigo = $event.toLocaleUpperCase()"
                                    (keyup.enter)="onQuest(cantidad)"
@@ -13,7 +13,7 @@
         </ion-col>
         <ion-col>
                 <ion-item>
-                        <ion-label stacked>{{ 'Cantidad - Compra' }}</ion-label>
+                        <ion-label stacked>{{ dtoTransaccion.cQstCnt }}</ion-label>
                         <ion-input #cantidad
                                    type="number"
                                    [(ngModel)]="articuloResponseMin.cantidad"
@@ -24,9 +24,9 @@
         </ion-col>
         <ion-col>
                 <ion-item>
-                        <ion-label stacked>{{ 'Precio U.' }}</ion-label>
+                        <ion-label stacked>{{ dtoTransaccion.cQstPre }}</ion-label>
                         <ion-input #precio
-                                   type="number" 
+                                   type="number"
                                    [(ngModel)]="articuloResponseMin.precio"
                                    (keydown.enter)="onAgregar()"
                                    (keypress)="utilitarioUtils.onFormatMoneda( precio, 2 )"
@@ -39,7 +39,7 @@
         <ion-col>
                 <ion-item>
                         <ion-label stacked>{{ 'Nombre Articulo' }}</ion-label>
-                        <ion-input type="text" 
+                        <ion-input type="text"
                                    disabled="true"
                                    [(ngModel)]="articuloResponseMin.nombre"></ion-input>
                 </ion-item>

@@ -16,14 +16,14 @@ export class DetalleComponent {
   cols:any = [
     { field: 'codigoArticulo', header: 'Codigo', width:'18%' },
     { field: 'cantidad', header: 'Cantidad', width:'24%' },
-    { field: 'precio', header: 'Precio', width:'20%' },
-    { field: 'precio', header: 'Precio', width:'25%' },
+    { field: 'precio', header: 'Precio Unit.', width:'20%' },
+    { field: 'precio', header: 'Precio SubTotal', width:'25%' },
     { field: '', header: '', width:'10%' }
   ]
   @Input("tsubtotl") tsubtotl:number
   @Input("tsubprec") tsubprec:number
   @Input("tsubcant") tsubcant:number
-  
+
   constructor(public alertCtrl:AlertController,
               public utilitarioUtils:UtilitarioUtils ) {
                 console.log('CONSTRUCTOR DETALLE TS......')
@@ -63,7 +63,7 @@ export class DetalleComponent {
    */
   onAlertElminar( row:TransaccionDetalle ) {
     this.row = row
-    this.utilitarioUtils.onAlertEliminar(this.alertCtrl, this, null, 
+    this.utilitarioUtils.onAlertEliminar(this.alertCtrl, this, null,
       'Alerta', 'Esta seguro de eliminar el registro de la lista con codigo ' + this.row.codigoArticulo)
   }
   /**

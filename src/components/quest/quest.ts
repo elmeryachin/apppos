@@ -5,6 +5,8 @@ import { ArticuloService } from '../../providers/articulo.service';
 import { UtilitarioUtils } from '../../utils/utilitario.utils';
 import { MensajeUtils } from '../../utils/mensaje.utils';
 import { TransaccionService } from '../../providers/transaccion.service';
+import { PEDIDO } from '../../utils/ctte.utils';
+import { DtoTransaccion } from '../../modelo/dto';
 import { StorageService } from '../../providers/storage.service';
 
 @Component({
@@ -12,42 +14,50 @@ import { StorageService } from '../../providers/storage.service';
   templateUrl: 'quest.html'
 })
 export class QuestComponent {
-  
+
   @ViewChild('codigo') codigoNext
-  @ViewChild('cantidad') cantidadNext 
+  @ViewChild('cantidad') cantidadNext
   @ViewChild('precio') precioNext
-  
+
   articuloResponseMin:ArticuloResponseMin
   auxiliarCtrl:ArticuloResponseMin    //Auxiliar para validar el ingreso correcto de los campos
   existeEnLista:boolean
   ctrlIncorrecto:boolean
-  @Output() enterInventario = new EventEmitter() 
+  @Output() enterInventario = new EventEmitter()
   @Output() enterGuardar = new EventEmitter()
+
   @Input() cantidadExistente:number
+  @Input() tipoTransaccion:string
+
+  dtoTransaccion:DtoTransaccion
 
   constructor(public articuloService:ArticuloService,
               public utilitarioUtils:UtilitarioUtils,
               public mensajeUtils:MensajeUtils,
               public alertCtrl:AlertController,
               public transaccionService:TransaccionService,
-              public storageService: StorageService ) {
-    this.articuloResponseMin = new ArticuloResponseMin() 
+              private storageService: StorageService) {
+    this.articuloResponseMin = new ArticuloResponseMin()
     this.auxiliarCtrl = new ArticuloResponseMin()
     this.auxiliarCtrl.codigo = '-1'
     this.auxiliarCtrl.cantidad = -1
   }
 
+  ngOnInit() {
+    this.storageService.setAsignacionDtoTransaccion(this.tipoTransaccion)
+    this.dtoTransaccion = this.storageService.getDtoTransaccion()
+  }
   /**
    * Valida que se ingrese la cantidad caso contrario no pasa con el enter
    * @param next objeto al cual se dirige tras validarse la cantidad
    */
   onCantidad( next:any ) {
-    if(this.articuloResponseMin.cantidad != undefined 
+    if(this.articuloResponseMin.cantidad != undefined
       && this.articuloResponseMin.cantidad != null
       && this.articuloResponseMin.cantidad * 1 > 0) {
-        this.auxiliarCtrl.cantidad = this.articuloResponseMin.cantidad 
+        this.auxiliarCtrl.cantidad = this.articuloResponseMin.cantidad
         next.setFocus()
-      } 
+      }
   }
    /**
    * Realiza busquedas a partir del codigo de entre una lista a obtener un solo registro.
@@ -57,22 +67,22 @@ export class QuestComponent {
   onQuest( next:any ):any {
 
     let codigo = this.articuloResponseMin.codigo
-    
+
     this.getReset()
 
 
     if( codigo == undefined || codigo.trim() == '' ) {
       this.enterInventario.emit( {codigo: null} )
       return;
-    } 
-    
-    this.articuloResponseMin.codigo = codigo 
+    }
+
+    this.articuloResponseMin.codigo = codigo
 
     if ( this.articuloResponseMin.codigo.indexOf('%') > -1 ) {
       this.articuloService.onListaPorCodigo( { patron: this.articuloResponseMin.codigo } ).subscribe (
         data => {
           if( this.mensajeUtils.getValidarRespuestaSinMensaje( data ) ) {
-            
+
             this.utilitarioUtils.onAlertRadio(this.alertCtrl, this, next, data.lista , 'titulo')
 
           }
@@ -84,10 +94,10 @@ export class QuestComponent {
   }
 
   /**
-   * Obtiene los datos Minimos del articulo por el codigo  
+   * Obtiene los datos Minimos del articulo por el codigo
    * Nota: Tras ejecutar onQuest se trabajo con onObtener
-   * @param codigo 
-   * @param next 
+   * @param codigo
+   * @param next
    */
   getObtener(codigo:string, next:any) {
     this.existeEnLista = false
@@ -95,9 +105,15 @@ export class QuestComponent {
     this.transaccionService.onObtenerArticulo( codigo ).subscribe(
       data => {
         if( this.mensajeUtils.getValidarRespuestaSinMensaje(data) ) {
-          this.articuloResponseMin = data
-          this.auxiliarCtrl.codigo = data.codigo
-          this.enterInventario.emit( {codigo: data.codigo} )
+          this.articuloResponseMin.codigo = data.articulo.codigo
+          this.articuloResponseMin.nombre = data.articulo.nombre
+          this.articuloResponseMin.precio = data.articulo.precioVenta
+
+          if( this.tipoTransaccion == PEDIDO )
+            this.articuloResponseMin.precio = data.articulo.precioCompra
+
+          this.auxiliarCtrl.codigo = data.articulo.codigo
+          this.enterInventario.emit( {codigo: data.articulo.codigo} )
 
           setTimeout( () => next.setFocus(), 350)
         } else {
@@ -126,16 +142,16 @@ export class QuestComponent {
       /*} else {
         this.utilitarioUtils.onAlertMensaje(this.alertCtrl, this.cantidadNext, 'Alerta', 'Supero la cantidad existente del inventario')
       }*/
-    } 
+    }
   }
 
   onGuardar(next:any) {
     this.enterGuardar.emit(this.articuloResponseMin)
-    
+
     this.getReset()
 
     setTimeout( ()=> {
-      
+
       next.setFocus()
     }, 350 )
   }

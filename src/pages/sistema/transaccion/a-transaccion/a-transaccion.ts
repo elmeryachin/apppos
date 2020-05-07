@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController, ModalController, ToastController } from 'ionic-angular';
 import { TransaccionService } from '../../../../providers/transaccion.service';
-import { TransaccionRequest, ArticuloResponseMin, TransaccionDetalle, TransaccionResponse, ServResponse, SaldoResponse } from '../../../../modelo/objeto.model';
+import { TransaccionRequest, ArticuloResponseMin, TransaccionDetalle, TransaccionResponse, ServResponse, SaldoResponse, TransaccionObjeto } from '../../../../modelo/objeto.model';
 import { MensajeUtils } from '../../../../utils/mensaje.utils';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { Observable } from 'rxjs/Observable';
@@ -29,6 +29,7 @@ export class ATransaccionPage {
   esMenu:boolean = true
   @Input() tipoTransaccion:string         // Se manda el tipo ejm.: 'PEDIDO, RECIBIDO, SOLICITUD ...'
   transaccionRequest:TransaccionRequest
+  transaccionRequestAux:TransaccionRequest
   codigo:string = null                    //Auxiliar para el codigo del producto
   saldoResponse: SaldoResponse
 
@@ -55,7 +56,7 @@ export class ATransaccionPage {
   }
 
   ngOnInit() {
-    //console.log(Mousetrap_global)
+    console.log('ngOnInit ......')
     this.storageService.setAsignacionDtoTransaccion(this.tipoTransaccion)
 
     this.dtoTransaccion = this.storageService.getDtoTransaccion()
@@ -115,8 +116,9 @@ export class ATransaccionPage {
    * @param next componente/html para asignar focus
    */
   onAlertGuardar( next:any ) {
-    this.utilitarioUtils.onAlertGuardar( this.alertCtrl, this, next, 'Confirmacion',
-     'Esta seguro de guardar la transaccion con Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
+    this.onGuardar( next )
+    /*this.utilitarioUtils.onAlertGuardar( this.alertCtrl, this, next, 'Confirmacion',
+     'Esta seguro de guardar la transaccion con Nro ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)*/
   }
 
   /**
@@ -211,6 +213,8 @@ export class ATransaccionPage {
           this.transaccionRequest.getReset()
           this.transaccionRequest.transaccionObjeto.nroMovimiento = data.nroMovimiento
           this.transaccionRequest.transaccionObjeto.fechaMovimiento = data.fechaMovimiento
+          this.getCloneTransaccionRequest()
+          this.onValidaObjetoTransaccionRequest()
           setTimeout( ()=> this.entradaNext.codigoNext.setFocus(), 350 )
         }
       )
@@ -231,18 +235,17 @@ export class ATransaccionPage {
       this.entradaNext.codigo = null
       let service: Observable<TransaccionResponse>
       this.transaccionService.onTipoTransaccion(this.tipoTransaccion)
-      console.log('this.transaccionRequest.transaccionObjeto.nroMovimiento:: ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
+      console.log('### this.transaccionRequest.transaccionObjeto.nroMovimiento:: ' + this.transaccionRequest.transaccionObjeto.nroMovimiento)
       service = this.transaccionService.onObtener(this.transaccionRequest.transaccionObjeto.nroMovimiento )
       service.subscribe(
         data => {
           if( this.mensajeUtils.getValidarRespuestaQuest( data, present, this.entradaNext.codigoNext ) ) {
             this.transaccionRequest.transaccionObjeto = data.transaccionObjeto
-
             this.entradaNext.codigo = data.transaccionObjeto.codigo
             this.entradaNext.onQuest()
-          } else {
-
           }
+          this.getCloneTransaccionRequest();
+          this.onValidaObjetoTransaccionRequest();
         }
       )
     }
@@ -256,6 +259,7 @@ export class ATransaccionPage {
   onEnterEntrada( event:any, next:any ) {
     this.transaccionRequest.transaccionObjeto.codigo = event.codigo
     this.transaccionRequest.transaccionObjeto.nombreUsuario = event.nombre
+    this.onValidaObjetoTransaccionRequest()
     if( event.nombre != undefined && event.nombre != null) {
       setTimeout( () => next.setFocus(), 350 )
     }
@@ -284,19 +288,29 @@ export class ATransaccionPage {
    * @param event
    */
   onEnterInventarioGuardar( event:ArticuloResponseMin ) {
+    //this.transaccionRequest.transaccionObjeto.lista =
+      //this.transaccionRequest.transaccionObjeto.lista.filter(item => item.codigoArticulo !== event.codigo)
+    let nuevo:boolean = true;
+    this.transaccionRequest.transaccionObjeto.lista.forEach(
+      registro => {
+        if( registro.codigoArticulo == event.codigo) {
+          nuevo = false;
+          registro.cantidad = event.cantidad
+          registro.precio = event.precio
+        }
+      }
+    )
 
-    this.transaccionRequest.transaccionObjeto.lista =
-      this.transaccionRequest.transaccionObjeto.lista.filter(item => item.codigoArticulo !== event.codigo)
-
-    this.codigo = null
-
-    let transaccionDetalle:TransaccionDetalle = new TransaccionDetalle()
-    transaccionDetalle.codigoArticulo = event.codigo
-    transaccionDetalle.cantidad = event.cantidad
-    transaccionDetalle.precio = event.precio
-
-    this.transaccionRequest.transaccionObjeto.lista.push(transaccionDetalle)
+    if( nuevo ) {
+      let transaccionDetalle:TransaccionDetalle = new TransaccionDetalle()
+      transaccionDetalle.codigoArticulo = event.codigo
+      transaccionDetalle.cantidad = event.cantidad
+      transaccionDetalle.precio = event.precio
+      this.transaccionRequest.transaccionObjeto.lista.push(transaccionDetalle)
+    }
+    this.codigo = null;
     this.getTotalesTransaccion()
+    this.onValidaObjetoTransaccionRequest()
   }
 
   /**
@@ -347,7 +361,7 @@ export class ATransaccionPage {
       if( servicio != null) {
         servicio.subscribe(
           data => {
-            if( this.mensajeUtils.getValidarRespuesta(data, next) ) {
+            if( this.mensajeUtils.getValidarRespuestaSinMsgConfirm(data, next) ) {
               /*this.transaccionRequest.getReset()
               this.entradaNext.codigo = null
               this.getInit()
@@ -528,5 +542,98 @@ export class ATransaccionPage {
     PHE.printHtml( xhttp.responseText );
   }
 
+  proceso:string
+  msgs:string
+  private msg(codigo:number) {
+    if( codigo == 0) {
+      this.proceso = 'nuevo'
+      this.msgs = ' sin guardar'
+    } else if( codigo == 1) {
+      this.proceso = 'guardado'
+      this.msgs = null;
+    } else if( codigo == 2) {
+      this.proceso = 'editado'
+      this.msgs = ' sin guardar'
+    }
+    console.log('#####################')
+    console.log(this.proceso)
+    console.log(this.msgs)
+  }
+  private getCloneTransaccionRequest() {
+    let to:TransaccionObjeto = this.transaccionRequest.transaccionObjeto;
+    this.transaccionRequestAux = new TransaccionRequest()
+    this.transaccionRequestAux.transaccionObjeto = new TransaccionObjeto()
+    this.transaccionRequestAux.transaccionObjeto.id = to.id
+    this.transaccionRequestAux.transaccionObjeto.nroMovimiento = to.nroMovimiento
+    this.transaccionRequestAux.transaccionObjeto.fechaMovimiento = to.fechaMovimiento
+    this.transaccionRequestAux.transaccionObjeto.observacion = to.observacion
+    this.transaccionRequestAux.transaccionObjeto.codigo = to.codigo
+    //this.transaccionRequestAux.transaccionObjeto.nombreUsuario = to.nombreUsuario
+    this.transaccionRequestAux.transaccionObjeto.cantidad = to.cantidad
+    this.transaccionRequestAux.transaccionObjeto.precio = to.precio
 
+    let len = this.transaccionRequest.transaccionObjeto.lista.length
+    let list:TransaccionDetalle[] = this.transaccionRequest.transaccionObjeto.lista;
+    let auxList:TransaccionDetalle[] = new Array();
+    for( let i=0; i<len; i++) {
+      auxList[i] = new TransaccionDetalle()
+      auxList[i].id = list[i].id
+      auxList[i].codigoArticulo = list[i].codigoArticulo
+      auxList[i].cantidad = list[i].cantidad
+      auxList[i].precio = list[i].precio
+      auxList[i].observacion = list[i].observacion
+    }
+    this.transaccionRequestAux.transaccionObjeto.lista = auxList
+    auxList = null
+    list = null
+    console.log('Clonacion de objetos :::::::::::::: ')
+    console.log(this.transaccionRequest)
+    console.log(this.transaccionRequestAux)
+  }
+  onValidaObjetoTransaccionRequest() {
+    let to:TransaccionObjeto = this.transaccionRequest.transaccionObjeto
+    let toAux:TransaccionObjeto = this.transaccionRequestAux.transaccionObjeto;
+
+    if( toAux.id == null) {
+      this.msg(0);
+      return;
+    }
+    console.log(to)
+    console.log(toAux)
+    if( to.nroMovimiento == toAux.nroMovimiento ) {
+      if( to.fechaMovimiento == toAux.fechaMovimiento ) {
+        if( to.codigo == toAux.codigo ) {
+          if( true ) { //to.nombreUsuario == toAux.nombreUsuario ) {
+            if( to.observacion == toAux.observacion ) {
+              if( to.lista.length == toAux.lista.length ) {
+                let map = new Map();
+                let count = 0;
+                for(let i=0; i< to.lista.length; i++)
+                  map.set( to.lista[i].id, to.lista[i] );
+                for(let i=0; i< toAux.lista.length; i++) {
+                  let obj:TransaccionDetalle = map.get(toAux.lista[i].id);
+                  if( obj == null) break;
+                  if( obj.codigoArticulo == toAux.lista[i].codigoArticulo) {
+                    if( obj.cantidad == toAux.lista[i].cantidad ) {
+                      if( obj.observacion == toAux.lista[i].observacion ) {
+                        if( obj.precio == toAux.lista[i].precio ) {
+                          count++;
+                        }
+                      }
+                    }
+                  }
+                }
+                if( count == to.lista.length ) {
+                  this.msg(1);
+                  return;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    this.msg(2);
+  }
 }

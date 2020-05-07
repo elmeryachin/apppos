@@ -10,7 +10,8 @@ export interface DtoTransaccion {
     update  :   string
     delete  :   string
     quest   :   string
-
+    cQstCnt :   string
+    cQstPre :   string
     tipoE   :   string
     listE   :   string
     questE  :   string

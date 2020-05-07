@@ -9,7 +9,7 @@ export class MensajeUtils {
                 private alertCtrl:AlertController) {}
 
     /**
-     * Valida si una operacion fue exitosa mostrando un mensaje 
+     * Valida si una operacion fue exitosa mostrando un mensaje
      * @param data Contiene los datos para validar
      * @param next componente/html al cual realizar asignar el focus
      */
@@ -26,9 +26,23 @@ export class MensajeUtils {
         }
         return parcial.respuesta;
     }
+    /**
+     * Valida si una operacion fue exitosa mostrando un mensaje
+     * @param data Contiene los datos para validar
+     * @param next componente/html al cual realizar asignar el focus
+     */
+    getValidarRespuestaSinMsgConfirm( data: any, next:any ) {
+      let parcial:DatosComunes = data
+      if( parcial.respuesta ) {
+        this.utilitarioUtils.onSaltoNext(next)
+      } else {
+          this.utilitarioUtils.onAlertMensaje(this.alertCtrl, next, 'Alerta', data.mensaje)
+      }
+      return parcial.respuesta;
+  }
 
     /**
-     * Valida si una operacion fue exitosa mostrando un mensaje para el control 
+     * Valida si una operacion fue exitosa mostrando un mensaje para el control
      * Nota : Se utiliza tanto la respuesta(true/false) como el mensaje para retornar un boolean
      * Cuando sea true sin mensaje, existe y recupera la data
      * Cuando sea true con mensaje, no existe y puede usarse ese nro
@@ -50,7 +64,7 @@ export class MensajeUtils {
 
     getValidarRespuestaSinMsgOk( data: any,present:any, next:any ) {
         let parcial:DatosComunes = data
-        if( !parcial.respuesta ) 
+        if( !parcial.respuesta )
             this.utilitarioUtils.onAlertMensaje(this.alertCtrl, present, 'Alerta', data.mensaje)
 
         return parcial.respuesta && data.mensaje == null;
@@ -59,7 +73,7 @@ export class MensajeUtils {
     /**
      * Validador, aun en desarrollo para definir y mostrar algun mensaje
      * y no afecte al next
-     * @param data 
+     * @param data
      */
     getValidarRespuestaSinMensaje( data: any ) {
         let parcial:DatosComunes = data
@@ -72,5 +86,5 @@ export class MensajeUtils {
 
 export interface DatosComunes {
     respuesta:boolean
-    mensaje:string    
-}   
+    mensaje:string
+}

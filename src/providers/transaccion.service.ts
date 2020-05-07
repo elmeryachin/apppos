@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { SERVIDOR } from '../utils/ctte.utils';
 import { Observable } from 'rxjs/Observable';
-import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin, UsuarioRequest, SaldoResponse, PagoResponse } from '../modelo/objeto.model';
+import { TransaccionResponseInit, TransaccionRequest, TransaccionResponse, TransaccionResponseList, ServResponse, ArticuloResponseMin, UsuarioResponseList, UsuarioResponseMin, UsuarioRequest, SaldoResponse, PagoResponse, ServObtenerResponse } from '../modelo/objeto.model';
 import { PagPago } from '../modelo/tabla.model';
 
 @Injectable()
@@ -21,9 +21,9 @@ export class TransaccionService {
   getHeaders():HttpHeaders {
     return new HttpHeaders().set( 'token', this.storageService.getAccesoResponse().token )
   }
-  onObtenerArticulo( codigo:string ):Observable<ArticuloResponseMin> {
+  onObtenerArticulo( codigo:string ):Observable<ServObtenerResponse> {
     console.log('codigo::: ' + codigo)
-    return this.http.get<ArticuloResponseMin>( SERVIDOR + '/articulo/quest/min/' + codigo , {headers: this.getHeaders()} )
+    return this.http.get<ServObtenerResponse>( SERVIDOR + '/articulo/quest/' + codigo , {headers: this.getHeaders()} )
   }
   // ############################ A
   // 1
@@ -83,7 +83,7 @@ export class TransaccionService {
 
   onListaPagos( idTrans:string ): Observable<PagoResponse>{
     console.log( 'URL PAGO :::: ' + SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans )
-    return this.http.get<PagoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans, {headers: this.getHeaders()} )    
+    return this.http.get<PagoResponse>( SERVIDOR + this.storageService.getDtoTransaccion().listaPag + idTrans, {headers: this.getHeaders()} )
   }
   // ############################ B | C | D
 

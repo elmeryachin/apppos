@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ReporteService } from '../../../providers/reporte.service';
 import { Observable } from 'rxjs';
 import { ResponseReporte } from '../../../modelo/dto';
-
+declare var require: any
 var PHE = require("print-html-element")
 
 /**

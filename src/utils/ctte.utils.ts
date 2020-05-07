@@ -5,7 +5,7 @@ export const SERVIDOR = "http://localhost:8080"
 export const PEDIDO:string = "PATH_PEDIDO"
 export const PATH_PEDIDO:DtoTransaccion = {
     enabled :   true,
-    titulo  :   'Pedidos',
+    titulo  :   'Pedido',
     guardar :   true,
     nuevo   :   true,
     eliminar:   true,
@@ -15,6 +15,8 @@ export const PATH_PEDIDO:DtoTransaccion = {
     update  :   '/pedido/update',
     delete  :   '/pedido/delete/',                          //{id}
     quest   :   '/pedido/quest/movimiento/',                //{nro}
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Compra',
     tipoE   :   'PROVEEDOR',
     listE   :   '/usuario/proveedor/list',
     questE  :   '/usuario/proveedor/quest/',                 //{codigo}
@@ -65,7 +67,7 @@ export const PATH_PEDIDO:DtoTransaccion = {
 export const ENVIAR:string = "PATH_ENVIAR"
 export const PATH_ENVIAR:DtoTransaccion = {
     enabled :   true,
-    titulo  :   'Entregas',
+    titulo  :   'Entrega',
     guardar :   true,
     nuevo   :   true,
     eliminar:   true,
@@ -75,7 +77,9 @@ export const PATH_ENVIAR:DtoTransaccion = {
     update  :   '/transferencia/envio/update',
     delete  :   '/transferencia/envio/delete/',     //{id}
     quest   :   '/transferencia/envio/quest/movimiento/',
-    tipoE   :   'AMBIENTE',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
+    tipoE   :   'TIENDA',
     listE   :   '/ambiente/list',
     questE  :   '/ambiente/quest/',                  //{codigo}
 
@@ -135,6 +139,8 @@ export const PATH_RECIBIR:DtoTransaccion = {
     update  :   null,
     delete  :   null,
     quest   :   '/transferencia/recibir/porrecibir/quest/movimiento/',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'ORIGEN',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -195,6 +201,8 @@ export const PATH_SOLICITUD:DtoTransaccion = {
     update  :   '/transferencia/recibir/solicitud/update',
     delete  :   '/transferencia/recibir/solicitud/delete/',
     quest   :   '/transferencia/recibir/solicitud/quest/movimiento/',       //{nro}
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'AMBIENTE',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -256,6 +264,8 @@ export const PATH_SOLICITUD_DESTINO:DtoTransaccion = {
     update  :   null,
     delete  :   null,
     quest   :   '/transferencia/solicitud/procesa/quest/movimiento/',  // DESARROLLAR
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'ORIGEN',
     listE   :   '/ambiente/list',                    // SE COPIA DE ENVIO POR QUE ES LO MISMO
     questE  :   '/ambiente/quest/',                  //{codigo}
@@ -317,6 +327,8 @@ export const PATH_VENTA:DtoTransaccion = {
     update  :   '/ventas/update',
     delete  :   '/ventas/delete/',
     quest   :   '/ventas/quest/movimiento/',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
@@ -378,6 +390,8 @@ export const PATH_BORRADOR:DtoTransaccion = {
     update  :   '/borrador/update',
     delete  :   '/borrador/delete/',
     quest   :   '/borrador/quest/movimiento/',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
@@ -439,6 +453,8 @@ export const PATH_AGRUPADOR:DtoTransaccion = {
     update  :   '/agrupado/update',
     delete  :   null, //'/agrupado/delete/',
     quest   :   '/agrupado/quest/movimiento/',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',
@@ -500,6 +516,8 @@ export const PATH_ESTADO_CUENTA:DtoTransaccion = {
     update  :   '/est_cta/update',
     delete  :   null, //'/agrupado/delete/',
     quest   :   '/est_cta/quest/movimiento/',
+    cQstCnt :   'Cantidad - Compra',
+    cQstPre :   'Precio Unit.',
     tipoE   :   'CLIENTE',
     listE   :   '/usuario/cliente/list',
     questE  :   '/usuario/cliente/quest/',

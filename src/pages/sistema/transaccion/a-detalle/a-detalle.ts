@@ -9,7 +9,7 @@ import { DtoDetalle } from '../../../../modelo/dto';
 import { UtilitarioUtils } from '../../../../utils/utilitario.utils';
 import { ADiferenciaPage } from '../a-diferencia/a-diferencia';
 import {ReporteService} from "../../../../providers/reporte.service";
-
+declare var require: any
 var PHE = require("print-html-element")
 
 @Component({
@@ -31,6 +31,8 @@ export class ADetallePage {
   cols:any = [
     { field: 'codigo', header: 'Codigo', width:'18%' },
     { field: 'fechaMovimiento', header: 'Fecha', width:'24%' },
+    { field: 'cantidad', header: 'cantidad', width:'24%' },
+    { field: 'precio', header: 'precio', width:'24%' },
     { field: 'nroMovimiento', header: 'Nro.Mov', width:'20%' },
     { field: 'observacion', header: 'Observacion', width:'38%' }
   ];

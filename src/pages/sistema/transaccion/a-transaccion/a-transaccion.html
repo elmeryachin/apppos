@@ -87,7 +87,17 @@
         </ion-navbar>
 </ion-header>
 <ion-content>
-
+  <ion-grid style="font-size: 14px;background-color: fddeda !important;">
+    <ion-row>
+      <ion-col style="text-align: left;">
+        <ion-label>
+          <a style="color: #fd7900;">{{ dtoTransaccion.titulo }}</a>
+          <a style="color: #009bfd;">{{ proceso }}</a>
+          <a style="color: #de1f21;">{{ msgs }}</a>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
     <ion-grid>
         <ion-row>
             <ion-col>
@@ -101,7 +111,7 @@
                 </ion-item>
                 <ion-item>
                         <ion-label stacked>{{ 'Fecha de Movimiento' }}</ion-label>
-                        <ion-input type="text"
+                        <ion-input type="text" (keyup)="onValidaObjetoTransaccionRequest()"
                                    [disabled]="!dtoTransaccion.enabled"
                                    [(ngModel)]="transaccionRequest.transaccionObjeto.fechaMovimiento"></ion-input>
                 </ion-item>
@@ -115,7 +125,7 @@
             <ion-col class="colTextArea">
                     <ion-item>
                         <ion-label stacked>{{ 'Observacion' }}</ion-label>
-                        <ion-textarea #observacion
+                        <ion-textarea #observacion (keyup)="onValidaObjetoTransaccionRequest()"
                                       [(ngModel)]="transaccionRequest.transaccionObjeto.observacion"></ion-textarea>
                     </ion-item>
             </ion-col>
@@ -150,6 +160,7 @@
 
         <quest #producto
                [cantidadExistente]="cantidadExistente"
+               [tipoTransaccion]="tipoTransaccion"
                (enterInventario)="onEnterInventario( $event, producto )"
                (enterGuardar)="onEnterInventarioGuardar( $event )"></quest>
 
@@ -158,7 +169,8 @@
                 <inventario  [codigo]="codigo" (noEvent)="onNoEventInventario( $event )" ></inventario>
             </ng-container>
             <ng-container *ngIf="codigo==null">
-               <detalle [lista]="this.transaccionRequest.transaccionObjeto.lista.reverse()"
+              <!-- lista.reverse() -->
+               <detalle [lista]="this.transaccionRequest.transaccionObjeto.lista"
                         [tsubtotl]="transaccionRequest.transaccionObjeto.precio"
                         [tsubcant]="transaccionRequest.transaccionObjeto.cantidad"
                         style="width: 100%;padding-left: 10px;padding-right: 10px"

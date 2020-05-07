@@ -6,6 +6,7 @@ import { AlertController, ViewController, NavController, NavParams } from 'ionic
 import { StorageService } from '../../../providers/storage.service';
 import { UsuarioRequest, UsuarioResponseMin } from '../../../modelo/objeto.model';
 import { Observable } from 'rxjs';
+declare var require: any
 var PHE = require("print-html-element");
 
 @Component({
